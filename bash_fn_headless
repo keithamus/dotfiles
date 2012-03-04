@@ -1,0 +1,28 @@
+# Quick way to start/stop headless servers in VirtualBox
+headless() {
+    startstop=$1
+    servername=$2   
+
+    if [ "$servername" == "" -a "$startstop" != "start" -a "$startstop" != "stop" ]; then
+        servername=$startstop
+        if [ `VBoxManage list runningvms | grep "$servername" | wc -l` -eq 0 ]; then
+            startstop="start"
+        else
+            startstop="stop"
+        fi
+
+    fi
+
+    if [ "$servername" == "" ] || [ `VboxManage list vms | grep "\"$servername\"" | wc -l` -eq 0 ]; then
+        echo "Please provide a VM name. Possible values are:"
+        VBoxManage list vms | sed -e 's/{.*$//' | grep "[^\"]"
+        return 1
+    fi
+
+    if [ "$startstop" = "start" ]; then
+        command="startvm --type headless ${servername}"
+    else
+        command="controlvm ${servername} savestate"
+    fi
+    VBoxManage ${command} &
+}

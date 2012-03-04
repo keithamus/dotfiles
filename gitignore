@@ -1,0 +1,72 @@
+# Mac OSX Specific
+# ----------------
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows Specific
+# ----------------
+Thumbs.db 
+Desktop.ini
+
+# Linux Specific
+# --------------
+*~
+
+
+# Editor Project Files
+# --------------------
+*.komodoproject
+*.sublime-*
+*.iml
+*.ipr
+*.iws
+.idea/
+*.tmproj
+
+
+
+# Compression formats (commit the unzipped contents and add a makefile if need be)
+# --------------------------------------------------------------------------------
+*.7z
+*.jar
+*.rar
+*.zip
+*.gz
+*.bzip
+*.xz
+*.lzma
+*.iso
+*.tar
+*.dmg
+*.xpi
+*.gem
+*.egg
+*.deb
+*.rpm
+
+# Cross Compiler/Language/CLI artifacts
+# -------------------------------------
+.sass-cache
+node_modules
+npm-debug.log
+*.py[co]
+*.egg
+*.egg-info
+pip-log.txt
+.bundle
+*.class
+*.pid
+
+# Other VCS artifacts
+# -------------------
+.hg
+.hgignore
+.svn
+
+# Common Design files or Secrets files
+# ------------------------------------
+*.ai
+*.psd
+*.pem

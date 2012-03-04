@@ -1,0 +1,11 @@
+# For more on shopt, see http://www.gnu.org/software/bash/manual/html_node/The-Shopt-Builtin.html
+
+# Enable auto cding, so you don't have to use "cd /the/dir" just "/the/dir"
+shopt -s autocd
+
+# Enable directory autocorrection
+shopt -s cdspell dirspell
+
+# Don't want my shell to warn me of incoming mail.
+shopt -u mailwarn
+unset MAILCHECK
