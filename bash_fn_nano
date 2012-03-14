@@ -1,3 +1,4 @@
+#!/bin/bash
 # Old habbits die hard.
 nano() {
     read -n1 -p "Use subl instead (y/n)?"

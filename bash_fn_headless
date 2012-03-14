@@ -1,3 +1,4 @@
+#!/bin/bash
 # Quick way to start/stop headless servers in VirtualBox
 headless() {
     startstop=$1

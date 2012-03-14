@@ -1,3 +1,4 @@
+#!/bin/bash
 # Quick archive extractor. Saves having to remember tars weird xvjf style combos
 function xtract()
 {

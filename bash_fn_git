@@ -1,3 +1,4 @@
+#!/bin/bash
 # Handle GIT properly, deferring to tig or git depending on what needs doing 
 git() {
     # Sometimes I accidentally type "git git status" or something, so chop off the first `git `
