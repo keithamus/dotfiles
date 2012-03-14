@@ -1,0 +1,21 @@
+#!/bin/bash
+function project() {
+
+    if [ "${1}" != "" ]; then
+        cd ~/Projects/${1}/
+        git status -sb
+    fi
+
+}
+
+# Bash completion for `project`
+function _project() {
+    local cur opts
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    opts="`ls -d ~/Projects/*/ | sed 's/.*Projects\///' | sed 's/\///'`"
+
+    COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    return 0
+}
+complete -F _project project

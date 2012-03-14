@@ -55,6 +55,7 @@ export EDITOR="subl -w"
 . ~/.bash_fn_git
 . ~/.bash_fn_headless
 . ~/.bash_fn_nano
+. ~/.bash_fn_project
 . ~/.bash_fn_xtract
 
 
