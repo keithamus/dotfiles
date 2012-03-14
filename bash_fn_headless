@@ -27,3 +27,35 @@ headless() {
     fi
     VBoxManage ${command} &
 }
+
+# Bash completion for `headless`
+function _headless() {
+    local cur opts prev cmd
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    
+    case "${COMP_CWORD}" in
+        1)
+            opts="`VBoxManage list vms | sed -e 's/{.*$//' | sed 's/"//g'`"
+            opts="${opts} start stop"
+            COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+            return 0
+            ;;
+        *)
+            if [ "${prev}" == "stop" ]; then
+                cmd="runningvms"
+            else
+                cmd="vms"
+            fi
+
+            opts="`VBoxManage list ${cmd} | sed -e 's/{.*$//' | sed 's/"//g'`"
+            COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+            return 0
+            ;;
+    esac
+
+    return 0
+}
+complete -F _headless headless
