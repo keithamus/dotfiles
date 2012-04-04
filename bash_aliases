@@ -14,6 +14,9 @@ alias egrep='egrep --color=auto'
 
 # cd
 alias ..='cd ..'
+alias ...='cd ../..'
+alias -- -='cd -'
+alias cd..='cd ..'
 
 # git (mostly typo fixes)
 alias g='git'
@@ -23,6 +26,7 @@ alias tit='git'
 alias gti='git'
 alias cgit='git'
 alias lgit='git'
+alias giit='git'
 
 # sublime
 alias sublime='subl'
