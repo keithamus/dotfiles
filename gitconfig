@@ -7,6 +7,8 @@
 	loosecompression = 0
 	preloadindex = 1
 	ignorecase = false
+	autoclrf = true
+	autocrlf = input
 
 [alias]
 	d = diff --word-diff
