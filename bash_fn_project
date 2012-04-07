@@ -1,12 +1,13 @@
 #!/bin/bash
 if [ -z "${PROJECTS_PATH}" ]; then
-    export PROJECTS_PATH='~/Projects'
+    export PROJECTS_PATH="~/Projects"
 fi
 
 function project() {
 
     if [ "${1}" != "" ]; then
-        cd ${PROJECTS_PATH}/${1}/
+        PROJECTS_PATH=$(echo ${PROJECTS_PATH} | sed 's/\;.*//')
+        eval cd "${PROJECTS_PATH}/${1}/"
 	clear
         git status -sb
     fi
@@ -15,11 +16,13 @@ function project() {
 
 # Bash completion for `project`
 function _project() {
-    local cur opts abs
+    local cur opts abs absesc
     COMPREPLY=()
-    abs=$(cd ${PROJECTS_PATH}; pwd | sed 's/[][\.*^$/]/\\&/g')
+    PROJECTS_PATH=$(echo ${PROJECTS_PATH} | sed 's/\;.*//')
+    abs=$(eval cd "${PROJECTS_PATH}"; pwd)
+    absesc=$(echo ${abs} | sed 's/[][\.*^$/]/\\&/g')
     cur="${COMP_WORDS[COMP_CWORD]}"
-    opts=$(ls -d ${PROJECTS_PATH}/*/ | sed "s/^${abs}\///")
+    opts=$(eval ls -d "${abs}/*" | sed "s/^${absesc}\///")
 
     COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
     return 0
