@@ -4,7 +4,11 @@
 
 # Include bash completions
 # ------------------------
-. /usr/local/etc/bash_completion
+. `brew --prefix`/etc/bash_completion
+
+# Include Z
+# ---------
+. `brew --prefix`/etc/profile.d/z.sh
 
 # Set PS1 to be Git-Aware
 # -----------------------
