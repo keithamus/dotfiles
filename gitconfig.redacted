@@ -1,0 +1,96 @@
+[core]
+    pager = tig
+    editor = "subl -w"
+    excludesfile = ~/.gitignore
+    whitespace = trailing-space,space-before-tab,indent-with-non-tab,tabwidth=4
+    compression = 0
+    loosecompression = 0
+    preloadindex = 1
+    ignorecase = false
+    autoclrf = true
+    autocrlf = input
+
+[alias]
+    d = diff --word-diff
+    di = diff --word-diff
+    s = status -sb
+    st = status -sb
+    b = branch
+    br = branch
+    lbr = b -a
+    c = commit -vp
+    ci = commit -vp
+
+    tree = !sh -c 'tig' - 
+    nightly = !sh -c 'git archive --format=zip HEAD -o $("basename `pwd`")_nightly_$(date +"%d%m%Y").zip' - 
+    versionpack = !sh -c 'git archive --format=tar HEAD -o $("basename `pwd`")_$(git describe --tags).tar' -
+
+[merge]
+    tool = opendiff
+
+[apply]
+    ignore-whitespace = 1
+
+[help]
+    autocorrect = 1
+
+[diff]
+    noprefix = 1
+
+[push]
+    default = upstream
+
+[rebase]
+    stat = 1
+
+[color]
+    status = auto
+    branch = auto
+    interactive = auto
+    diff = true
+
+[branch]
+    autosetuprebase = always
+
+[branch "master"]
+    mergeoptions = --no-ff
+    rebase = true
+    push = refs/heads/*:refs/heads/*
+    push = refs/tags/*:refs/tags/*
+    push = resfs/notes/*:refs/notes/*
+    fetch = refs/heads/*:refs/heads/*
+    fetch = refs/tags/*:refs/tags/*
+    fetch = refs/notes/*:refs/notes/*
+
+[branch "develop"]
+    mergeoptions = --no-ff
+    rebase = true
+    push = refs/heads/*:refs/heads/*
+    push = refs/tags/*:refs/tags/*
+    push = resfs/notes/*:refs/notes/*
+    fetch = refs/heads/*:refs/heads/*
+    fetch = refs/tags/*:refs/tags/*
+    fetch = refs/notes/*:refs/notes/*
+
+[gitflow "branch"]
+    master = master
+    develop = develop
+
+[gitflow "prefix"]
+    feature = feature/
+    release = release/
+    hotfix = hotfix/
+    support = support/
+    versiontag = 
+
+[user]
+    name = # briefcase(gitconfigName)
+    email = # briefcase(gitconfigEmail)
+
+[difftool "sourcetree"]
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path = 
+
+[mergetool "sourcetree"]
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
