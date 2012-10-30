@@ -13,7 +13,7 @@
 [alias]
     d = diff --word-diff
     di = diff --word-diff
-    st = "!sh -c 'git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1 && git status -s'" -
+    st = "!cd ${GIT_PREFIX:-`pwd`}; git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1; git status -s"
     s = st
     b = branch
     br = branch
