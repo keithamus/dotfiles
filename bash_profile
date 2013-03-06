@@ -28,8 +28,8 @@ function __git_ps1_expand() {
 
     # If your branch is behind origin (HEAD is different to origin) then put a ↑
     origin="`git remote | head -1`"
-    if [[ "`git rev-parse HEAD`" != "`git rev-parse ${origin}/${gitps1} 2> /dev/null`" ]]; then
-	   dirty="${dirty}↑"
+    if [[ "`git rev-parse --quiet HEAD`" != "`git rev-parse ${origin}/${gitps1} 2> /dev/null`" ]]; then
+        dirty="${dirty}↑"
     fi
 
     github=""
