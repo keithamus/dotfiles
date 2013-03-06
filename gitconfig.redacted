@@ -20,6 +20,7 @@
     lbr = b -a
     c = commit -vp
     ci = commit -vp
+    trackallbranches = !sh -c "for remote in `git branch -r `; do git branch --track $remote; done"
 
     tree = !sh -c 'tig' - 
     nightly = !sh -c 'git archive --format=zip HEAD -o $("basename `pwd`")_nightly_$(date +"%d%m%Y").zip' - 
