@@ -60,12 +60,7 @@ export EDITOR="subl -w"
 
 # Safely include functions that are portable and don't override anything important in any PATH folders
 # ----------------------------------------------------------------------------------------------------
-. ~/.bash_fn_git
-. ~/.bash_fn_headless
-. ~/.bash_fn_nano
-. ~/.bash_fn_project
-. ~/.bash_fn_xtract
-
+. ~/.bash_fn_*
 
 # Add ALIASES
 # -----------
