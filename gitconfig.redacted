@@ -27,7 +27,7 @@
     versionpack = !sh -c 'git archive --format=tar HEAD -o $("basename `pwd`")_$(git describe --tags).tar' -
 
 [merge]
-    tool = opendiff
+    tool = sublime
 
 [apply]
     ignore-whitespace = 1
@@ -90,8 +90,12 @@
 
 [difftool "sourcetree"]
     cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-    path = 
+    path =
 
 [mergetool "sourcetree"]
     cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
     trustExitCode = true
+
+[mergetool "sublime"]
+    cmd = "subl -w $MERGED"
+    trustExitCode = false
