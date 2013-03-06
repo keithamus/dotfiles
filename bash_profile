@@ -10,6 +10,10 @@
 # ---------
 . `brew --prefix`/etc/profile.d/z.sh
 
+# Include Z!
+#-----------
+ . `brew --prefix`/etc/profile.d/z.sh
+
 # Set PS1 to be Git-Aware
 # -----------------------
 function __git_ps1_expand() {
