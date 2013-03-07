@@ -31,9 +31,12 @@ function __git_ps1_expand() {
     fi
 
     # If your branch is behind origin (HEAD is different to origin) then put a ↑
-    origin="`git remote | head -1`"
-    if [[ "`git rev-parse --quiet HEAD`" != "`git rev-parse ${origin}/${gitps1} 2> /dev/null`" ]]; then
-        dirty="${dirty}↑"
+    git rev-parse --quiet HEAD &>/dev/null
+    if [[ $? == 0 ]]; then
+        commitsbehind="`git rev-list HEAD --not --remotes | wc -l | sed -e 's/^ *//g' -e 's/ *$//g'`"
+        if [[ "${commitsbehind}" != "0" ]]; then
+            dirty="${dirty}↑${commitsbehind}"
+        fi
     fi
 
     github=""
