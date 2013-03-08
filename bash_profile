@@ -70,6 +70,7 @@ export EDITOR="subl -w"
 . ~/.bash_fn_project
 . ~/.bash_fn_selenium
 . ~/.bash_fn_xtract
+. ~/.bash_fn_briefcasewanker
 
 # Add ALIASES
 # -----------

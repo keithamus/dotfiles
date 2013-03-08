@@ -1,0 +1,8 @@
+#!/bin/bash
+briefcase() {
+    if [ $1 = "wanker" ]; then
+        command briefcase git pull && briefcase generate && briefcase sync;
+    else
+        command briefcase "$@";
+    fi;
+}
