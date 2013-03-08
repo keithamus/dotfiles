@@ -21,7 +21,7 @@ function __git_ps1_expand() {
     if [[ -z "${gitps1}" ]]; then
 	return;
     fi
-    
+
     dirty=""
 
     # If your branch is dirty (it has a diff) then put a *
@@ -63,7 +63,13 @@ export EDITOR="subl -w"
 
 # Safely include functions that are portable and don't override anything important in any PATH folders
 # ----------------------------------------------------------------------------------------------------
-. ~/.bash_fn_*
+. ~/.bash_fn_gifify
+. ~/.bash_fn_git
+. ~/.bash_fn_headless
+. ~/.bash_fn_nano
+. ~/.bash_fn_project
+. ~/.bash_fn_selenium
+. ~/.bash_fn_xtract
 
 # Add ALIASES
 # -----------
