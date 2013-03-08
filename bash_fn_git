@@ -1,27 +1,35 @@
 #!/bin/bash
-# Handle GIT properly, deferring to tig or git depending on what needs doing 
+# Handle GIT properly, deferring to tig or git depending on what needs doing
 git() {
+    gitcmd="git"
+
+    # Default to hub if it is installed
+    command -v hub >/dev/null 2>&1
+    if [ $? -eq 0 ]; then
+        gitcmd="hub"
+    fi
+
     # Sometimes I accidentally type "git git status" or something, so chop off the first `git `
-    if [ $1 = "git" ]; then
+    if [ "${1}" = "git" ]; then
         shift;
     fi
 
     # If I just type "git" do something useful
     if [ "$1" == "" ]; then
-        command git status
+        command $gitcmd status
         return $?
     fi
-    
+
     # If diff, show or log then remove colours, so tig can color nicely
     if [ $1 = "diff" -o $1 = "show" -o $1 = "log" ]; then
         CMD=$1;
         shift;
-        command git $CMD --no-color "$@";
+        command $gitcmd $CMD --no-color "$@";
     # If blame then defer to tig as it is a first level command
     elif [ $1 = "blame" ]; then
         command tig "$@";
     # Otherwise do it in git normally
     else
-        command git "$@";
+        command $gitcmd "$@";
     fi;
 }
