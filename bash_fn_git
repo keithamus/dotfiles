@@ -16,7 +16,7 @@ git() {
 
     # If I just type "git" do something useful
     if [ "$1" == "" ]; then
-        command $gitcmd status
+        command $gitcmd st
         return $?
     fi
 
