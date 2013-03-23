@@ -22,10 +22,10 @@ brew install tig # Tig is git, but moar awesomer
 ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
 ```
 
-Also if you want bash 4.2.20, you need to do annoying stuff... either edit /etc/shell and replace
-/bin/bash with /usr/local/bin/bash, or in iterm/terminal hit `cmd+,` and find the bit which looks
-like `login -fp <username>` and append /usr/local/bin/bash, so it now looks like
-`login -fp <username> /usr/local/bin/bash`. I don't care which you do.
+Also if you want bash 4.2.20, you need to do annoying stuff...
+
+1. Edit /etc/shells and add `/usr/local/bin/bash` as an extra line
+2. Run the command `sudo chsh -s /usr/local/bin/bash $USER`
 
 # Quick functions
 
