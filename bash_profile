@@ -4,11 +4,15 @@
 
 # Include bash completions
 # ------------------------
-. `brew --prefix`/etc/bash_completion
+if [ -a "`brew --prefix`/etc/bash_completion" ]; then
+    . `brew --prefix`/etc/bash_completion
+fi
 
 # Include Z
 # ---------
-. `brew --prefix`/etc/profile.d/z.sh
+if [ -a "`brew --prefix`/etc/profile.d/z.sh" ]; then
+    . `brew --prefix`/etc/profile.d/z.sh
+fi
 
 # Include RVM
 # -----------
