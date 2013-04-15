@@ -13,17 +13,25 @@
 [alias]
     d = diff --word-diff
     di = diff --word-diff
-    st = "!cd ${GIT_PREFIX:-`pwd`}; git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1; git status -s"
     s = st
     b = branch
     br = branch
     lbr = b -a
     c = commit -vp
     ci = commit -vp
+
+    st = "!cd ${GIT_PREFIX:-`pwd`}; git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1; git status -s; echo "\n""
+
     trackallbranches = !sh -c "for remote in `git branch -r `; do git branch --track $remote; done"
 
-    tree = !sh -c 'tig' - 
-    nightly = !sh -c 'git archive --format=zip HEAD -o $("basename `pwd`")_nightly_$(date +"%d%m%Y").zip' - 
+    assume   = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+
+    snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+
+    tree = !sh -c 'tig' -
+    nightly = !sh -c 'git archive --format=zip HEAD -o $("basename `pwd`")_nightly_$(date +"%d%m%Y").zip' -
     versionpack = !sh -c 'git archive --format=tar HEAD -o $("basename `pwd`")_$(git describe --tags).tar' -
 
 [merge]
@@ -37,6 +45,7 @@
 
 [diff]
     noprefix = 1
+    algorithm = patience
 
 [push]
     default = upstream
@@ -48,7 +57,7 @@
     status = auto
     branch = auto
     interactive = auto
-    diff = true
+    diff = auto
 
 [branch]
     autosetuprebase = always
@@ -82,7 +91,7 @@
     release = release/
     hotfix = hotfix/
     support = support/
-    versiontag = 
+    versiontag =
 
 [user]
     name = # briefcase(gitconfigName)
@@ -99,3 +108,8 @@
 [mergetool "sublime"]
     cmd = "subl -w $MERGED"
     trustExitCode = false
+
+[tig]
+    read-git-colors = 1
+[rerere]
+    enabled = 1
