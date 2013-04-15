@@ -10,9 +10,9 @@
 # ---------
 . `brew --prefix`/etc/profile.d/z.sh
 
-# Include Z!
-#-----------
- . `brew --prefix`/etc/profile.d/z.sh
+# Include RVM
+# -----------
+. ~/.rvm/scripts/rvm
 
 # Set PS1 to be Git-Aware
 # -----------------------
