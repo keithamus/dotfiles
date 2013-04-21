@@ -8,6 +8,11 @@ if [ -a "`brew --prefix`/etc/bash_completion" ]; then
     . `brew --prefix`/etc/bash_completion
 fi
 
+# Include NPM completions:
+if [ `which npm` ]; then
+    . <(npm completion)
+fi
+
 # Include Z
 # ---------
 if [ -a "`brew --prefix`/etc/profile.d/z.sh" ]; then
@@ -53,8 +58,21 @@ function __git_ps1_expand() {
         echo " (${github}${gitps1}${dirty})"
     fi
 }
+
+# Set PS1 to be NPM aware
+# -----------------------
+function __npm_dir_expand() {
+    npmpackage=`npm ls --long . --loglevel silent | head -1`
+    if [ "${npmpackage}" ]; then
+        # echo "${PWD/${HOME}/~} ${npmpackage}" # Uncomment to have NPM version alongside folder
+        echo "${npmpackage}" # Uncomment to have NPM version on its own
+    else
+        echo "${PWD/${HOME}/~}"
+    fi
+}
+
 #PS1='\w $(__git_ps1_expand "(%s)")\$ ' # non-colored PS1
-PS1='\[\033[0;32m\]\w\[\033[0m\]\[\033[0;31m\]$(__git_ps1_expand)\[\033[0m\] \[\033[0;33m\]\$\[\033[0m\] '
+PS1='\[\033[0;32m\]$(__npm_dir_expand)\[\033[0m\]\[\033[0;31m\]$(__git_ps1_expand)\[\033[0m\] \[\033[0;33m\]\$\[\033[0m\] '
 
 # Set node PATHs
 # --------------
