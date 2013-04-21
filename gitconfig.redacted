@@ -113,3 +113,10 @@
     read-git-colors = 1
 [rerere]
     enabled = 1
+
+[url "github"]
+    insteadOf = git@github.com
+    insteadOf = http://github.com
+    insteadOf = https://github.com
+    insteadOf = github.com
+    insteadOf = git://github.com
