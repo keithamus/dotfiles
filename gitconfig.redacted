@@ -20,7 +20,7 @@
     c = commit -vp
     ci = commit -vp
 
-    st = "!cd ${GIT_PREFIX:-`pwd`}; git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1; git status -s; echo "\n""
+    st = "!cd ${GIT_PREFIX:-`pwd`}; git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1; echo ""; git status -s; echo """
 
     trackallbranches = !sh -c "for remote in `git branch -r `; do git branch --track $remote; done"
 
