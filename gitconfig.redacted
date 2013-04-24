@@ -114,7 +114,7 @@
 [rerere]
     enabled = 1
 
-[url "github:"]
+[url "github.com:"]
     insteadOf = git@github.com/
     insteadOf = http://github.com/
     insteadOf = https://github.com/
