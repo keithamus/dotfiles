@@ -1,4 +1,4 @@
 #!/bin/bash
 selenium() {
-    java -jar /usr/local/Cellar/selenium-server-standalone/2.37.0/selenium-server-standalone-2.37.0.jar -p 4444
+    java -jar `brew ls selenium-server-standalone | grep .jar` -p 4444
 }
