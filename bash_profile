@@ -59,13 +59,32 @@ function __git_ps1_expand() {
     fi
 }
 
+function findup() {
+    local file="$1"
+    local result=1
+    local dir="`pwd`"
+    while [[ $dir != "/" ]]; do
+        if [[ -e "$dir/$file" ]]; then
+            result=0
+            echo "$dir"
+            break
+        fi
+        dir=`dirname $dir`
+    done
+    return $result
+}
+
 # Set PS1 to be NPM aware
 # -----------------------
 function __npm_dir_expand() {
-    npmpackage=`npm ls --long . --loglevel silent | head -1`
-    if [ "${npmpackage}" ]; then
-        # echo "${PWD/${HOME}/~} ${npmpackage}" # Uncomment to have NPM version alongside folder
-        echo "${npmpackage}" # Uncomment to have NPM version on its own
+    local npmprefix=`findup package.json`
+    if [[ -n "$npmprefix" ]]; then
+        local folder=${PWD#${npmprefix}}
+        local npmpackage=`npm ls --depth=-1 --long . --loglevel silent | head -1`
+        if [ "${npmpackage}" ]; then
+            # echo "${PWD/${HOME}/~} ${npmpackage}" # Uncomment to have NPM version alongside folder
+            echo "${npmpackage}${folder/#\//:}" # Uncomment to have NPM version on its own
+        fi
     else
         echo "${PWD/${HOME}/~}"
     fi
