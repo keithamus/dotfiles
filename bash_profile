@@ -26,7 +26,7 @@ fi
 # Set PS1 to be Git-Aware
 # -----------------------
 function __git_ps1_expand() {
-    gitps1=$(__git_ps1 "%s")
+    local gitps1=$(__git_ps1 "%s")
     if [[ -z "${gitps1}" ]]; then
 	return;
     fi
