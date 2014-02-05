@@ -1,3 +1,7 @@
+# Include RVM
+# -----------
+. ~/.rvm/scripts/rvm
+
 # Include bash shopt options
 # --------------------------
 . ~/.bash_options
@@ -18,10 +22,6 @@ fi
 if [ -a "`brew --prefix`/etc/profile.d/z.sh" ]; then
     . `brew --prefix`/etc/profile.d/z.sh
 fi
-
-# Include RVM
-# -----------
-. ~/.rvm/scripts/rvm
 
 # Set PS1 to be Git-Aware
 # -----------------------
