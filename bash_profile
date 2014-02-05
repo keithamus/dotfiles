@@ -69,7 +69,7 @@ function findup() {
             echo "$dir"
             break
         fi
-        dir=`dirname $dir`
+        dir=`dirname "$dir"`
     done
     return $result
 }
