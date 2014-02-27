@@ -34,3 +34,6 @@ alias sub='subl'
 
 # mkdir
 alias mkdir='mkdir -p'
+
+# get your external ip
+alias ip='dig +short myip.opendns.com @resolver1.opendns.com'
