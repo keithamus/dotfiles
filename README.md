@@ -53,3 +53,7 @@ want it. This is a set and forget thing, don't worry, it'll do the magics.
 ### Nano
 `nano` has been replaced by a command which asks if you want to use subl instead. Good for if, like
 me, you habitually type "nano <file>" when you really would like Sublime instead. Yup.
+
+### Gifify
+
+`gifify` will turn any movie file (ones supported by ffmpeg - so basically all of them) into a gif. Pass in `--good` as the second argument (i.e `gifify file.mov --good`) to convert a gif as higher quality, but bigger file size and longer encoding time. This requires 4 dependendies: ffmpeg, ImageMagick, gifsicle and XQuartz if on a mac. For Macs with Homebrew simply `brew install ffmpeg imagemagick gifsicle` after you've installed XQarts.
