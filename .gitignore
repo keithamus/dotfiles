@@ -1,1 +1,7 @@
 gitconfig
+config/fish/fish_history
+config/fish/fishd.*
+config/fish/functions/npm*
+*.key.pub
+*.key
+*debug*
