@@ -40,7 +40,7 @@ end
 
 set -g _prompt_exitstatus_enabled 1
 set -g _prompt_exitstatus_backcolor black
-set -g _prompt_exitstatus_badglyph \u2716
+set -g _prompt_exitstatus_badglyph \u2716' '
 set -g _prompt_exitstatus_badcolor red
 set -g _prompt_exitstatus_goodglyph ''
 set -g _prompt_exitstatus_goodcolor green
@@ -49,7 +49,7 @@ function _prompt_exitstatus -d "Show stauts of last commands exit code"
         if [ $argv[1] -ne 0 ]
           _prompt_segment $_prompt_exitstatus_backcolor $_prompt_exitstatus_badcolor $_prompt_exitstatus_badglyph
         else if [ -n $_prompt_exitstatus_goodglyph ]
-          _prompt_segment $_prompt_exitstatus_backcolor $_prompt_exitstatus_goodcolor $_prompt_exitstatus_badglyph
+          _prompt_segment $_prompt_exitstatus_backcolor $_prompt_exitstatus_goodcolor $_prompt_exitstatus_goodglyph
         end
     end
 end
@@ -175,8 +175,9 @@ end
 # ===========================
 
 function fish_prompt
+    set -l s $status
     set_color white -b black
-    _prompt_exitstatus $status
+    _prompt_exitstatus $s
     _prompt_jobstatus
     _prompt_user
     _prompt_npm

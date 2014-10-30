@@ -21,7 +21,9 @@ function git
     if contains $cmd show log blame
         eval $tig $argv
     else if contains $cmd diff
-        eval $git $argv --no-color
+        set -l $args $argv
+        set -e args[1]
+        eval $git $cmd --no-color $args
     else
         eval $git $argv
     end
