@@ -1,0 +1,6 @@
+package brew
+package foreign-env
+package rvm
+package z
+package tab
+package osx

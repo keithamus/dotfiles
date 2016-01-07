@@ -1,0 +1,105 @@
+[core]
+  pager = tig
+  whitespace = trailing-space,space-before-tab,indent-with-non-tab,tabwidth=4
+  compression = 0
+  loosecompression = 0
+  preloadindex = 1
+  ignorecase = false
+  autoclrf = true
+  autocrlf = input
+
+[alias]
+  f = fetch --all --prune
+  d = diff --word-diff
+  di = diff --word-diff
+  s = st
+  b = branch
+  br = branch
+  lbr = b -a
+  c = commit -vp
+  ci = commit -vp
+  st = "!cd ${GIT_PREFIX:-`pwd`}; git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1; echo ""; git status -s; echo """
+  trackallbranches = !sh -c "for remote in `git branch -r `; do git branch --track $remote; done"
+  assume   = update-index --assume-unchanged
+  unassume = update-index --no-assume-unchanged
+  assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
+  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+  tree = !sh -c 'tig' -
+  nightly = !sh -c 'git archive --format=zip HEAD -o $("basename `pwd`")_nightly_$(date +"%d%m%Y").zip' -
+  versionpack = !sh -c 'git archive --format=zip $(git describe --tags) -o $("basename `pwd`")_$(git describe --tags).zip' -
+
+[apply]
+  ignore-whitespace = 1
+
+[help]
+  autocorrect = 1
+
+[diff]
+  noprefix = 1
+  algorithm = patience
+
+[push]
+  default = upstream
+
+[rebase]
+  stat = 1
+
+[color]
+  status = auto
+  branch = auto
+  interactive = auto
+  diff = auto
+
+[branch]
+  autosetuprebase = always
+
+[merge]
+  ff = only
+
+[branch "master"]
+  mergeoptions = --no-ff
+  rebase = true
+  push = refs/heads/*:refs/heads/*
+  push = refs/tags/*:refs/tags/*
+  push = resfs/notes/*:refs/notes/*
+  fetch = refs/heads/*:refs/heads/*
+  fetch = refs/tags/*:refs/tags/*
+  fetch = refs/notes/*:refs/notes/*
+
+[branch "develop"]
+  mergeoptions = --no-ff
+  rebase = true
+  push = refs/heads/*:refs/heads/*
+  push = refs/tags/*:refs/tags/*
+  push = resfs/notes/*:refs/notes/*
+  fetch = refs/heads/*:refs/heads/*
+  fetch = refs/tags/*:refs/tags/*
+  fetch = refs/notes/*:refs/notes/*
+
+[difftool "sourcetree"]
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path =
+
+[mergetool "sourcetree"]
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
+
+[mergetool "sublime"]
+  cmd = "subl -w $MERGED"
+  trustExitCode = false
+
+[tig]
+  read-git-colors = 1
+
+[rerere]
+  enabled = 1
+
+[url "github.com:"]
+  insteadOf = git@github.com/
+  insteadOf = http://github.com/
+  insteadOf = https://github.com/
+  insteadOf = github.com/
+  insteadOf = git://github.com/
+  insteadOf = git@github.com:
+  insteadOf = github.com:
+  insteadOf = git://github.com:
