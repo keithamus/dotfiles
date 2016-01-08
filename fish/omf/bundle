@@ -1,6 +1,7 @@
+package https://github.com/keithamus/keithafish-theme
 package brew
 package foreign-env
-package rvm
-package z
-package tab
 package osx
+package rvm
+package tab
+package z

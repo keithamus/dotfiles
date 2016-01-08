@@ -17,10 +17,12 @@ if [ "$(uname -s)" = "Darwin" ]
 then
   installScript "Homebrew" homebrew
   installScript "OSX tweaks" osx
+  installScript "BitBar" bitbar
   installScript "Mjolnir" mjolnir
 fi
 
 installScript "Git" git
+installScript "Docker" docker
 installScript "Fish" fish
 installScript "Node" node
 installScript "Rust" rust

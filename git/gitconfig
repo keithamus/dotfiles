@@ -48,7 +48,9 @@
   status = auto
   branch = auto
   interactive = auto
-  diff = auto
+  # color set to `no` for compatibility with tig.
+  # if you change tig for another pager, you might want color back!
+  diff = no
 
 [branch]
   autosetuprebase = always
@@ -89,7 +91,9 @@
   trustExitCode = false
 
 [tig]
-  read-git-colors = 1
+  git-colors = 1
+  line-graphics = yes
+  tab-size = 2
 
 [rerere]
   enabled = 1
