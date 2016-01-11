@@ -50,9 +50,10 @@ read -r REPLY
 echo
 if [ "$REPLY" = "Y" ] || [ "$REPLY" = "y" ] || [ "$REPLY" = "" ]
 then
-  defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
-  defaults write com.apple.dock autohide-time-modifier -float 0.001
+  defaults write -g NSWindowResizeTime -float 0.001
+  defaults write com.apple.dock autohide-time-modifier -float 0.25
   killall Dock
+  killall Finder
 fi
 
 printf "Disable autocorrect? (Y/n) "
