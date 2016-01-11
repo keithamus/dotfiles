@@ -37,7 +37,7 @@ then
   defaults write NSGlobalDomain AppleAquaColorVariant -int 6
   defaults write NSGlobalDomain AppleHighlightColor -string "0.780400 0.815700 0.858800"
   defaults write com.apple.dock no-glass -bool true
-  defaults write com.apple.dock autohide-delay -float 1
+  defaults write com.apple.dock autohide-delay -float 0.1
   defaults write com.apple.dock autohide -int 1
   defaults read com.apple.dock tilesize -int 68
   defaults write com.apple.dock size-immutable -bool YES
