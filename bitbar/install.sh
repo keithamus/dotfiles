@@ -21,8 +21,10 @@ defaults write com.matryer.BitBar pluginsDirectory -string "$THISDIR/plugins/ena
 
 echo "Enabling bitbar plugins"
 rm "$THISDIR/plugins/Enabled/"*
-enablePlugin Dev/Docker/docker-status.1m.sh
 enablePlugin Dev/Homebrew/brew-updates.1h.sh
+enablePlugin Dev/Docker/docker-status.1m.sh
+enablePlugin Dev/Homebrew/notifications.30s.sh
+enablePlugin Dev/Homebrew/travis-check.2m.sh
 chmod +x "$THISDIR/plugins/Enabled/"*
 
 killall BitBar
