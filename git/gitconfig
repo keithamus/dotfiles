@@ -45,12 +45,8 @@
   stat = 1
 
 [color]
-  status = auto
-  branch = auto
-  interactive = auto
-  # color set to `no` for compatibility with tig.
-  # if you change tig for another pager, you might want color back!
-  diff = no
+  ui = auto
+  pager = no
 
 [branch]
   autosetuprebase = always
