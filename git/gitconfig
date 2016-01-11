@@ -78,18 +78,6 @@
   fetch = refs/tags/*:refs/tags/*
   fetch = refs/notes/*:refs/notes/*
 
-[difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path =
-
-[mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
-
-[mergetool "sublime"]
-  cmd = "subl -w $MERGED"
-  trustExitCode = false
-
 [tig]
   git-colors = 1
   line-graphics = yes
