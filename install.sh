@@ -25,4 +25,4 @@ installScript "Git" git
 installScript "Docker" docker
 installScript "Fish" fish
 installScript "Node" nvm
-#installScript "Rust" rust
+installScript "Rust" rust
