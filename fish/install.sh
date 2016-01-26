@@ -3,16 +3,18 @@ THISDIR=$(realpath "$(dirname "$0")")
 FISHOMF="$(realpath "$THISDIR/omf")"
 FISHFUNCTIONS="$(realpath "$THISDIR/functions")"
 mkdir -p ~/.config/fish
-if [ -d ~/.config/fish/functions ]
+if [ ! -L ~/.config/fish/functions ] && [ -d ~/.config/fish/functions ]
 then
+  echo "moving old fish functions folder"
   mv ~/.config/fish/functions ~/.config/fish/functions.old
 fi
-if [ -d ~/.config/omf ]
+if [ ! -L ~/.config/omf ] && [ -d ~/.config/omf ]
 then
+  echo "moving old omf folder"
   mv ~/.config/omf ~/.config/omf.old
 fi
-ln -nsfF "$FISHFUNCTIONS" ~/.config/fish/functions
-ln -nsfF "$FISHOMF" ~/.config/omf
+ln -nsfF "$FISHFUNCTIONS" ~/.config/fish/
+ln -nsfF "$FISHOMF" ~/.config/
 
 if [ "$(grep -c fish /etc/shells)" = "0" ]
 then
