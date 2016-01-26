@@ -1,3 +1,4 @@
+hs.window.animationDuration = 0.1
 hs.console.clearConsole()
 local hotkey = require "hs.hotkey"
 local grid = require "hs.grid"
