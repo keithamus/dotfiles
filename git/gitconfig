@@ -16,9 +16,9 @@
   di = diff --word-diff
   ds = diff --staged --word-diff
   s = st
-  b = branch
-  br = branch
-  lbr = b -a
+  b = branch --all
+  br = branch --all
+  lbr = branch --all
   c = commit -vp
   ci = commit -vp
   st = "!cd ${GIT_PREFIX:-`pwd`}; git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1; echo ""; git status -s; echo """
