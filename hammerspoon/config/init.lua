@@ -59,3 +59,77 @@ end
 
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", hs.reload):start()
 hs.notify.new({title="Hammersppon", informativeText="Configuration reloaded!"}):send()
+
+hotkey.bind(hyper, 'down', function()
+  local resizing = hs.hotkey.modal.new()
+  local activeWindow = hs.window.focusedWindow()
+  local backdrop = hs.drawing.rectangle( hs.screen.mainScreen():frame() )
+    :setFillColor({ red=0, green=0, blue=0, alpha=0.2 })
+  local resizeIndicator = hs.drawing.rectangle({ x=0, y=0, w=0, h=0 })
+    :setFillColor({ red=1, green=1, blue=1, alpha=0.3 })
+    :setStrokeWidth(1)
+    :setStroke(1)
+    :setStrokeColor({ red=1, green=1, blue=1, alpha=0.5 })
+  local startPosition = nil
+  local movePosition = nil
+  local followMouse = hs.eventtap.new({ hs.eventtap.event.types.leftMouseDragged }, function()
+    currentPosition = hs.mouse.getRelativePosition()
+    if movePosition  then
+      -- resizeIndicator.setTopLeft
+      resizeIndicator
+        :setTopLeft({
+          x= (startPosition.x + currentPosition.x) - movePosition.x,
+          y= (startPosition.y + currentPosition.y) - movePosition.y,
+        })
+    else
+      resizeIndicator
+        :setTopLeft({
+          x= math.min(startPosition.x, currentPosition.x),
+          y= math.min(startPosition.y, currentPosition.y),
+        })
+        :setSize({
+          w= math.max(startPosition.x - currentPosition.x, currentPosition.x - startPosition.x),
+          h= math.max(startPosition.y - currentPosition.y, currentPosition.y - startPosition.y),
+        })
+    end
+  end)
+
+  function resizing.entered()
+    backdrop
+      :bringToFront(true)
+      :show()
+    resizeIndicator
+      :bringToFront(true)
+  end
+
+  function resizing:exited()
+    followMouse:stop()
+    backdrop:delete()
+    resizeIndicator:delete()
+    activeWindow:focus()
+  end
+
+  resizing:bind({}, 'escape', function() resizing:exit() end)
+  resizing:bind({}, 'space',
+    function() movePosition = hs.mouse.getRelativePosition() end,
+    function()
+      movePosition = nil
+      startPosition = resizeIndicator:frame()
+    end
+  )
+
+  backdrop:setClickCallback(function()
+    pcall(function() activeWindow:setFrame( resizeIndicator:frame() ) end)
+    resizing:exit()
+  end, function()
+    startPosition = hs.mouse.getRelativePosition()
+    resizeIndicator
+      :setTopLeft( startPosition )
+      :setSize({ w=1, h=1 })
+      :show()
+    followMouse:start()
+  end)
+
+  resizing:enter()
+
+end)
