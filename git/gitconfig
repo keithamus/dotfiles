@@ -10,6 +10,8 @@
 
 [alias]
   f = fetch --all --prune
+  frm = "!f() { git fetch --all --prune && git rebase ${1:-upstream}/master; }; f"
+  fcm = "!f() { git fetch --all --prune && git checkout ${1:-upstream}/master -f; }; f"
   d = diff --word-diff
   di = diff --word-diff
   s = st
@@ -27,6 +29,7 @@
   tree = !sh -c 'tig' -
   nightly = !sh -c 'git archive --format=zip HEAD -o $("basename `pwd`")_nightly_$(date +"%d%m%Y").zip' -
   versionpack = !sh -c 'git archive --format=zip $(git describe --tags) -o $("basename `pwd`")_$(git describe --tags).zip' -
+  push-head = "!f() { git push origin HEAD:refs/heads/${1:-wip} -f; }; f"
 
 [apply]
   ignore-whitespace = 1
