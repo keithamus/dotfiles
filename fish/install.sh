@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
-THISDIR=$(realpath "$(dirname "$0")")
-FISHOMF="$(realpath "$THISDIR/omf")"
-FISHFUNCTIONS="$(realpath "$THISDIR/functions")"
+THISDIR=$(cd "$(dirname "$0")"; pwd)
+FISHOMF="$THISDIR/omf"
+FISHFUNCTIONS="$THISDIR/functions"
 mkdir -p ~/.config/fish
 if [ ! -L ~/.config/fish/functions ] && [ -d ~/.config/fish/functions ]
 then

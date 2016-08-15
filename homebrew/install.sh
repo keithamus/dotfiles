@@ -4,6 +4,6 @@ if [ "$?" != "0" ]
 then
   ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
-THISDIR=$(realpath "$(dirname "$0")")
-BREWFILE="$(realpath "$THISDIR/Brewfile")"
-brew bundle --file="$BREWFILE"
+THISDIR=$(cd "$(dirname "$0")"; pwd)
+BREWFILE="$THISDIR/Brewfile"
+brew bundle install --file="$BREWFILE"

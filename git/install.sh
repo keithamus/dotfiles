@@ -21,8 +21,8 @@ then
  GITEMAIL="$CURRENTGITEMAIL"
 fi
 
-THISDIR=$(realpath "$(dirname "$0")")
-GITCONFIG="$(realpath $THISDIR/gitconfig)"
+THISDIR=$(cd "$(dirname "$0")"; pwd)
+GITCONFIG="$THISDIR/gitconfig"
 
 mkdir -p ~/.config/git
 git config --global core.editor "$GITEDITOR"

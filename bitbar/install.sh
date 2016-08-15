@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-THISDIR=$(realpath "$(dirname "$0")")
+THISDIR=$(cd "$(dirname "$0")"; pwd)
 enablePlugin() {
   local PLUGIN
   local PLUGIN_NAME

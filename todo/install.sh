@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-THISDIR=$(realpath "$(dirname "$0")")
+THISDIR=$(cd "$(dirname "$0")"; pwd)
 TODOCONF_DIR="$HOME/.todo"
 ACTION_DIR="$TODOCONF_DIR/todo.actions.d"
 ln -sf "$THISDIR/todo-config.sh" "$HOME/.todo.cfg"
