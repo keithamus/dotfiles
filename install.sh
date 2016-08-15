@@ -18,7 +18,6 @@ then
   installScript "Homebrew" homebrew
   installScript "OSX tweaks" osx
   installScript "BitBar" bitbar
-  #installScript "Mjolnir" mjolnir
   installScript "Hammerspoon" hammerspoon
 fi
 
