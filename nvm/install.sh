@@ -9,7 +9,7 @@ nvm --version
 
 nvm install 0
 nvm install 4
-nvm install 5
+nvm install 6
 
 nvm alias lts 4
 nvm alias stable 6
