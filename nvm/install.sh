@@ -12,6 +12,6 @@ nvm install 4
 nvm install 5
 
 nvm alias lts 4
-nvm alias stable 5
+nvm alias stable 6
 nvm alias default stable
 nvm use default
