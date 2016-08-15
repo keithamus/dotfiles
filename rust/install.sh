@@ -5,3 +5,4 @@ then
 fi
 
 multirust default stable
+mkdir -p ~/.cargo/bin
