@@ -1,0 +1,8 @@
+# Commit ammend gpg sign:
+bind generic cg !?git commit --amend --no-edit --gpg-sign
+
+# Show signatures in diffs
+set diff-options = --show-signature
+
+# Color signatures in diffs green
+color "gpg: "    green   default

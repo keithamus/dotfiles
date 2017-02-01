@@ -78,11 +78,6 @@
   fetch = refs/tags/*:refs/tags/*
   fetch = refs/notes/*:refs/notes/*
 
-[tig]
-  git-colors = 1
-  line-graphics = yes
-  tab-size = 2
-
 [rerere]
   enabled = 1
 
@@ -94,4 +89,4 @@
   insteadOf = git://github.com/
   insteadOf = git@github.com:
   insteadOf = github.com:
-  insteadOf = git://github.com:
+  insteadOf = git://github.com: 

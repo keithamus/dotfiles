@@ -1,0 +1,20 @@
+# Commit feat:
+bind generic cF !git commit -m'feat: ' -e
+
+# Commit fix:
+bind generic cf !git commit -m'fix: ' -e
+
+# Commit perf:
+bind generic cf !git commit -m'perf: ' -e
+
+# Commit style:
+bind generic cs !git commit -m'style: ' -e
+
+# Commit refactor:
+bind generic cr !git commit -m'refactor: ' -e
+
+# Commit wip!:
+bind generic cw !git commit -m'wip! ' -e
+
+# Commit BREAKING CHANGE:
+bind generic cb !git commit -m'%(prompt Conventioanl type?): ' -m'BREAKING CHANGE:' -e

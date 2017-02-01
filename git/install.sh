@@ -23,9 +23,24 @@ fi
 
 THISDIR=$(cd "$(dirname "$0")"; pwd)
 GITCONFIG="$THISDIR/gitconfig"
+TIGCONFIG="$THISDIR/tigrc"
 
 mkdir -p ~/.config/git
 git config --global core.editor "$GITEDITOR"
 git config --global user.name "$GITNAME"
 git config --global user.email "$GITEMAIL"
 git config --global include.path "$GITCONFIG"
+
+USERTIGCONFIG="$HOME/.tigrc"
+TIGRCFILES="$THISDIR/tigrc.d"
+if [ ! -f "$USERTIGCONFIG" ];
+then
+  touch "$USERTIGCONFIG"
+fi
+for f in "$TIGRCFILES"/*;
+do
+  if ! grep -q "source $f" "$USERTIGCONFIG"
+  then
+    echo "source $f" >> "$USERTIGCONFIG";
+  fi
+done
