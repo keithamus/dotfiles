@@ -11,7 +11,7 @@
 [alias]
   f = fetch --all --prune
   frm = "!f() { git fetch --all --prune && git rebase ${1:-upstream}/master; }; f"
-  fcm = "!f() { git fetch --all --prune && git checkout ${1:-upstream}/master -f; }; f"
+  fcm = "!f() { git fetch --all --prune && git stash && git checkout ${1:-upstream}/master -f && git stash apply; }; f"
   d = diff --word-diff
   di = diff --word-diff
   ds = diff --staged --word-diff
