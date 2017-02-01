@@ -1,7 +1,0 @@
-package brew
-package fasd
-package foreign-env
-package osx
-package rvm
-package tab
-theme https://github.com/keithamus/theme-keithafish
