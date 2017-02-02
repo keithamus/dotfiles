@@ -28,3 +28,4 @@ installScript "Fish" fish
 installScript "Node" nvm
 installScript "Rust" rust
 installScript "Todo" todo
+installScript "VIM" vim
