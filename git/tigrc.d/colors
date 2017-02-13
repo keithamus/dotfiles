@@ -1,1 +1,2 @@
+# Use own colors, not from git
 set git-colors = no

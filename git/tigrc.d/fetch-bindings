@@ -1,0 +1,8 @@
+bind generic f none
+
+# Fetch and _checkout_ origin/master
+bind generic fcm !sh -c "git fetch --all --prune; git checkout origin/master"
+
+# Fetch and _rebase_ origin/master
+bind generic frm !sh -c "git fetch --all --prune; git rebase origin/master"
+

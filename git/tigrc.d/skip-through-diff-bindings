@@ -1,0 +1,14 @@
+bind generic @  none
+
+# skip to next diff section
+bind generic @j :/^@@
+
+# skip to previous diff section
+bind generic @k :?^@@
+
+# reduce diff context by one line
+bind generic @- :toggle diff-context -1
+
+# increase diff context by one line
+bind generic @+ :toggle diff-context +1
+

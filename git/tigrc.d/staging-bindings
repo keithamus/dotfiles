@@ -1,0 +1,9 @@
+bind status  u  none
+bind stage   u  none
+
+bind generic uu status-update
+bind generic ur status-revert
+bind generic um status-merge
+bind generic ul stage-update-line
+bind generic us stage-split-chunk
+

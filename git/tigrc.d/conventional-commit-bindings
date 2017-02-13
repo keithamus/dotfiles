@@ -1,20 +1,48 @@
+bind generic c none
+bind generic C none
+
+# Commit ammend
+bind generic ca !?git commit --amend -v
+
+# Commit ammend no edit
+bind generic cA !?git commit --amend --no-edit
+
 # Commit feat:
-bind generic cF !git commit -m'feat: ' -e
+bind generic cF !git commit -m'feat: ' -ev
+bind generic cmF !git commit -m'feat: %(prompt: feat: )'
 
 # Commit fix:
-bind generic cf !git commit -m'fix: ' -e
+bind generic cf !git commit -m'fix: ' -ev
+bind generic cmf !git commit -m'fix: %(prompt: fix: )'
 
 # Commit perf:
-bind generic cf !git commit -m'perf: ' -e
+bind generic ct !git commit -m'test: ' -ev
+bind generic cmt !git commit -m'test: %(prompt: test: )'
+
+# Commit perf:
+bind generic cp !git commit -m'perf: ' -ev
+bind generic cmp !git commit -m'perf: %(prompt: perf: )'
 
 # Commit style:
-bind generic cs !git commit -m'style: ' -e
+bind generic cs !git commit -m'style: ' -ev
+bind generic cms !git commit -m'style: %(prompt: style: )'
+
+
+# Commit doc
+bind generic cd !git commit -m'doc: ' -ev
+bind generic cmd !git commit -m'doc: %(prompt: doc: )'
 
 # Commit refactor:
-bind generic cr !git commit -m'refactor: ' -e
+bind generic cr !git commit -m'refactor: ' -ev
+bind generic cmr !git commit -m'refactor: %(prompt: refactor: )'
+
+# Commit chore!:
+bind generic cc !git commit -m'chore: ' -ev
+bind generic cmc !git commit -m'chore: %(prompt: chore: )'
 
 # Commit wip!:
-bind generic cw !git commit -m'wip! ' -e
+bind generic cw !git commit -m'wip! ' -ev
+bind generic cmw !git commit -m'wip! %(prompt: wip! )'
 
 # Commit BREAKING CHANGE:
-bind generic cb !git commit -m'%(prompt Conventioanl type?): ' -m'BREAKING CHANGE:' -e
+bind generic cb !git commit -m'%(prompt Conventioanl type?): ' -m'BREAKING CHANGE:' -ev
