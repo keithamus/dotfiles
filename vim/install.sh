@@ -7,5 +7,6 @@ then
   mv "$VIM_DIR" "${VIM_DIR}.old"
 fi
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-	    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-ln -sf "$THISDIR/vimrc" "$VIM_DIR/vimrc"
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+mkdir -p "$HOME/.config/nvim/"
+ln -sf "$THISDIR/nvim.vim" "$HOME/.config/nvim/init.vim"
