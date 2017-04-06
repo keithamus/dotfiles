@@ -6,3 +6,6 @@ bind generic fcm !sh -c "git fetch --all --prune; git checkout origin/master"
 # Fetch and _rebase_ origin/master
 bind generic frm !sh -c "git fetch --all --prune; git rebase origin/master"
 
+# Fetch and _rebase_ $branch
+bind generic frb !sh -c "git fetch --all --prune; git rebase origin/%(prompt: branch: )"
+
