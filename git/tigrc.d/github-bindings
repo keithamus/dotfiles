@@ -1,17 +1,17 @@
 # View the current commit in github
-bind generic GHc @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/commit/%(commit)"
+bind generic ghc @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/commit/%(commit)"
 
 # View the github page for the current project
-bind generic GHh @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)"
+bind generic ghh @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)"
 
 # Compare the current commit against `master`, in github
-bind generic GHd @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/compare/master...%(commit)"
+bind generic ghd @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/compare/master...%(commit)"
 
 # Go to the github issues page for this current project
-bind generic GHi @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/issues"
+bind generic ghi @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/issues"
 
 # Go to the github pulls page for this current project
-bind generic GHp @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/pulls"
+bind generic ghp @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/pulls"
 
 # Prepare the current branch for a pull/merge request in Github 
-bind generic GHm @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/compare/master...%(branch)?expand=1"
+bind generic ghm @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/compare/master...%(branch)?expand=1"
