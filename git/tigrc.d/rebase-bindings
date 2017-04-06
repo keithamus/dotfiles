@@ -1,10 +1,12 @@
 bind generic r none
 
 # Fetch everything and rebase the current branch
-bind generic re !sh -c "git fetch --all; git rebase"
+bind generic rem !sh -c "git fetch --all; git rebase origin/master"
+bind generic reb !sh -c "git fetch --all; git rebase %(prompt branch: )"
 
 # Fetch everything, rebase to a specified branch, interactively
-bind generic ri !sh -c "git fetch --all; git rebase %(prompt branch: ) --interactive"
+bind generic rim !sh -c "git fetch --all; git rebase origin/master --interactive"
+bind generic rib !sh -c "git fetch --all; git rebase %(prompt branch: ) --interactive"
 
 # Continue rebasing
 bind generic rc !git rebase --continue
