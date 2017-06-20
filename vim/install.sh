@@ -8,5 +8,11 @@ then
 fi
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+brew tap caskroom/fonts
+brew cask install font-hack-nerd-font
+
 mkdir -p "$HOME/.config/nvim/"
 ln -sf "$THISDIR/nvim.vim" "$HOME/.config/nvim/init.vim"
