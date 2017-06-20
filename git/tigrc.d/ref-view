@@ -1,0 +1,3 @@
+set refs-view-date = relative-compact
+set refs-view-author-width = 2
+set refs-view-id-width = 4

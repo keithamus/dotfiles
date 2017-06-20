@@ -1,0 +1,2 @@
+bind refs C none
+bind refs C !git checkout %(ref)

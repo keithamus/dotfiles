@@ -1,6 +1,9 @@
 # View the current commit in github
 bind generic ghc @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/commit/%(commit)"
 
+# View the current branch in github
+bind generic ghb @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/tree/%(branch)"
+
 # View the github page for the current project
 bind generic ghh @sh -c "open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)"
 

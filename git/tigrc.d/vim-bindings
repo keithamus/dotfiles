@@ -18,3 +18,23 @@ bind generic <C-f> move-page-down
 bind generic <C-b> move-page-up
 
 bind generic <C-w><C-w> view-next
+
+
+
+bind generic y none
+bind generic yy none
+
+bind main yy @sh -c "echo %(commit) | pbcopy"
+bind diff yy @sh -c "echo %(commit) | pbcopy"
+bind log yy @sh -c "echo %(commit) | pbcopy"
+bind blob yy @sh -c "echo %(text) | pbcopy"
+bind blame yy @sh -c "echo %(file):%(lineno) | pbcopy"
+bind refs yy @sh -c "echo %(branch) | pbcopy"
+bind status yy @sh -c "echo %(file) | pbcopy"
+bind stage yy !sh -c "git diff %(file) | pbcopy"
+bind stash yy @sh -c "echo %(stash) | pbcopy"
+bind grep yy @sh -c "echo %(file):%(lineno) | pbcopy"
+bind pager yy @sh -c "echo %(text) | pbcopy"
+bind help yy @sh -c "echo %(cmdlineargs) | pbcopy"
+
+
