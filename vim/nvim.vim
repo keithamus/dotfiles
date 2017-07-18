@@ -128,6 +128,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'tpope/vim-markdown'
   Plug 'othree/html5.vim', { 'for': 'html' }
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
+  Plug 'tpope/vim-liquid', { 'for': ['html', 'md', 'liquid' ] }
 
 """ Misc
 
