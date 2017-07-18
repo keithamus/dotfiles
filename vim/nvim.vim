@@ -358,3 +358,9 @@ augroup colorSettings
   hi Search cterm=NONE ctermfg=NONE ctermbg=240
   hi CursorLineNr ctermfg=250
 augroup END
+
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+function! ExecuteMacroOverVisualRange()
+  echo "@".getcmdline()
+  execute ":'<,'>normal @".nr2char(getchar())
+endfunction
