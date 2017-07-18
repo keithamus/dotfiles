@@ -324,8 +324,8 @@ if has('autocmd')
           \ if line("'\"") > 0 && line("'\"") <= line("$") |
           \   exe "normal g`\"" |
           \ endif
-    " ensure commit messages, when opened, put cursor at the end of the first line
-    autocmd BufReadPost COMMIT_EDITMSG exe "normal gg$"
+    " ensure commit messages, when opened, put cursor at the end of the first line and begin editing
+    autocmd BufReadPost COMMIT_EDITMSG exe "normal gg" | startinsert!
   augroup END
   augroup initvim
     autocmd!
