@@ -247,6 +247,11 @@ augroup easyalignSettings
   nmap ga <Plug>(EasyAlign)
 augroup END
 
+augroup refactorMappings
+  nmap <leader>r 1gdvaio:s/<C-R>///gc<left><left><left>
+  xmap <leader>r "cyvaio:s/<C-R>c//gc<left><left><left>
+augroup END
+
 augroup ultisnipsSettings
   let g:UltiSnipsExpandTrigger="<tab>"
   let g:UltiSnipsSnippetDirectories = ['~/.vim/plugged/vim-snippets/Ultisnips']
