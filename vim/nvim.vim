@@ -138,7 +138,7 @@ call plug#begin('~/.vim/plugged')
 
 """ Misc
 
-  Plug 'mhinz/neovim-remote'
+  Plug 'mhinz/neovim-remote', { 'do': 'pip3 install neovim-remote' }
 
 call plug#end()
 
