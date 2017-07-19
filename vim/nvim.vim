@@ -155,8 +155,6 @@ augroup easymotionSettings
   omap / <Plug>(easymotion-tn)
   map  n <Plug>(easymotion-next)
   map  N <Plug>(easymotion-prev)
-  map  <Tab> <Plug>(easymotion-next)
-  map  <S-Tab> <Plug>(easymotion-prev)
   function! s:config_easyfuzzymotion(...) abort
     return extend(copy({
           \   'converters': [incsearch#config#fuzzyword#converter()],
@@ -244,6 +242,14 @@ augroup END
 augroup easyalignSettings
   xmap ga <Plug>(EasyAlign)
   nmap ga <Plug>(EasyAlign)
+augroup END
+
+augroup ultisnipsSettings
+  let g:UltiSnipsExpandTrigger="<tab>"
+  let g:UltiSnipsSnippetDirectories = ['~/.vim/plugged/vim-snippets/Ultisnips']
+  let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
+  autocmd FileType js UltiSnipsAddFiletypes javascript-node
+  autocmd FileType js UltiSnipsAddFiletypes javascript-mocha
 augroup END
 
 augroup deopleteSettings
