@@ -127,8 +127,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'mxw/vim-jsx', { 'for': 'javascript' }
   Plug 'fleischie/vim-styled-components', { 'for': 'javascript' }
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
-  Plug 'othree/yajs.vim', { 'for': 'javascript' }
-  Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }
+  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   Plug 'leshill/vim-json', { 'for': 'json' }
 
   Plug 'dag/vim-fish', { 'for': 'fish' }
