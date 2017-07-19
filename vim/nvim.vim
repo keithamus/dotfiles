@@ -233,22 +233,16 @@ augroup neomakeSettings
 augroup END
 
 
+
 augroup switchSettings
   let g:switch_mapping = ""
   nnoremap <c-s> :Switch<cr>
-  autocmd FileType javascript let b:switch_definitions =
+  autocmd FileType javascript let b:switch_custom_definitions =
         \ [
-        \   [ 'false', 'true' ],
         \   {
-        \     'function \(\k\+\)(':              'var \1 = function (',
-        \     '\%(var \)\=\(\k\+\) = function (': 'function \1(',
-        \   },
-        \   {
-        \     'function\s*()\s*{':                        '() => {',
-        \     'function\s*(\([^()]\{-},[^()]\{-}\))\s*{': '(\1) => {',
-        \     'function\s*(\(\k\+\))\s*{':                '\1 => {',
-        \     '(\([^()]\{-}\))\s*=>\s*{':                 'function (\1) {',
-        \     '\(\k\+\)\s*=>\s*{':                        'function (\1) {',
+        \     'var ': 'let ',
+        \     'let ': 'const ',
+        \     'const ': 'let ',
         \   },
         \   {
         \     'describe(\(.*\)': 'describe.skip(\1',
