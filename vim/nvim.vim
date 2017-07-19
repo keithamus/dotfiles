@@ -235,8 +235,6 @@ augroup END
 
 
 augroup switchSettings
-  let g:switch_mapping = ""
-  nnoremap <c-s> :Switch<cr>
   autocmd FileType javascript let b:switch_custom_definitions =
         \ [
         \   {
