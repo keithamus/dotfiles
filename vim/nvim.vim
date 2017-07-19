@@ -78,6 +78,44 @@ call plug#begin('~/.vim/plugged')
   " into one - without breaking syntax!
   Plug 'AndrewRadev/splitjoin.vim'
 
+""" TextObject Plugins!
+  
+  " User definable TextObjects using regex or functions
+  Plug 'kana/vim-textobj-user'
+
+  " ai/ii - select region at this indent and further
+  " aI/iI - select region at this indent alone
+  Plug 'michaeljsmith/vim-indent-object'
+
+  " af/if - select function
+  Plug 'kana/vim-textobj-function'
+  Plug 'thinca/vim-textobj-function-javascript'
+
+  " aa/ia - select argument in function call
+  Plug 'vim-scripts/argtextobj.vim'
+
+  " ad/id - select date, at/it - select time
+  Plug 'kana/vim-textobj-datetime'
+
+  " ah/ih - select git hunk
+  Plug 'gilligan/textobj-gitgutter'
+
+  " ak/ik - select object key
+  " av/iv - select object value
+  Plug 'vimtaku/vim-textobj-keyvalue'
+
+  " am/im - select matchit (%) range
+  Plug 'adriaanzon/vim-textobj-matchit'
+
+	" au/iu - select URI
+	Plug 'jceb/vim-textobj-uri'
+
+  " ax/ix - select (X|HT)ML attributes
+  Plug 'whatyouhide/vim-textobj-xmlattr'
+
+  " ac/ic - select CSS rules+selectors
+  Plug 'jasonlong/vim-textobj-css'
+
 """ Autocompletion & Snippets
 
   " autocomplete brackets/quotes!
