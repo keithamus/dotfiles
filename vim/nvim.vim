@@ -74,6 +74,10 @@ call plug#begin('~/.vim/plugged')
   " cx{motion} store a value to exchange with the next cx
   Plug 'tommcdo/vim-exchange'
 
+  " gS to split a one-liner into multiple lines, gJ to join multiple lines
+  " into one - without breaking syntax!
+  Plug 'AndrewRadev/splitjoin.vim'
+
 """ Autocompletion & Snippets
 
   " autocomplete brackets/quotes!
