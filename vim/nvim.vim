@@ -186,6 +186,9 @@ augroup nerdtreeSettings
 augroup END
 
 augroup neomakeSettings
+  nmap <≥> <esc>:lNext<cr>
+  nmap <˘> <esc>:lprevious<cr>
+  let g:neomake_open_list = 1
   if has('autocmd')
     autocmd! BufWritePost,BufEnter * Neomake
   end
