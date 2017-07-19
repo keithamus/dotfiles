@@ -71,6 +71,9 @@ call plug#begin('~/.vim/plugged')
   " see easyalignSettings for more
   Plug 'junegunn/vim-easy-align'
 
+  " cx{motion} store a value to exchange with the next cx
+  Plug 'tommcdo/vim-exchange'
+
 """ Autocompletion & Snippets
 
   " autocomplete brackets/quotes!
