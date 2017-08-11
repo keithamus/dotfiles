@@ -1,6 +1,12 @@
+fisherman/await
 edc/bass
-fisherman/docker-completion
-oh-my-fish/plugin-fasd
+fisherman/done
+keithamus/firewatch-minimal-fish-theme
+fisherman/free
+fisherman/fzf
+fisherman/get
+fisherman/getopts
+fisherman/humanize_duration
 fisherman/imgcat
-keithamus/theme-keithafish
+fisherman/last_job_id
 fisherman/nvm
