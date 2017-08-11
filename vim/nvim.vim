@@ -238,15 +238,12 @@ augroup neomakeSettings
   end
 augroup END
 
-
-
 augroup switchSettings
   autocmd FileType javascript let b:switch_custom_definitions =
         \ [
         \   {
-        \     'var ': 'let ',
-        \     'let ': 'const ',
-        \     'const ': 'let ',
+        \      '\<\([a-zA-z.()]\+\) === false': '!\1',
+        \      '!\<\([a-zA-z.()]\+\)':          '\1 === false',
         \   },
         \   {
         \     'describe(\(.*\)': 'describe.skip(\1',
