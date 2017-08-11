@@ -36,6 +36,16 @@ call plug#begin('~/.vim/plugged')
   " Reads .editorconfig files and cleans up files on save
   Plug 'editorconfig/editorconfig-vim'
 
+  " Fugitive
+  " Adds a bunch of helpful git commands to Vim
+  Plug 'tpope/vim-fugitive'
+  
+  " Rhubarb adds GitHub support to fugitive
+  Plug 'tpope/vim-rhubarb'
+
+  " Provides a minimum `:GStatus` window, rather than fugitives rather verbose one
+  Plug 'alexdavid/vim-min-git-status'
+
 """ Editing tools
 
   " Switch - between variants of different lines/vars
