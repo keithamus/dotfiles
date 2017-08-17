@@ -12,4 +12,4 @@
  - You can re-run `./install.sh` as many times as you want. It will not do weird stuff (hopefully)
  - You can (re)install individual plugins by running the `install.sh` in their folder - e.g. `sh ~/.dotfiles/rust/install.sh`
 
-[zip]: https://github.com/keithamus/dotfiles/archive/master.zip
+[zip]: https://github.com/keithamus/dotfiles/archive/master.zip 
