@@ -1,5 +1,7 @@
 # Dotfiles
 
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/ygkcNhfZ9nTDeVM6P8LSGn1C/keithamus/dotfiles'>  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/ygkcNhfZ9nTDeVM6P8LSGn1C/keithamus/dotfiles.svg' /></a>
+
 > These are my dotfiles. There are many like it but these are mine.
 
 ## Setting up
