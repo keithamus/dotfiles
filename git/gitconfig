@@ -113,6 +113,10 @@
   versionpack = !sh -c 'git archive --format=zip $(git describe --tags) -o $("basename `pwd`")_$(git describe --tags).zip' -
   push-head = "!f() { git push origin HEAD:refs/heads/${1:-wip} -f; }; f"
 
+[commit]
+  gpgsign = true
+  verbose = 2
+
 [apply]
   ignore-whitespace = 1
 
