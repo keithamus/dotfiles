@@ -133,6 +133,9 @@
 
 [rebase]
   stat = 1
+  autostash = 1
+  autosquash = 1
+  missingcommitscheck = warn
 
 [color]
   ui = auto
