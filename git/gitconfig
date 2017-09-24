@@ -126,6 +126,7 @@
 [diff]
   noprefix = 1
   algorithm = patience
+  mnemonicprefix = 1
 
 [push]
   default = upstream
