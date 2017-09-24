@@ -9,19 +9,100 @@
   autocrlf = input
 
 [alias]
-  f = fetch --all --prune
-  frm = "!f() { git fetch --all --prune && git rebase ${1:-upstream}/master; }; f"
-  fcm = "!f() { git fetch --all --prune && git stash && git checkout ${1:-upstream}/master -f && git stash apply; }; f"
+  f = "!git fetch --all --prune && git branch --merged origin/master | tail -n +2 | xargs git branch -d"
+  s = "!cd ${GIT_PREFIX:-`pwd`}; git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1; echo ""; git status -s; echo """
+  st = !git s
+
   d = diff --word-diff
-  di = diff --word-diff
-  ds = diff --staged --word-diff
-  s = st
-  b = branch --all
-  br = branch --all
-  lbr = branch --all
-  c = commit -vp
-  ci = commit -vp
-  st = "!cd ${GIT_PREFIX:-`pwd`}; git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1; echo ""; git status -s; echo """
+  di = !git d
+  ds = !git d --staged
+
+  b = branch 
+  br = !git b
+  lbr = !git b --all
+
+  c = commit -v
+
+  # Fetch and _checkout_ origin/master
+  fcm = "!f() { git f && git checkout ${1:-origin}/${2:-master} -f; }; f"
+
+  rem = "!f() { git fetch ${1:-origin} ${2-master} && git rebase ${1:-origin}/${2:-master}; }; f"
+  reb = "!f() { git fetch ${1:-origin} ${2-master} && git rebase ${1:-origin}/${2:-master}; }; f"
+  rim = "!f() { git fetch ${1:-origin} ${2-master} && git rebase --interactive ${1:-origin}/${2:-master}; }; f"
+  rib = "!f() { git fetch ${1:-origin} ${2-master} && git rebase --interactive ${1:-origin}/${2:-master}; }; f"
+
+  # github aliases
+  # View the current commit in github
+  ghc = "!f() { open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/commit/$(git rev-parse ${1-HEAD}); }; f"
+  # View the current branch in github
+  ghb = "!f() { open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/tree/${1-HEAD}%(branch); }; f"
+  # View the github page for the current project
+  ghh = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)"
+  # Go to the github issues page for this current project
+  ghi = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/issues"
+  # Go to the github pulls page for this current project
+  ghp = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/pulls"
+  # Compare the current commit against `master`, in github
+  ghd = "!f() { open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/compare/master...$(git rev-parse ${1-HEAD})?expand=1; }; f"
+
+  # Conventional Commit aliases
+  # Commit ammend
+  caa = commit --amend
+  # Commit ammend no edit
+  can = "!git s; git show | cat; echo; read -n1 -p 'Amend this commit? ' confirm; echo; [[ \"$confirm\" == 'y' ]] && git commit --amend --no-edit"
+
+  # Commit feat:
+  cf = !git commit -m'feat: ' -e
+  cmf = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"feat: $1\"; }; f"
+
+  # Commit fix:
+  cb = !git commit -m'fix: ' -e
+  cmb = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"fix: $1\"; }; f"
+
+  # Commit perf:
+  ct = !git commit -m'test: ' -e
+  cmt = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"test: $1\"; }; f"
+
+  # Commit perf:
+  cp = !git commit -m'perf: ' -e
+  cmp = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"perf: $1\"; }; f"
+
+  # Commit style:
+  cs = !git commit -m'style: ' -e
+  cms = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"style: $1\"; }; f"
+
+  # Commit doc
+  cd = !git commit -m'doc: ' -e
+  cmd = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"doc: $1\"; }; f"
+
+  # Commit refactor:
+  cr = !git commit -m'refactor: ' -e
+  cmr = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"refactor: $1\"; }; f"
+
+  # Commit chore!:
+  cc = !git commit -m'chore: ' -e
+  cmc = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"chore: $1\"; }; f"
+
+  # Commit wip!:
+  cw = !git commit -m'wip! ' -e
+  cmw = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"wip! $1\"; }; f"
+
+  # Push a branch setting upstream
+  branchwiz = "!f() { read -p 'Name this branch: ' name && [ -n \"$name\" ] && git checkout -b $name HEAD; }; f"
+  promote = "!f() { local name=\"$(git rev-parse --abbrev-ref HEAD | head)\"; [ -f \".git/refs/heads/$name\" ] && git push --set-upstream ${1:-origin} \"$name\" || (git branchwiz && git promote \"$1\";); }; f"
+
+  # in case `git` isn't aliased to `hub` - provide aliases for hub commands
+  sync = "!f() { hub sync $@; }; f"
+  browse = "!f() { hub browse $@; }; f"
+  ci-status = "!f() { hub ci-status $@; }; f"
+  compare = "!f() { hub compare $@; }; f"
+  create = "!f() { hub create $@; }; f"
+  fork = "!f() { hub fork $@; }; f"
+  issue = "!f() { hub issue $@; }; f"
+  pr = "!f() { hub pr $@; }; f"
+  pull-request = "!f() { hub pull-request $@; }; f"
+  release = "!f() { hub release $@; }; f"
+
   trackallbranches = !sh -c "for remote in `git branch -r `; do git branch --track $remote; done"
   assume   = update-index --assume-unchanged
   unassume = update-index --no-assume-unchanged
