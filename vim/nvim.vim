@@ -16,9 +16,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   
-  " smooth/velocity trackpad scrolling in vim
-  Plug 'yuttie/comfortable-motion.vim'
-
 """ Project Tools
 
   " NERDTree
