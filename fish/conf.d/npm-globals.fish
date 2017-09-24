@@ -1,1 +1,1 @@
-set PATH $PATH './node_modules/.bin/'
+set PATH './node_modules/.bin' $PATH 
