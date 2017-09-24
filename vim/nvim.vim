@@ -137,6 +137,9 @@ call plug#begin('~/.vim/plugged')
   Plug '1995eaton/vim-better-javascript-completion', { 'for': 'javascript' }
   Plug 'othree/jspc.vim', { 'for': 'javascript' }
 
+  " ternjs autocomplete
+  Plug 'ternjs/tern_for_vim', { 'do': 'npm i' }
+
 """ UI
 
   " Airline
