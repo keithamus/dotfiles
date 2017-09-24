@@ -283,8 +283,6 @@ augroup clipboardSettings
   vnoremap <leader>P "*P
 augroup END
 
-" Plug 'mattn/emmet-vim'
-
 augroup easyalignSettings
   xmap ga <Plug>(EasyAlign)
   nmap ga <Plug>(EasyAlign)
