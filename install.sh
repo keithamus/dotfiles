@@ -22,7 +22,6 @@ then
 fi
 
 installScript "Git" git
-installScript "Docker" docker
 installScript "Powerline Fonts" powerline-fonts
 installScript "Fish" fish
 installScript "Node" nvm
