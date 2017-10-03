@@ -1,5 +1,9 @@
 #!/usr/bin/env sh
-SCRIPT_ROOT="$(dirname "$0")"
+SCRIPT_ROOT=$(cd "$(dirname "$0")" || exit 1; pwd)
+if [ -f "$SCRIPT_ROOT/setup" ]; then
+  SCRIPT_ROOT="$(dirname "${SCRIPT_ROOT}")"
+fi
+echo $SCRIPT_ROOT
 installScript() {
   echo "###"
   echo "# Installing $1"
