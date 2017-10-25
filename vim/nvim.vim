@@ -157,7 +157,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'ryanoasis/vim-devicons'
 
   " Icon theme
-  Plug 'crusoexia/vim-monokai'
+  Plug 'altercation/vim-colors-solarized'
 
   " GitGutter
   " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
@@ -340,7 +340,6 @@ augroup airlineSettings
   let g:airline_section_y = ''
   let g:airline_section_z = "%{g:airline_symbols.maxlinenr}%3l/%3L:%3v%#__restore__#"
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' " dont show expected file format
-  let g:airline_theme = 'wombat'
   set noshowmode " disable vim's default mode line (e.g. `--INSERT--`)
 augroup END
 
@@ -412,12 +411,23 @@ augroup END
 
 
 augroup colorSettings
-  colorscheme monokai
-  set background=dark
-  hi NonText ctermfg=240
-  hi SpecialKey ctermfg=240
-  hi Search cterm=NONE ctermfg=NONE ctermbg=240
-  hi CursorLineNr ctermfg=250
+  set background=light
+  colorscheme solarized
+  if &background ==# "dark"
+    let g:airline_theme = 'wombat'
+    let g:indentLine_color_term = 240
+    hi NonText ctermfg=240
+    hi SpecialKey ctermfg=240
+    hi Search cterm=NONE ctermfg=NONE ctermbg=240
+    hi CursorLineNr ctermfg=250
+  else
+    let g:airline_theme = 'solarized'
+    let g:indentLine_color_term = 254
+    hi NonText ctermfg=254
+    hi SpecialKey ctermfg=254
+    hi Search cterm=NONE ctermfg=NONE ctermbg=254
+    hi CursorLineNr ctermfg=3
+  endif
 augroup END
 
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
