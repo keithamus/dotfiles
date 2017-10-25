@@ -15,7 +15,7 @@ call plug#begin('~/.vim/plugged')
   " see augroup fzfSettings for more
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-  
+
 """ Project Tools
 
   " NERDTree
@@ -36,7 +36,7 @@ call plug#begin('~/.vim/plugged')
   " Fugitive
   " Adds a bunch of helpful git commands to Vim
   Plug 'tpope/vim-fugitive'
-  
+
   " Rhubarb adds GitHub support to fugitive
   Plug 'tpope/vim-rhubarb'
 
@@ -82,7 +82,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'AndrewRadev/splitjoin.vim'
 
 """ TextObject Plugins!
-  
+
   " User definable TextObjects using regex or functions
   Plug 'kana/vim-textobj-user'
 
@@ -110,8 +110,8 @@ call plug#begin('~/.vim/plugged')
   " am/im - select matchit (%) range
   Plug 'adriaanzon/vim-textobj-matchit'
 
-	" au/iu - select URI
-	Plug 'jceb/vim-textobj-uri'
+  " au/iu - select URI
+  Plug 'jceb/vim-textobj-uri'
 
   " ax/ix - select (X|HT)ML attributes
   Plug 'whatyouhide/vim-textobj-xmlattr'
