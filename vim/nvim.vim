@@ -157,7 +157,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'ryanoasis/vim-devicons'
 
   " Icon theme
-  Plug 'altercation/vim-colors-solarized'
+  Plug 'flazz/vim-colorschemes'
 
   " GitGutter
   " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
@@ -411,8 +411,9 @@ augroup END
 
 
 augroup colorSettings
+  set t_Co=256
   set background=light
-  colorscheme solarized
+  colorscheme papercolor
   if &background ==# "dark"
     let g:airline_theme = 'wombat'
     let g:indentLine_color_term = 240
@@ -421,9 +422,9 @@ augroup colorSettings
     hi Search cterm=NONE ctermfg=NONE ctermbg=240
     hi CursorLineNr ctermfg=250
   else
-    let g:airline_theme = 'solarized'
+    let g:airline_theme = 'papercolor'
     let g:indentLine_color_term = 254
-    hi NonText ctermfg=254
+    hi NonText ctermfg=250
     hi SpecialKey ctermfg=254
     hi Search cterm=NONE ctermfg=NONE ctermbg=254
     hi CursorLineNr ctermfg=3
