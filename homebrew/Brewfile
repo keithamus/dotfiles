@@ -80,6 +80,7 @@ brew 'rustc-completion'
 
 cask '1password-cli'
 cask 'alfred'
+cask 'android-file-transfer'
 cask 'backblaze'
 cask 'bartender'
 cask 'bitbar'
