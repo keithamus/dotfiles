@@ -37,8 +37,8 @@ brew 'imagemagick'
 brew 'jpeg'
 brew 'jq'
 brew 'lame'
-brew 'launch_socket_server'
-brew 'launchdns'
+brew "launch_socket_server", restart_service: true
+brew "launchdns", restart_service: true
 brew 'lcov'
 brew 'neovim'
 brew 'netcat'
