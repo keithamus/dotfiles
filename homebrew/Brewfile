@@ -116,6 +116,7 @@ cask 'tunnelblick'
 cask 'turtl'
 cask 'vanilla'
 cask 'virtualbox'
+cask 'virtualbox-extension-pack'
 cask 'vlc'
 cask 'zoomus'
 
