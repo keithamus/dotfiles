@@ -1,7 +1,6 @@
 fisherman/await
 edc/bass
 fisherman/done
-keithamus/firewatch-minimal-fish-theme
 fisherman/free
 fisherman/fzf
 fisherman/get
@@ -10,3 +9,4 @@ fisherman/humanize_duration
 fisherman/imgcat
 fisherman/last_job_id
 fisherman/nvm
+keithamus/papercolor-fish-theme
