@@ -43,6 +43,7 @@ brew 'lcov'
 brew 'neovim'
 brew 'netcat'
 brew 'nmap'
+brew "pass"
 brew 'pngcrush'
 brew 'python3'
 brew 'readline'
