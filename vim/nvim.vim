@@ -176,6 +176,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
   Plug 'leshill/vim-json', { 'for': 'json' }
+  Plug 'facebook/vim-flow', { 'for': 'javascript' }
 
   Plug 'dag/vim-fish', { 'for': 'fish' }
   Plug 'tpope/vim-markdown'
