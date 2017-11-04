@@ -78,6 +78,7 @@ brew 'open-completion'
 brew 'ruby-completion'
 brew 'rustc-completion'
 
+cask '1password-cli'
 cask 'alfred'
 cask 'backblaze'
 cask 'bartender'
