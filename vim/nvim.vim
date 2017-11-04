@@ -417,6 +417,7 @@ end
 
 " extra keybindings
 vnoremap . :normal .<CR>
+nnoremap <esc> :
 
 " movement remaps
 noremap H ^
