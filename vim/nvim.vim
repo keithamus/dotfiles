@@ -23,10 +23,10 @@ call plug#begin('~/.vim/plugged')
   " see augroup nerdtreeSettings for more
   Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 
-  " Neomake
+  " ALE
   " Asynchronous linting and make framework for Neovim/Vim
-  " see augroup neomakeSettings for more
-  Plug 'neomake/neomake'
+  " see augroup aleSettings for more
+  Plug 'w0rp/ale'
 
 
   " Editorconfig
@@ -229,13 +229,17 @@ augroup nerdtreeSettings
   autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 augroup END
 
-augroup neomakeSettings
-  nmap <≥> <esc>:lNext<cr>
-  nmap <˘> <esc>:lprevious<cr>
-  let g:neomake_open_list = 1
-  if has('autocmd')
-    autocmd! BufWritePost,BufEnter * Neomake
-  end
+augroup aleSettings
+  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+  nmap <silent> <C-j> <Plug>(ale_next_wrap)
+  let g:flow#showquickfix = 0
+  let g:ale_sign_column_always = 1
+  let g:ale_sign_error = ''
+  let g:ale_sign_warning = ''
+  " let g:ale_fix_on_save = 1
+  let g:ale_fixers = {
+  \   'javascript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
+  \}
 augroup END
 
 augroup switchSettings
