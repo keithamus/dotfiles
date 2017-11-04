@@ -30,7 +30,7 @@ brew 'gnutls'
 brew 'go'
 brew 'graphicsmagick'
 brew 'httpie'
-brew 'hub'
+brew "hub", args: ["devel"]
 brew 'ical-buddy'
 brew 'ievms'
 brew 'imagemagick'
