@@ -1,6 +1,7 @@
 tap 'caskroom/cask'
 tap "caskroom/fonts"
 tap 'caskroom/versions'
+tap "buo/cask-upgrade"
 tap 'homebrew/bundle'
 tap 'ravenac95/sudolikeaboss'
 tap 'universal-ctags/universal-ctags'
