@@ -5,6 +5,7 @@ export DONE_FILE="$TODO_DIR/done.txt"
 export REPORT_FILE="$TODO_DIR/report.txt"
 export TODOCONF_DIR="$HOME/.todo"
 export TODO_ACTIONS_DIR="$TODOCONF_DIR/todo.actions.d"
+export TODOTXT_FINAL_FILTER="$TODO_ACTIONS_DIR/futureTasks"
 
 ### === HIGH-COLOR === compatible with most terms including putty
 ### for windows... use colors that don't make your eyes bleed :)
