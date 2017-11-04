@@ -43,6 +43,9 @@ call plug#begin('~/.vim/plugged')
   " Provides a minimum `:GStatus` window, rather than fugitives rather verbose one
   Plug 'alexdavid/vim-min-git-status'
 
+  " Adds `:Test[File|Nearest|Suite|Last|Visit]` commands
+  Plug 'janko-m/vim-test'
+
 """ Editing tools
 
   " Switch - between variants of different lines/vars
@@ -350,6 +353,12 @@ augroup END
 augroup indentlineSettings
   let g:indentLine_char = '│'
   let g:indentLine_color_term = 236
+augroup END
+
+augroup vimTestSettings
+  nmap <silent> <leader>t :TestNearest<CR>
+  nmap <silent> <leader>T :TestFile<CR>
+  let test#strategy="neovim"
 augroup END
 
 """ Syntaxes
