@@ -55,6 +55,7 @@ brew 'sqlite'
 brew 'sudolikeaboss'
 brew 'terminal-notifier'
 brew 'the_silver_searcher'
+brew "tidy-html5"
 brew 'tig'
 brew 'todo-txt'
 brew 'tree'
