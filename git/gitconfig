@@ -23,6 +23,13 @@
 
   c = commit -v
 
+  workstate = "!f() { (test -d \"${1}/rebase-merge\" -o -d \"${1}/rebase-apply\" && echo rebase) || (test -e \"${1}/MERGE_HEAD\" && echo merge) || echo normal; }; f \"$(git rev-parse --git-dir)\""
+  continue = !git "$(git workstate)Continue"
+  normalContinue = !echo "You are not rebasing or merging any files"
+  mergeContinue = "!f() { (test $count -ne 0 && echo \"There are still merge conflicts! Cannot continue\" && exit 1) || git commit; }; f \"$(git ls-files --unmerged | wc -l)\""
+  rebaseContinue = "!f() { git diff-index --quiet HEAD --; (test $? -eq 0 && echo \"No changes, automatically skipping commit\" && git rebase --skip) || git rebase --continue; }; f"
+  abort = !sh -c "git merge --abort 2>/dev/null || git rebase --abort 2>/dev/null"
+
   # Fetch and _checkout_ origin/master
   fcm = "!f() { git f && git checkout ${1:-origin}/${2:-master} -f; }; f"
 
