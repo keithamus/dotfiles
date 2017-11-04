@@ -1,4 +1,5 @@
 tap 'caskroom/cask'
+tap "caskroom/fonts"
 tap 'caskroom/versions'
 tap 'homebrew/bundle'
 tap 'ravenac95/sudolikeaboss'
@@ -111,6 +112,14 @@ cask 'vanilla'
 cask 'virtualbox'
 cask 'vlc'
 cask 'zoomus'
+
+# fonts
+cask "caskroom/fonts/font-anonymouspro-nerd-font-mono"
+cask "caskroom/fonts/font-firacode-nerd-font-mono"
+cask "caskroom/fonts/font-hack-nerd-font"
+cask "caskroom/fonts/font-inconsolata-nerd-font"
+cask "caskroom/fonts/font-meslo-nerd-font-mono"
+cask "caskroom/fonts/font-sourcecodepro-nerd-font-mono"
 
 # quicklook
 cask 'qlcolorcode'
