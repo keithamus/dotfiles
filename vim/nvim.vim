@@ -428,11 +428,6 @@ noremap L g_
 let g:markdown_fenced_languages = ['ruby', 'erb=ruby', 'sh', 'yaml', 'javascript', 'js=javascript', 'json=javascript', 'html', 'css', 'sass']
 let g:markdown_syntax_conceal = 0
 
-augroup equalPrograms
-  au FileType json setlocal equalprg=jq\ --indent\ 4\ .
-augroup END
-
-
 augroup colorSettings
   set t_Co=256
   set background=light
