@@ -18,11 +18,6 @@ call plug#begin('~/.vim/plugged')
 
 """ Project Tools
 
-  " NERDTree
-  " A tree explorer plugin for vim.
-  " see augroup nerdtreeSettings for more
-  Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-
   " ALE
   " Asynchronous linting and make framework for Neovim/Vim
   " see augroup aleSettings for more
@@ -64,9 +59,6 @@ call plug#begin('~/.vim/plugged')
   " gt<movement> for title casing
   Plug 'christoomey/vim-titlecase'
 
-  " Add `+` key to expand selection to "smart regions"
-  Plug 'terryma/vim-expand-region'
-
   " bunch of cool keyboard combos
   Plug 'tpope/vim-unimpaired'
 
@@ -79,10 +71,6 @@ call plug#begin('~/.vim/plugged')
 
   " cx{motion} store a value to exchange with the next cx
   Plug 'tommcdo/vim-exchange'
-
-  " gS to split a one-liner into multiple lines, gJ to join multiple lines
-  " into one - without breaking syntax!
-  Plug 'AndrewRadev/splitjoin.vim'
 
 """ TextObject Plugins!
 
@@ -105,16 +93,6 @@ call plug#begin('~/.vim/plugged')
 
   " ah/ih - select git hunk
   Plug 'gilligan/textobj-gitgutter'
-
-  " ak/ik - select object key
-  " av/iv - select object value
-  Plug 'vimtaku/vim-textobj-keyvalue'
-
-  " am/im - select matchit (%) range
-  Plug 'adriaanzon/vim-textobj-matchit'
-
-  " au/iu - select URI
-  Plug 'jceb/vim-textobj-uri'
 
   " ax/ix - select (X|HT)ML attributes
   Plug 'whatyouhide/vim-textobj-xmlattr'
@@ -218,19 +196,7 @@ augroup END
 augroup fzfSettings
   imap <C-p> <esc>:GFiles<cr>
   nmap <C-p> :GFiles<cr>
-  imap <C-F> <esc>:Ag<space>
-  nmap <C-F> :Ag<space>
   let g:fzf_nvim_statusline = 0
-augroup END
-
-augroup nerdtreeSettings
-  nmap <C-\> :NERDTreeToggle<cr>
-  imap <C-\> <esc>:NERDTreeToggle<cr>  " make NERDTree toggleable with Ctrl+/
-  let g:loaded_netrw = 1
-  let g:loaded_netrwPlugin = 1
-  " allow nerdtree to load when run `nvim .` or `nvim`
-  autocmd StdinReadPre * let s:std_in=1
-  autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 augroup END
 
 augroup aleSettings
