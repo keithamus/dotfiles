@@ -215,6 +215,9 @@ augroup aleSettings
   let g:ale_fixers = {
   \   'javascript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
   \}
+  let g:ale_linters = {
+  \   'javascript': ['eslint', 'flow'],
+  \}
 augroup END
 
 augroup switchSettings
