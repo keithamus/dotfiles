@@ -44,6 +44,10 @@ call plug#begin('~/.vim/plugged')
   " Adds `:Dash` command
   Plug 'rizzatti/dash.vim'
 
+  " Adds capabilities for custom per-project start pages
+  Plug 'keithamus/vimstart'
+
+
 """ Editing tools
 
   " Switch - between variants of different lines/vars
@@ -387,61 +391,8 @@ augroup colorSettings
   endif
 augroup END
 
-xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>;
+xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 function! ExecuteMacroOverVisualRange()
   echo "@".getcmdline()
   execute ":'<,'>normal @".nr2char(getchar())
 endfunction
-
-fun! Start()
-    " Don't run if: we have commandline arguments, we don't have an empty
-    " buffer, if we've not invoked as vim or gvim, or if we'e start in insert mode
-    if argc() || line2byte('$') != -1 || v:progname !~? '^[-gmnq]\=vim\=x\=\%[\.exe]$' || &insertmode
-        return
-    endif
-    " Start a new buffer ...
-    enew
-    " ... and set some options for it
-    setlocal
-        \ bufhidden=wipe
-        \ buftype=nofile
-        \ nobuflisted
-        \ nocursorcolumn
-        \ nocursorline
-        \ nolist
-        \ nonumber
-        \ noswapfile
-        \ norelativenumber
-    " Now we can just write to the buffer, whatever you want.
-    call append('$', "")
-    if !empty(glob(".vim.motd"))
-      let motd=split(system("cat .vim.motd"), '\n')
-    else
-      let motd=split(system("cat ~/.config/nvim/motd"), '\n')
-    endif
-    let linelengths=map(copy(motd), 'len(v:val)')
-    let space=repeat(' ', (winwidth(0) - max(linelengths))/2)
-    call append('$', map(motd, 'space . v:val'))
-    let todos=split(system("td"), '\n')[0:-3]
-    if len(todos) > 0
-      call append('$', '')
-      call append('$', '')
-      call append('$', repeat('-', 40))
-      execute ":$:center " winwidth(0)
-      let linelengths=map(copy(todos), 'len(v:val)')
-      let space=repeat(' ', (winwidth(0) - max(linelengths))/2)
-      call append('$', map(todos, 'space . v:val'))
-    endif
-    let leading=repeat([''], (winheight(0)-len(getline(0, '$')))/2)
-    call append('^', leading)
-    execute ":0"
-    " No modifications to this buffer
-    setlocal nomodifiable nomodified
-    " When we go to insert mode start a new buffer, and start insert
-    nnoremap <buffer><silent> e :enew<CR>
-    nnoremap <buffer><silent> i :enew <bar> startinsert<CR>
-    nnoremap <buffer><silent> o :enew <bar> startinsert<CR>
-endfun
-
-" Run after "doing all the startup stuff"
-autocmd VimEnter * call Start()
