@@ -178,8 +178,10 @@ augroup easymotionSettings
   map  / <Plug>(incsearch-easymotion-/)
   map  ? <Plug>(incsearch-easymotion-?)
   omap / <Plug>(easymotion-tn)
-  map  n <Plug>(easymotion-next)
-  map  N <Plug>(easymotion-prev)
+  map  <Leader>l <Plug>(easymotion-lineforward)
+  map  <Leader>j <Plug>(easymotion-j)
+  map  <Leader>k <Plug>(easymotion-k)
+  map  <Leader>h <Plug>(easymotion-linebackward)
   function! s:config_easyfuzzymotion(...) abort
     return extend(copy({
           \   'converters': [incsearch#config#fuzzyword#converter()],
@@ -189,17 +191,21 @@ augroup easymotionSettings
           \   'is_stay': 1
           \ }), get(a:, 1, {}))
   endfunction
-  noremap <silent><expr> <Space>/ incsearch#go(<SID>config_easyfuzzymotion())
+  noremap <silent><expr> <Leader>/ incsearch#go(<SID>config_easyfuzzymotion())
 augroup END
 
 augroup fzfSettings
-  imap <C-p> <esc>:GFiles<cr>
-  nmap <C-p> :GFiles<cr>
+  nmap gG :GFiles<cr>
+  nmap gF :Files<cr>
+  nmap gH :History<cr>
+  nmap gB :Buffers<cr>
+  nmap gA :Ag<Space>
   let g:fzf_nvim_statusline = 0
 augroup END
 
 augroup aleSettings
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+  nmap <silent> <C-j> <Plug>(ale_next_wrap)
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
   let g:flow#showquickfix = 0
   let g:ale_sign_column_always = 1
