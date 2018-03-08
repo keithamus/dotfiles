@@ -334,6 +334,7 @@ if has('autocmd')
     autocmd BufNewFile,BufReadPost git-rebase-todo set filetype=gitrebase
     autocmd BufNewFile,BufReadPost gitconfig set filetype=gitconfig
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
+    autocmd BufNewFile,BufRead *.ts  set filetype=typescript
     autocmd BufNewFile,BufReadPost tigrc set filetype=vimrc
     autocmd BufNewFile,BufReadPost Vagrantfile set filetype=ruby
   augroup END
