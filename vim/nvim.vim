@@ -297,6 +297,8 @@ augroup END
 
 augroup airlineSettings
   let g:airline#extensions#tabline#enabled = 1
+  let g:airline#extensions#tabline#buffers_label = '*'
+  let g:airline_extensions = ['tabline']
   let g:airline_powerline_fonts = 1
   let g:airline_mode_map = {
         \ '__' : '-',
@@ -304,15 +306,17 @@ augroup airlineSettings
         \ 'i'  : 'I',
         \ 'R'  : 'R',
         \ 'c'  : 'C',
-        \ 'v'  : 'V',
+        \ 'v'  : 'v',
         \ 'V'  : 'V',
-        \ '' : 'V',
-        \ 's'  : 'S',
+        \ '' : '^V',
+        \ 's'  : 's',
         \ 'S'  : 'S',
-        \ '' : 'S',
+        \ '' : '^S',
+        \ 't'  : 't',
         \ }
   let g:airline_skip_empty_sections = 1
   let g:airline_section_b = ''
+  let g:airline_section_c = ' '
   let g:airline_section_x = ''
   let g:airline_section_y = ''
   let g:airline_section_z = "%{g:airline_symbols.maxlinenr}%3l/%3L:%3v%#__restore__#"
