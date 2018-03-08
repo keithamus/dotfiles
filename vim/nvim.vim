@@ -143,6 +143,9 @@ call plug#begin('~/.vim/plugged')
   " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
   Plug 'airblade/vim-gitgutter'
 
+  " HighlightedYank
+  " Briefly highlight the yanked text
+  Plug 'machakann/vim-highlightedyank'
 
 """ Syntaxes
 
