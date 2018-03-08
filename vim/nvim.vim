@@ -321,9 +321,6 @@ set mouse=a                          " enable mouse support
 set number                           " enable line numbers
 set nowrap                           " disable line wrapping
 set ts=2 sts=2 sw=2 et               " make tabs 2 spaces, but use softtabs
-set relativenumber                   " make line numbers relative
-au FocusLost * :set relativenumber!  " bring back fixed line numbers when unfocussed
-au FocusGained * :set relativenumber " bring back relative line numbers when focussed
 let $NVIM_TUI_ENABLE_TRUE_COLOR = 1  " attempt to make things true-color
 set lazyredraw                       " attempt to speed up redrawing
 set ttyfast                          " attempt to speed up redrawing
