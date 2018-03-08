@@ -285,20 +285,7 @@ augroup END
 
 augroup deopleteSettings
   let g:deoplete#enable_at_startup = 1
-
   call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
-
-  " let g:deoplete#file#enable_buffer_path = 1
-
-  " let g:deoplete#omni_input_patterns = get(g:, 'deoplete#omni_input_patterns', {})
-  " let g:deoplete#omni_patterns = get(g:, 'deoplete#omni_patterns', {})
-  " let g:deoplete#omni#functions = get(g:, 'deoplete#omni#functions', {})
-  " let g:deoplete#sources = get(g:, 'deoplete#sources', {})
-
-  " let g:deoplete#omni_patterns.javascript = '[^. *\t]\.\w*'
-  " let g:deoplete#omni_input_patterns.javascript = '[^. *\t]\.\w*'
-  " let g:deoplete#omni#functions.javascript = [ 'jspc#omni', 'js#CompleteJS' ]
-  " let g:deoplete#sources.javascript = ['file', 'ultisnips', 'omni']
 augroup END
 
 augroup gitgutterSettings
