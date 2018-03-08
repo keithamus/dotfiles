@@ -41,6 +41,9 @@ call plug#begin('~/.vim/plugged')
   " Adds `:Test[File|Nearest|Suite|Last|Visit]` commands
   Plug 'janko-m/vim-test'
 
+  " Adds `:Dash` command
+  Plug 'rizzatti/dash.vim'
+
 """ Editing tools
 
   " Switch - between variants of different lines/vars
