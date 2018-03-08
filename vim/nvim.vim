@@ -165,10 +165,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
   Plug 'tpope/vim-liquid', { 'for': ['html', 'md', 'liquid' ] }
 
-""" Misc
-
-  Plug 'mhinz/neovim-remote', { 'do': 'pip3 install neovim-remote' }
-
 call plug#end()
 
 
