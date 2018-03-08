@@ -251,20 +251,6 @@ augroup switchSettings
         \ ]
 augroup END
 
-augroup clipboardSettings
-  " This adds a <leader>Y and <leader>P commands which yank/paste the text to
-  " the clipboard register
-  set clipboard= " set clipboard as nothing
-  nnoremap <leader>y "*y
-  nnoremap <leader>Y "*Y
-  nnoremap <leader>p "*p
-  nnoremap <leader>P "*P
-  vnoremap <leader>y "*y
-  vnoremap <leader>Y "*Y
-  vnoremap <leader>p "*p
-  vnoremap <leader>P "*P
-augroup END
-
 augroup easyalignSettings
   xmap ga <Plug>(EasyAlign)
   nmap ga <Plug>(EasyAlign)
