@@ -9,94 +9,173 @@
   autocrlf = input
 
 [alias]
-  f = "!git fetch --all --prune && git branch --merged origin/master | tail -n +2 | xargs git branch -d"
-  s = "!cd ${GIT_PREFIX:-`pwd`}; git log --pretty=format:\"## %C(green)`git rev-parse --abbrev-ref HEAD`%Creset (%C(yellow)%h%Creset: %s <%C(cyan)%an%Creset>)\" | head -n1; echo ""; git status -s; echo """
+
+  ##################
+  #### Fetching ####
+  ##################
+
+  # Fetch everything down, and delete anything that has been deleted remotely, or local branches that got merged to master
+  fetch-and-cleanup = "!git fetch --all --prune && git delete-merged-branches"
+
+  # Fetch, cleanup and and _checkout_ origin/master
+  fetch-and-cleanup-and-checkout-master = "!f() { git f && git checkout ${1:-origin}/${2:-master} -f; }; f"
+
+  # ~~Shorthands
+  f = !git fetch-and-cleanup
+  fcm = !git fetch-and-cleanup-and-checkout-master
+
+  ##################
+  #### Statuses ####
+  ##################
+
+  # Outputs how many commits ahead from upstream we are
+  how-many-ahead = "!git rev-list '@{u}..' 2>/dev/null | wc -l | xargs"
+
+  # Outputs the current rev as branch, tag, or commit
+  current-rev = rev-parse --abbrev-ref HEAD
+
+  # Outputs the current upstream, or if not available, `{unpushed}`
+  current-upstream = "!git rev-parse --abbrev-ref '@{u}' 2>/dev/null || echo '{unpushed}'"
+
+  # Summarise satus info as a headline
+  status-headline = "!git log --color --pretty=format:\"%Cgreen`git current-rev`%Creset..%Cred`git current-upstream`%Creset [`git how-many-ahead`] `git workstateicon`%n%Creset(%C(yellow)%h%Creset %s <%C(cyan)%an%Creset>)\n\" | head -2"
+
+  # ~~Shorthands
+  s = "!cd ${GIT_PREFIX:-`pwd`}; git status-headline; git status -s"
   st = !git s
 
+  ###############
+  #### Diffs ####
+  ###############
+
+  # ~~Shorthands
   d = diff --word-diff
   di = !git d
   ds = !git d --staged
 
+  ##################
+  #### Branches ####
+  ##################
+
+  # Delete branches that have been merged into master already
+  delete-merged-branches = "!f() { git branch --merged origin/master | tail -n +2 | xargs git branch -d; }; f"
+
+  # Set up every remote branch as a local tracking copy
+  track-all-branches = "!f() { for remote in `git branch -r `; do git branch --track $remote; done; }; f"
+
+  # Friendlier version of `git checkout -b`
+  branch-wizard = "!f() { read -p 'Name this branch: ' name && [ -n \"$name\" ] && git checkout -b $name HEAD; }; f"
+
+  # ~~Shorthands
   b = branch 
   br = !git b
   lbr = !git b --all
 
-  c = commit -v
+  ######################
+  #### Rebase/Merge ####
+  ######################
 
+  # Determine if we're `rebase`ing, `merge`ing or `normal`
   workstate = "!f() { (test -d \"${1}/rebase-merge\" -o -d \"${1}/rebase-apply\" && echo rebase) || (test -e \"${1}/MERGE_HEAD\" && echo merge) || echo normal; }; f \"$(git rev-parse --git-dir)\""
-  continue = !git "$(git workstate)Continue"
-  normalContinue = !echo "You are not rebasing or merging any files"
-  mergeContinue = "!f() { (test $count -ne 0 && echo \"There are still merge conflicts! Cannot continue\" && exit 1) || git commit; }; f \"$(git ls-files --unmerged | wc -l)\""
-  rebaseContinue = "!f() { git diff-index --quiet HEAD --; (test $? -eq 0 && echo \"No changes, automatically skipping commit\" && git rebase --skip) || git rebase --continue; }; f"
+  workstateicon = "!f() { (test -d \"${1}/rebase-merge\" -o -d \"${1}/rebase-apply\" && printf '\\xee\\x9c\\xa8') || (test -e \"${1}/MERGE_HEAD\" && printf '\\xef\\x90\\x99'); }; f \"$(git rev-parse --git-dir)\""
+
+  # `continue` is an alias for `rebase --continue` or `merge --continue`
+  continue = !git "$(git workstate)-continue"
+  cont = !git continue
+
+  # Abort is shorthand for `merge --abort` or `rebase --abort`
   abort = !sh -c "git merge --abort 2>/dev/null || git rebase --abort 2>/dev/null"
+  ab = !git abort
 
-  # Fetch and _checkout_ origin/master
-  fcm = "!f() { git f && git checkout ${1:-origin}/${2:-master} -f; }; f"
+  # `This is a hack for when in normal mode, typing `git continue` should echo this message
+  normal-continue = !echo "You are not rebasing or merging any files"
 
-  rem = "!f() { git fetch ${1:-origin} ${2-master} && git rebase ${1:-origin}/${2:-master}; }; f"
-  reb = "!f() { git fetch ${1:-origin} ${2-master} && git rebase ${1:-origin}/${2:-master}; }; f"
-  rim = "!f() { git fetch ${1:-origin} ${2-master} && git rebase --interactive ${1:-origin}/${2:-master}; }; f"
-  rib = "!f() { git fetch ${1:-origin} ${2-master} && git rebase --interactive ${1:-origin}/${2:-master}; }; f"
+  # If all merge conflicts are resolved then just `git commit`
+  merge-continue = "!f() { (test $count -ne 0 && echo \"There are still merge conflicts! Cannot continue\" && exit 1) || git commit; }; f \"$(git ls-files --unmerged | wc -l)\""
 
-  # github aliases
+  # If all conflicts are resolved does `rebase --continue` (or `rebase --skip` if no files changed)
+  rebase-continue = "!f() { git diff-index --quiet HEAD --; (test $? -eq 0 && echo \"No changes, automatically skipping commit\" && git rebase --skip) || git rebase --continue; }; f"
+
+  # Fetch a branch (default master), then rebase it
+  fetch-rebase = "!f() { git fetch ${1:-origin} ${2-master} && git rebase ${1:-origin}/${2:-master}; }; f"
+
+  # Fetch a branch (default master), then _interactively_ rebase it
+  fetch-interactive-rebase = "!f() { git fetch ${1:-origin} ${2-master} && git rebase --interactive ${1:-origin}/${2:-master}; }; f"
+
+  fetch-interactive-rebase = "!f() { git fetch ${1:-origin} ${2-master} && git rebase --interactive ${1:-origin}/${2:-master}; }; f"
+
+  # ~~Shorthands
+  rem = !git fetch-rebase
+  reb = !git fetch-rebase
+  rim = !git fetch-interactive-rebase
+  rib = !git fetch-interactive-rebase
+
+  #########################
+  #### GitHub specific ####
+  #########################
+
   # View the current commit in github
-  ghc = "!f() { open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/commit/$(git rev-parse ${1-HEAD}); }; f"
+  github-view-commit = "!f() { open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/commit/$(git rev-parse ${1-HEAD}); }; f"
+
   # View the current branch in github
-  ghb = "!f() { open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/tree/${1-HEAD}%(branch); }; f"
+  github-view-branch = "!f() { open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/tree/${1-HEAD}%(branch); }; f"
+
   # View the github page for the current project
-  ghh = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)"
+  github-view-project = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)"
+
   # Go to the github issues page for this current project
-  ghi = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/issues"
+  github-view-issues = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/issues"
+
   # Go to the github pulls page for this current project
-  ghp = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/pulls"
-  # Compare the current commit against `master`, in github
-  ghd = "!f() { open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/compare/master...$(git rev-parse ${1-HEAD})?expand=1; }; f"
+  github-view-pulls = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/pulls"
 
-  # Conventional Commit aliases
-  # Commit ammend
-  caa = commit --amend
+  # ~~Shorthands
+  ghc = !git github-view-commit
+  ghb = !git github-view-branch
+  ghh = !git github-view-project
+  ghi = !git github-view-issues
+  ghp = !git github-view-pulls
+
+  ####################
+  #### Committing ####
+  ####################
+
+  # Search for a user by name in the log - and output a GitHub `Co-authored-by` string for that user
+  get-coauthor = "!f() { author=$(git log --no-merges -1 --author \"${1}\" --format='%an <%ae>' 2>/dev/null); test -z \"$author\" && exit 1; echo \"Co-authored-by: $author\"; }; f"
+
+  # Ammend a commit to add a trailer for `Co-authored-by`
+  coauthor = "!f() { $co = $(git get-coauthor \"${1}\"); echo; read -n1 -p $co y; [[ \"$y\" == 'y' ]] && git commit --amend -m\"$(git log --format=%B -n1)\" -m\"$co\"; }; f"
+
   # Commit ammend no edit
-  can = "!git s; git show | cat; echo; read -n1 -p 'Amend this commit? ' confirm; echo; [[ \"$confirm\" == 'y' ]] && git commit --amend --no-edit"
+  commit-ammend-no-edit = "!git s; git show | cat; echo; read -n1 -p 'Amend this commit? ' y; echo; [[ \"$y\" == 'y' ]] && git commit --amend --no-edit"
 
-  # Commit feat:
-  cf = !git commit -m'feat: ' -e
-  cmf = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"feat: $1\"; }; f"
+  # Show the conventional commit table
+  conventional-commit-table = !printf '0 \\xe2\\x99\\xbb\\xef\\xb8\\x8f\\xef\\xb8\\x8f chore\n1 \\xE2\\x9C\\xA8 feat\n2 \\xF0\\x9F\\x90\\x9B fix\n3 \\xF0\\x9F\\x93\\x9A docs\n4 \\xf0\\x9f\\x92\\x8e style\n5 \\xf0\\x9f\\x93\\xa6 refactor\n6 \\xf0\\x9f\\x9a\\x80 perf\n7 \\xf0\\x9f\\x9a\\xa8 test\n8 \\xf0\\x9f\\x9b\\xa0 build\n9 \\xe2\\x9a\\x99\\xef\\xb8\\x8f ci\n'
 
-  # Commit fix:
-  cb = !git commit -m'fix: ' -e
-  cmb = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"fix: $1\"; }; f"
+  # Start a commit with a conventional commit prefix
+  conventional-commit = "!f() { p=(chore feat fix docs style refactor perf test build ci); git conventional-commit-table; read -n1 n; echo git commit -m\"${p[n]}: \" -e $@; }; f"
 
-  # Commit perf:
-  ct = !git commit -m'test: ' -e
-  cmt = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"test: $1\"; }; f"
+  # ~~Shorthands
+  c = commit
+  cc = !git conventional-commit
+  cw = !git commit -m'wip! '
+  caa = commit --amend
+  can = !git commit-ammend-no-edit
 
-  # Commit perf:
-  cp = !git commit -m'perf: ' -e
-  cmp = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"perf: $1\"; }; f"
+  ##############
+  #### Push ####
+  ##############
 
-  # Commit style:
-  cs = !git commit -m'style: ' -e
-  cms = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"style: $1\"; }; f"
+  # Automatically set upstream and push to it
+  promote = "!f() { local name=\"$(git rev-parse --abbrev-ref HEAD | head)\"; [ -f \".git/refs/heads/$name\" ] && git push --set-upstream ${1:-origin} \"$name\" || (git branch-wizard && git promote \"$1\";); }; f"
 
-  # Commit doc
-  cd = !git commit -m'doc: ' -e
-  cmd = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"doc: $1\"; }; f"
+  # ~~Shorthands
+  p = push
+  pf = !git push --force-with-lease
 
-  # Commit refactor:
-  cr = !git commit -m'refactor: ' -e
-  cmr = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"refactor: $1\"; }; f"
-
-  # Commit chore!:
-  cc = !git commit -m'chore: ' -e
-  cmc = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"chore: $1\"; }; f"
-
-  # Commit wip!:
-  cw = !git commit -m'wip! ' -e
-  cmw = "!f() { [ -z \"$1\" ] && echo Please provide a message && exit 1 || git commit -m\"wip! $1\"; }; f"
-
-  # Push a branch setting upstream
-  branchwiz = "!f() { read -p 'Name this branch: ' name && [ -n \"$name\" ] && git checkout -b $name HEAD; }; f"
-  promote = "!f() { local name=\"$(git rev-parse --abbrev-ref HEAD | head)\"; [ -f \".git/refs/heads/$name\" ] && git push --set-upstream ${1:-origin} \"$name\" || (git branchwiz && git promote \"$1\";); }; f"
+  #############
+  #### Hub ####
+  #############
 
   # in case `git` isn't aliased to `hub` - provide aliases for hub commands
   sync = "!f() { hub sync $@; }; f"
@@ -110,15 +189,8 @@
   pull-request = "!f() { hub pull-request $@; }; f"
   release = "!f() { hub release $@; }; f"
 
-  trackallbranches = !sh -c "for remote in `git branch -r `; do git branch --track $remote; done"
-  assume   = update-index --assume-unchanged
-  unassume = update-index --no-assume-unchanged
-  assumed  = "!git ls-files -v | grep ^h | cut -c 3-"
-  snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
-  tree = !sh -c 'tig' -
-  nightly = !sh -c 'git archive --format=zip HEAD -o $("basename `pwd`")_nightly_$(date +"%d%m%Y").zip' -
-  versionpack = !sh -c 'git archive --format=zip $(git describe --tags) -o $("basename `pwd`")_$(git describe --tags).zip' -
-  push-head = "!f() { git push origin HEAD:refs/heads/${1:-wip} -f; }; f"
+  # ~~Shorthands
+  ci = "!f() { hub ci-status $@; }; f"
 
 [commit]
   gpgsign = true
