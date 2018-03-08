@@ -325,7 +325,8 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR = 1  " attempt to make things true-color
 set lazyredraw                       " attempt to speed up redrawing
 set ttyfast                          " attempt to speed up redrawing
 set nofoldenable                     " disable annoying folding
-
+set inccommand=nosplit               " enable inccommand
+set fillchars+=vert:│
 
 if has('autocmd')
   augroup syntaxes
