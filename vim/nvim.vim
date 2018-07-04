@@ -206,17 +206,17 @@ augroup easymotionSettings
 augroup END
 
 augroup fzfSettings
-  nmap gG :GFiles<cr>
-  nmap gF :Files<cr>
-  nmap gH :History<cr>
-  nmap gB :Buffers<cr>
-  nmap gA :Ag<Space>
+  nmap <C-p> :GFiles<cr>
+  nmap <C-o> :Files<cr>
+  nmap <C-t> :Buffers<cr>
+  nmap g/ :Ag<Space>
   let g:fzf_nvim_statusline = 0
+  autocmd! FileType fzf
+  autocmd FileType fzf set laststatus=0 | autocmd BufLeave <buffer> set laststatus=2
 augroup END
 
 augroup aleSettings
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-  nmap <silent> <C-j> <Plug>(ale_next_wrap)
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
   let g:flow#showquickfix = 0
   let g:ale_sign_column_always = 1
@@ -293,6 +293,14 @@ augroup gitgutterSettings
   let g:gitgutter_sign_removed = ''
   let g:gitgutter_sign_modified = ''
   let g:gitgutter_sign_modified_removed = ''
+augroup END
+
+augroup fugitiveSettings
+  nnoremap <Leader>gs :Gministatus<CR>
+  nnoremap <Leader>gc :Gcommit -v -q<CR>
+  nnoremap <Leader>gd :Gdiff<CR>
+  nnoremap <Leader>+ :diffput<CR>
+  nnoremap <Leader>- :diffget<CR>
 augroup END
 
 augroup airlineSettings
