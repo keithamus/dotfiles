@@ -400,6 +400,9 @@ noremap L g_
 " markdown settings
 let g:markdown_fenced_languages = ['ruby', 'erb=ruby', 'sh', 'yaml', 'javascript', 'js=javascript', 'json=javascript', 'html', 'css', 'sass']
 let g:markdown_syntax_conceal = 0
+" When in markdown, having selected some text, press Ctrl+K to have it wrapped
+" in [](). So `foo` becomes `[foo]()` with the cursor placed inbetween ()
+xmap <C-k> "zdi[<C-R>z]()<Left>
 
 augroup colorSettings
   set t_Co=256
