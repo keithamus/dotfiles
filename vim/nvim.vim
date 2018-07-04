@@ -47,7 +47,6 @@ call plug#begin('~/.vim/plugged')
   " Adds capabilities for custom per-project start pages
   Plug 'keithamus/vimstart'
 
-
 """ Editing tools
 
   " Switch - between variants of different lines/vars
@@ -78,6 +77,10 @@ call plug#begin('~/.vim/plugged')
 
   " cx{motion} store a value to exchange with the next cx
   Plug 'tommcdo/vim-exchange'
+
+  " rebind P/p to handle whitespace and indentation better
+  Plug 'AndrewRadev/whitespaste.vim'
+  Plug 'sickill/vim-pasta'
 
 """ TextObject Plugins!
 
