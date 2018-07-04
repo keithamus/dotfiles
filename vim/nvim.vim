@@ -120,12 +120,16 @@ call plug#begin('~/.vim/plugged')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
   " snippets
-  Plug 'SirVer/ultisnips'
+  Plug 'Shougo/neosnippet.vim'
+  Plug 'Shougo/neosnippet-snippets'
   Plug 'honza/vim-snippets'
 
   " javascript autocomplete
   Plug '1995eaton/vim-better-javascript-completion', { 'for': 'javascript' }
   Plug 'othree/jspc.vim', { 'for': 'javascript' }
+
+  " flow completion
+  Plug 'steelsojka/deoplete-flow'
 
 """ UI
 
@@ -257,17 +261,31 @@ augroup refactorMappings
   xmap <leader>r "cyvaio:s/<C-R>c//gc<left><left><left>
 augroup END
 
-augroup ultisnipsSettings
-  let g:UltiSnipsExpandTrigger="<tab>"
-  let g:UltiSnipsSnippetDirectories = ['~/.vim/plugged/vim-snippets/Ultisnips']
-  let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
-  autocmd FileType js UltiSnipsAddFiletypes javascript-node
-  autocmd FileType js UltiSnipsAddFiletypes javascript-mocha
+augroup neosnippetSettings
+  let g:neosnippet#enable_completed_snippet = 1
+  let g:neosnippet#enable_snipmate_compatibility = 1
+  let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>     <Plug>(neosnippet_expand_target)
+  imap <expr><TAB>
+    \ pumvisible() ? "\<C-n>" :
+    \ neosnippet#expandable_or_jumpable() ?
+    \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+   \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+  smap <silent><CR> <Plug>(neosnippet_jump_or_expand)
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
+
 augroup END
 
 augroup deopleteSettings
   let g:deoplete#enable_at_startup = 1
-  call deoplete#custom#set('ultisnips', 'matchers', ['matcher_fuzzy'])
+  call deoplete#custom#source('neosnippet', 'matchers', ['matcher_fuzzy'])
+  call deoplete#custom#source('neosnippet', 'rank', 1000)
+  call deoplete#custom#option('smart_case', v:true)
 augroup END
 
 augroup gitgutterSettings
