@@ -340,6 +340,7 @@ augroup END
 augroup vimTestSettings
   nmap <silent> <leader>t :TestNearest<CR>
   nmap <silent> <leader>T :TestFile<CR>
+  let test#strategy = "neovim"
 augroup END
 
 """ Syntaxes
