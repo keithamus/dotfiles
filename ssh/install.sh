@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 if [ ! -f "$HOME/.ssh/id_rsa" ]; then
   echo "Creating an ssh key"
-  ssh-keygen -b 4096 ~/.id_rsa -N ""
+  ssh-keygen -b 4096 -N "" -f ~/.id_rsa
 fi
 
 
