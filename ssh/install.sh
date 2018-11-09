@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 if [ ! -f "$HOME/.ssh/id_rsa" ]; then
   echo "Creating an ssh key"
-  ssh-keygen -b 4096 -N "" -f ~/.id_rsa
+  ssh-keygen -q -b 4096 -N "" -f ~/.ssh/id_rsa
 fi
 
 
@@ -15,7 +15,7 @@ then
   USER="$STRAP_GITHUB_USER"
 fi
 
-pub="$(cat ~/.ssh/id_rsa.pub)"
+pub="$(ssh-keygen -y -f ~/.ssh/id_rsa)"
 if ! curl -sq "https://github.com/$USER.keys" | grep "$pub" > /dev/null; then
   echo "Add your SSH key to GitHub.com!"
   echo "The public key is in your clipboard"
