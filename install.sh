@@ -20,6 +20,7 @@ then
 fi
 
 installScript "Git" git
+installScript "SSH" ssh
 installScript "Powerline Fonts" powerline-fonts
 installScript "Fish" fish
 installScript "Node" nvm
