@@ -176,6 +176,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
   Plug 'tpope/vim-liquid', { 'for': ['html', 'md', 'liquid' ] }
 
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+
 call plug#end()
 
 
