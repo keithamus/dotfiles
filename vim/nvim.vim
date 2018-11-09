@@ -326,7 +326,7 @@ augroup airlineSettings
         \ }
   let g:airline_skip_empty_sections = 1
   let g:airline_section_b = ''
-  let g:airline_section_c = ' '
+  let g:airline_section_c = '%f'
   let g:airline_section_x = ''
   let g:airline_section_y = ''
   let g:airline_section_z = "%{g:airline_symbols.maxlinenr}%3l/%3L:%3v%#__restore__#"
