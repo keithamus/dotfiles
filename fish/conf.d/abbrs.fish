@@ -1,9 +1,12 @@
 # Git Abbreviations
 abbr g 'git'
+abbr gs 'git st'
 abbr ga 'git add -p'
 abbr gpf 'git push --force-with-lease'
+abbr gpu 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) | grep http | sed \'s/remote: *//\' | xargs open'
 abbr gpr 'hub pull-request -o'
-abbr gcm 'git commit --message '
+abbr gcm 'git commit --message'
+abbr gcw 'git commit --message \'WIP!\''
 abbr gc 'git commit'
 abbr gcan 'git commit --amend --no-edit'
 abbr gfcm 'git fetch --all --prune; and git branch --merged origin/master | tail -n +2 | xargs git branch -d; and git checkout origin/master'
