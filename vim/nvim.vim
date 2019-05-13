@@ -129,10 +129,6 @@ call plug#begin('~/.vim/plugged')
   " see indentlineSettings for more
   Plug 'Yggdroot/indentLine'
 
-  " Devicons
-  " Adds file type glyphs/icons to popular Vim plugins
-  Plug 'ryanoasis/vim-devicons'
-
   " Icon theme
   Plug 'flazz/vim-colorschemes'
 
@@ -265,9 +261,10 @@ augroup fugitiveSettings
 augroup END
 
 augroup airlineSettings
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#buffers_label = '*'
   let g:airline_extensions = ['tabline']
+  let g:airline#extensions#tabline#show_splits = 1
+  let g:airline#extensions#tabline#buffers_label = '*'
+  " let g:airline#extensions#tabline#formatter = 'custom'
   let g:airline_powerline_fonts = 1
   let g:airline_mode_map = {
         \ '__' : '-',
@@ -284,12 +281,15 @@ augroup airlineSettings
         \ 't'  : 't',
         \ }
   let g:airline_skip_empty_sections = 1
+  " let g:airline_section_a = ''
   let g:airline_section_b = ''
-  let g:airline_section_c = '%f'
-  let g:airline_section_x = ''
+  let g:airline_section_c = ' '
+  let g:airline_section_x = '%f:%3l:%2v'
   let g:airline_section_y = ''
-  let g:airline_section_z = "%{g:airline_symbols.maxlinenr}%3l/%3L:%3v%#__restore__#"
+  let g:airline_section_z = ''
   let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' " dont show expected file format
+  let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+  let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
   set noshowmode " disable vim's default mode line (e.g. `--INSERT--`)
 augroup END
 
@@ -374,11 +374,17 @@ xmap <C-k> "zdi[<C-R>z]()<Left>
 
 augroup colorSettings
   set t_Co=256
-  set background=light
+  set background=dark
   colorscheme papercolor
+  augroup noBackground
+    hi Normal guibg=NONE ctermbg=NONE
+    hi NonText guibg=NONE ctermbg=NONE
+    hi LineNr guibg=NONE ctermbg=NONE
+  augroup end
   if &background ==# "dark"
     let g:airline_theme = 'wombat'
     let g:indentLine_color_term = 240
+    hi Normal guibg=#000000
     hi NonText ctermfg=240
     hi SpecialKey ctermfg=240
     hi Search cterm=NONE ctermfg=NONE ctermbg=240
