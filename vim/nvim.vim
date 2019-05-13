@@ -26,7 +26,6 @@ call plug#begin('~/.vim/plugged')
   " see augroup aleSettings for more
   Plug 'w0rp/ale'
 
-
   " Editorconfig
   " Reads .editorconfig files and cleans up files on save
   Plug 'editorconfig/editorconfig-vim'
@@ -37,9 +36,6 @@ call plug#begin('~/.vim/plugged')
 
   " Rhubarb adds GitHub support to fugitive
   Plug 'tpope/vim-rhubarb'
-
-  " Provides a minimum `:GStatus` window, rather than fugitives rather verbose one
-  Plug 'alexdavid/vim-min-git-status'
 
   " Adds `:Test[File|Nearest|Suite|Last|Visit]` commands
   Plug 'janko-m/vim-test'
