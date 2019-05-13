@@ -203,7 +203,9 @@ augroup fzfSettings
   nmap <C-p> :GFiles<cr>
   nmap <C-o> :Files<cr>
   nmap <C-t> :Buffers<cr>
-  nmap g/ :Ag<Space>
+  nmap <leader>/ :Ag<cr>
+  nmap <leader>d :call fzf#vim#tags('^' . expand('<cword>'), {'options': '--exact --select-1 --exit-0 +i'})<CR>
+  nmap <leader>g :Ag <c-r>=expand("<cword>")<CR><CR>
   let g:fzf_nvim_statusline = 0
   autocmd! FileType fzf
   autocmd FileType fzf set laststatus=0 | autocmd BufLeave <buffer> set laststatus=2
