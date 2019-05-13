@@ -16,6 +16,7 @@ abbr gba 'git checkout -b (git log --format=%s | head -1 | tr -cs \[:alnum:\] "-
 
 # nvim Abbreviations!
 abbr nf 'nvim (fzf)'
+abbr ng 'nvim (git status --porcelain | grep "^UU" | head -1 | cut -f2 -d" ")'
 
 
 # npm Abbrevations!
