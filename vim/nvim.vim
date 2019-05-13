@@ -140,24 +140,34 @@ call plug#begin('~/.vim/plugged')
   " Briefly highlight the yanked text
   Plug 'machakann/vim-highlightedyank'
 
-""" Syntaxes
+
+""" Per-Language Plugins
+
+  " Enable `gf` on `require()` calls
+  Plug 'moll/vim-node', { 'for': 'javascript' }
 
   " javascript related completions and syntaxes
-  Plug 'moll/vim-node', { 'for': 'javascript' }
-  Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-  Plug 'fleischie/vim-styled-components', { 'for': 'javascript' }
-  Plug 'othree/javascript-libraries-syntax.vim', { 'for': 'javascript' }
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-  Plug 'leshill/vim-json', { 'for': 'json' }
-  Plug 'facebook/vim-flow', { 'for': 'javascript' }
-  Plug 'leafgarland/typescript-vim', { 'for': 'typescript' }
 
+  " json syntax highlighting
+  Plug 'elzr/vim-json', { 'for': 'json' }
+
+  " fish syntax highlighting
   Plug 'dag/vim-fish', { 'for': 'fish' }
+
+  " markdown syntax highlighting
   Plug 'tpope/vim-markdown'
+
+  " html syntax highlighting
   Plug 'othree/html5.vim', { 'for': 'html' }
+
+  " css syntax highlighting
   Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
+
+  " liquid template (jekyll) syntax highlighting
   Plug 'tpope/vim-liquid', { 'for': ['html', 'md', 'liquid' ] }
 
+  " A whole bunch of cool Go commands and highlighting
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
 
 call plug#end()
@@ -309,6 +319,12 @@ augroup cocSettings
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
   inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<tab>"
   nmap <Leader>o :CocList outline<cr>
+augroup end
+
+augroup javascriptSyntaxSettings
+  let g:javascript_plugin_jsdoc = 1
+  let g:javascript_plugin_flow = 1
+  let g:vim_json_syntax_conceal = 0
 augroup end
 
 """ Syntaxes
