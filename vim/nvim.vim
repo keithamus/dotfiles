@@ -16,6 +16,9 @@ call plug#begin('~/.vim/plugged')
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
 
+  " Underling matching words in the buffer
+  Plug 'itchyny/vim-cursorword'
+
 """ Project Tools
 
   " ALE
