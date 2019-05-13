@@ -372,6 +372,12 @@ if has('autocmd')
     autocmd!
     autocmd BufWritePost ~/.config/nvim/init.vim nested source %
   augroup END
+  augroup speeling
+    autocmd BufRead,BufNewFile *.md setlocal spell
+    autocmd FileType gitcommit setlocal spell
+  augroup END
+
+  autocmd FileType json syntax match Comment +\/\/.\+$+
 end
 
 " extra keybindings
