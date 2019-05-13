@@ -109,26 +109,13 @@ call plug#begin('~/.vim/plugged')
   " ac/ic - select CSS rules+selectors
   Plug 'jasonlong/vim-textobj-css'
 
-""" Autocompletion & Snippets
+""" Autocompletion
 
   " autocomplete brackets/quotes!
   Plug 'Raimondi/delimitMate'
 
-  " Deoplete
-  " see deopleteSettings for more
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-
-  " snippets
-  Plug 'Shougo/neosnippet.vim'
-  Plug 'Shougo/neosnippet-snippets'
-  Plug 'honza/vim-snippets'
-
-  " javascript autocomplete
-  Plug '1995eaton/vim-better-javascript-completion', { 'for': 'javascript' }
-  Plug 'othree/jspc.vim', { 'for': 'javascript' }
-
-  " flow completion
-  Plug 'steelsojka/deoplete-flow'
+  " COC Completion Engine
+  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 """ UI
 
@@ -262,33 +249,6 @@ augroup refactorMappings
   xmap <leader>r "cyvaio:s/<C-R>c//gc<left><left><left>
 augroup END
 
-augroup neosnippetSettings
-  let g:neosnippet#enable_completed_snippet = 1
-  let g:neosnippet#enable_snipmate_compatibility = 1
-  let g:neosnippet#snippets_directory='~/.vim/plugged/vim-snippets/snippets'
-  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-  xmap <C-k>     <Plug>(neosnippet_expand_target)
-  imap <expr><TAB>
-    \ pumvisible() ? "\<C-n>" :
-    \ neosnippet#expandable_or_jumpable() ?
-    \    "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-  smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-   \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
-  smap <silent><CR> <Plug>(neosnippet_jump_or_expand)
-  if has('conceal')
-    set conceallevel=2 concealcursor=niv
-  endif
-
-augroup END
-
-augroup deopleteSettings
-  let g:deoplete#enable_at_startup = 1
-  call deoplete#custom#source('neosnippet', 'matchers', ['matcher_fuzzy'])
-  call deoplete#custom#source('neosnippet', 'rank', 1000)
-  call deoplete#custom#option('smart_case', v:true)
-augroup END
-
 augroup gitgutterSettings
   let g:gitgutter_sign_added = ''
   let g:gitgutter_sign_removed = ''
@@ -343,6 +303,13 @@ augroup vimTestSettings
   nmap <silent> <leader>T :TestFile<CR>
   let test#strategy = "neovim"
 augroup END
+
+augroup cocSettings
+  " Enter expands snippets
+  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+  inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<tab>"
+  nmap <Leader>o :CocList outline<cr>
+augroup end
 
 """ Syntaxes
 
