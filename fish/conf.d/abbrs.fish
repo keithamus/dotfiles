@@ -12,7 +12,7 @@ abbr gcan 'git commit --amend --no-edit'
 abbr gfcm 'git fetch --all --prune; and git branch --merged origin/master | tail -n +2 | xargs git branch -d; and git checkout origin/master'
 abbr grim 'git fetch; and git rebase -i origin/master'
 abbr gcl 'git clone git@github.com:'
-abbr gba 'git checkout -b (git log --format=%s | head -1 | tr -cs \[:alnum:\] '-' | tr \[:upper:\] \[:lower:\] | sed \'s/-$//\')'
+abbr gba 'git checkout -b (git log --format=%s | head -1 | tr -cs \[:alnum:\] "-" | tr \[:upper:\] \[:lower:\] | sed \'s/-$//\')'
 
 # nvim Abbreviations!
 abbr nf 'nvim (fzf)'
