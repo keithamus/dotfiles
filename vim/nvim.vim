@@ -24,7 +24,7 @@ call plug#begin('~/.vim/plugged')
   " ALE
   " Asynchronous linting and make framework for Neovim/Vim
   " see augroup aleSettings for more
-  Plug 'w0rp/ale'
+  Plug 'dense-analysis/ale'
 
   " Editorconfig
   " Reads .editorconfig files and cleans up files on save
@@ -45,6 +45,9 @@ call plug#begin('~/.vim/plugged')
 
   " Adds capabilities for custom per-project start pages
   Plug 'keithamus/vimstart'
+
+  " Allows you to vim a textarea in the browser
+  Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
 
 """ Editing tools
 
@@ -149,6 +152,9 @@ call plug#begin('~/.vim/plugged')
   " javascript related completions and syntaxes
   Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
 
+  " typescript related completions and syntaxes
+  Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
+
   " json syntax highlighting
   Plug 'elzr/vim-json', { 'for': 'json' }
 
@@ -214,7 +220,9 @@ augroup END
 augroup aleSettings
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
-  let g:flow#showquickfix = 0
+  nmap <silent> gd :ALEGoToDefinition<CR>
+  let g:ale_set_loclist = 0
+  let g:ale_set_quickfix = 1
   let g:ale_sign_column_always = 1
   let g:ale_sign_error = ''
   let g:ale_sign_warning = ''
@@ -223,7 +231,7 @@ augroup aleSettings
   \   'javascript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
   \}
   let g:ale_linters = {
-  \   'javascript': ['eslint', 'flow'],
+  \   'javascript': ['eslint', 'flow', 'tsserver'],
   \}
 augroup END
 

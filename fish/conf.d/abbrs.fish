@@ -27,3 +27,5 @@ abbr npb 'npm run build --'
 abbr npl 'npm run lint --'
 abbr npit 'npm it'
 
+# taskwarrior abbreviations
+abbr t 'task project:(basename (pwd))'

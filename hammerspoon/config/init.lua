@@ -1,5 +1,6 @@
 hs.window.animationDuration = 0.1
 hs.console.clearConsole()
+local logger = hs.logger.new("")
 local hotkey = require "hs.hotkey"
 local grid = require "hs.grid"
 local window = require "hs.window"
@@ -11,6 +12,7 @@ hs.grid.MARGINX = 0
 hs.grid.MARGINY = 0
 
 hotkey.bind(hyper, 'up', function()
+  logger.d("here")
   grid.show(function ()
     local focusedWindow = window:focusedWindow()
     for i, window in pairs(allWindowsInBounds(focusedWindow:frame())) do
