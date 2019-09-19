@@ -7,11 +7,10 @@ source ~/.nvm/nvm.sh
 
 nvm --version
 
-nvm install 0
-nvm install 4
-nvm install 6
+nvm install 12
+nvm install 10
 
-nvm alias lts 4
-nvm alias stable 6
+nvm alias lts 10
+nvm alias stable 12
 nvm alias default stable
 nvm use default
