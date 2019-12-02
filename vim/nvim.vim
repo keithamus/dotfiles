@@ -144,37 +144,10 @@ call plug#begin('~/.vim/plugged')
   Plug 'machakann/vim-highlightedyank'
 
 
-""" Per-Language Plugins
+""" Syntaxes
 
-  " Enable `gf` on `require()` calls
-  Plug 'moll/vim-node', { 'for': 'javascript' }
-
-  " javascript related completions and syntaxes
-  Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-
-  " typescript related completions and syntaxes
-  Plug 'HerringtonDarkholme/yats.vim', { 'for': 'typescript' }
-
-  " json syntax highlighting
-  Plug 'elzr/vim-json', { 'for': 'json' }
-
-  " fish syntax highlighting
-  Plug 'dag/vim-fish', { 'for': 'fish' }
-
-  " markdown syntax highlighting
-  Plug 'tpope/vim-markdown'
-
-  " html syntax highlighting
-  Plug 'othree/html5.vim', { 'for': 'html' }
-
-  " css syntax highlighting
-  Plug 'hail2u/vim-css3-syntax', { 'for': [ 'css', 'scss' ] }
-
-  " liquid template (jekyll) syntax highlighting
-  Plug 'tpope/vim-liquid', { 'for': ['html', 'md', 'liquid' ] }
-
-  " A whole bunch of cool Go commands and highlighting
-  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go' }
+  " One syntax plugin to rule them all
+  Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
