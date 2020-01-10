@@ -333,6 +333,8 @@ set ttyfast                          " attempt to speed up redrawing
 set nofoldenable                     " disable annoying folding
 set inccommand=nosplit               " enable inccommand
 set fillchars+=vert:│
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal = 0
 
 if has('autocmd')
   augroup syntaxes
@@ -361,6 +363,10 @@ if has('autocmd')
   augroup speeling
     autocmd BufRead,BufNewFile *.md setlocal spell
     autocmd FileType gitcommit setlocal spell
+  augroup END
+  augroup better-markdown
+    autocmd BufNewFile,BufRead *.md set linebreak
+    autocmd BufNewFile,BufRead *.md set wrap
   augroup END
 
   autocmd FileType json syntax match Comment +\/\/.\+$+
