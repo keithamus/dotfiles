@@ -203,11 +203,13 @@ augroup aleSettings
   let g:ale_completion_tsserver_autoimport = 1
   let g:ale_fixers = {
   \   'ruby': ['remove_trailing_lines', 'trim_whitespace', 'rubocop'],
+  \   'go': ['remove_trailing_lines', 'trim_whitespace', 'gofmt'],
   \   'javascript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
   \   'typescript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
   \}
   let g:ale_linters = {
   \   'ruby': ['rubocop'],
+  \   'go': ['gofmt', 'go build'],
   \   'javascript': ['eslint', 'flow', 'tsserver'],
   \   'typescript': ['eslint', 'tsserver'],
   \}
