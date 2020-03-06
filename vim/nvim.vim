@@ -93,10 +93,6 @@ call plug#begin('~/.vim/plugged')
   " aI/iI - select region at this indent alone
   Plug 'michaeljsmith/vim-indent-object'
 
-  " af/if - select function
-  Plug 'kana/vim-textobj-function'
-  Plug 'thinca/vim-textobj-function-javascript'
-
   " aa/ia - select argument in function call
   Plug 'vim-scripts/argtextobj.vim'
 
@@ -122,10 +118,10 @@ call plug#begin('~/.vim/plugged')
 
 """ UI
 
-  " Airline
-  " see airlineSettings for more
-  Plug 'bling/vim-airline'
-  Plug 'vim-airline/vim-airline-themes'
+  " Lightline
+  " see lightlineSettings for more
+  Plug 'itchyny/lightline.vim'
+  Plug 'mengelbrecht/lightline-bufferline'
 
   " IndentLine
   " A vim plugin to display the indention levels with thin vertical lines
@@ -193,7 +189,6 @@ augroup END
 augroup aleSettings
   nmap <silent> <C-k> <Plug>(ale_previous_wrap)
   nmap <silent> <C-j> <Plug>(ale_next_wrap)
-  nmap <silent> gd :ALEGoToDefinition<CR>
   let g:ale_set_loclist = 0
   let g:ale_set_quickfix = 1
   let g:ale_sign_column_always = 1
@@ -203,13 +198,15 @@ augroup aleSettings
   let g:ale_completion_tsserver_autoimport = 1
   let g:ale_fixers = {
   \   'ruby': ['remove_trailing_lines', 'trim_whitespace', 'rubocop'],
-  \   'go': ['remove_trailing_lines', 'trim_whitespace', 'gofmt'],
+  \   'go': ['remove_trailing_lines', 'trim_whitespace', 'gomod', 'goimports', 'gofmt'],
+  \   'proto': ['remove_trailing_lines', 'trim_whitespace'],
   \   'javascript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
   \   'typescript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
   \}
   let g:ale_linters = {
   \   'ruby': ['rubocop'],
-  \   'go': ['gofmt', 'go build'],
+  \   'go': ['gofmt', 'golint', 'govet', 'gobuild', 'gopls'],
+  \   'proto': ['protoc-gen-lint'],
   \   'javascript': ['eslint', 'flow', 'tsserver'],
   \   'typescript': ['eslint', 'tsserver'],
   \}
@@ -240,11 +237,6 @@ augroup easyalignSettings
   nmap ga <Plug>(EasyAlign)
 augroup END
 
-augroup refactorMappings
-  nmap <leader>r 1gdvaio:s/<C-R>///gc<left><left><left>
-  xmap <leader>r "cyvaio:s/<C-R>c//gc<left><left><left>
-augroup END
-
 augroup gitgutterSettings
   let g:gitgutter_sign_added = ''
   let g:gitgutter_sign_removed = ''
@@ -260,37 +252,56 @@ augroup fugitiveSettings
   nnoremap <Leader>- :diffget<CR>
 augroup END
 
-augroup airlineSettings
-  let g:airline_extensions = ['tabline']
-  let g:airline#extensions#tabline#show_splits = 1
-  let g:airline#extensions#tabline#buffers_label = '*'
-  " let g:airline#extensions#tabline#formatter = 'custom'
-  let g:airline_powerline_fonts = 1
-  let g:airline_mode_map = {
-        \ '__' : '-',
-        \ 'n'  : 'N',
-        \ 'i'  : 'I',
-        \ 'R'  : 'R',
-        \ 'c'  : 'C',
-        \ 'v'  : 'v',
-        \ 'V'  : 'V',
-        \ '' : '^V',
-        \ 's'  : 's',
-        \ 'S'  : 'S',
-        \ '' : '^S',
-        \ 't'  : 't',
-        \ }
-  let g:airline_skip_empty_sections = 1
-  " let g:airline_section_a = ''
-  let g:airline_section_b = ''
-  let g:airline_section_c = ' '
-  let g:airline_section_x = '%f:%3l:%2v'
-  let g:airline_section_y = ''
-  let g:airline_section_z = ''
-  let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]' " dont show expected file format
-  let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-  let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
-  set noshowmode " disable vim's default mode line (e.g. `--INSERT--`)
+augroup lightlineSettings
+  let g:lightline = {
+  \ 'separator': {
+  \   'left': "\ue0b0",
+  \   'right': "\ue0b2",
+  \ },
+  \ 'subseparator': {
+  \   'left': "\ue0b1",
+  \   'right': "\ue0b3",
+  \ },
+  \ 'component': {
+  \   'filename': '%f',
+  \ },
+  \ 'component_expand': {
+  \   'buffers': 'lightline#bufferline#buffers',
+  \ },
+  \ 'component_type': {
+  \   'buffers': 'tabsel',
+  \ },
+  \ 'component_function': {
+  \   'cocstatus': 'coc#status'
+  \ },
+  \ 'component_raw': {
+  \   'buffers': 1,
+  \ },
+  \ 'active': {
+  \   'right': [ [ 'lineinfo' ], [ 'cocstatus' ] ],
+  \ },
+  \ 'tabline': {
+  \   'left': [ [ 'buffers' ] ],
+  \   'right': [ [] ],
+  \ },
+  \ 'mode_map': {
+  \   '__' : '-',
+  \   'n'  : 'N',
+  \   'i'  : 'I',
+  \   'R'  : 'R',
+  \   'c'  : 'C',
+  \   'v'  : 'v',
+  \   'V'  : 'V',
+  \   '' : '^V',
+  \   's'  : 's',
+  \   'S'  : 'S',
+  \   '' : '^S',
+  \   't'  : 't',
+  \ },
+  \}
+  let g:lightline#bufferline#filename_modifier = ':~'
+  let g:lightline#bufferline#clickable = 1
+  let g:lightline#bufferline#unicode_symbols = 1
 augroup END
 
 augroup indentlineSettings
@@ -309,6 +320,19 @@ augroup cocSettings
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
   inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<tab>"
   nmap <Leader>o :CocList outline<cr>
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <leader>r <Plug>(coc-rename)
+  xmap <leader>r <Plug>(coc-rename)
+  xmap if <Plug>(coc-funcobj-i)
+  xmap af <Plug>(coc-funcobj-a)
+  omap if <Plug>(coc-funcobj-i)
+  omap af <Plug>(coc-funcobj-a)
+  let g:coc_status_error_sign = 'E'
+  autocmd CursorHold * silent call CocActionAsync('doHover')
+  autocmd CursorHoldI * silent call CocActionAsync('doHover')
 augroup end
 
 augroup javascriptSyntaxSettings
@@ -335,6 +359,10 @@ set ttyfast                          " attempt to speed up redrawing
 set nofoldenable                     " disable annoying folding
 set inccommand=nosplit               " enable inccommand
 set fillchars+=vert:│
+set updatetime=300
+set noshowmode " disable vim's default mode line (e.g. `--INSERT--`)
+set showtabline=2 " Always show the tab line
+set laststatus=2
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
 
@@ -400,7 +428,6 @@ augroup colorSettings
     hi LineNr guibg=NONE ctermbg=NONE
   augroup end
   if &background ==# "dark"
-    let g:airline_theme = 'wombat'
     let g:indentLine_color_term = 240
     hi Normal guibg=#000000
     hi NonText ctermfg=240
