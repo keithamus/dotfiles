@@ -15,7 +15,6 @@ if [ "$(uname -s)" = "Darwin" ]
 then
   installScript "Homebrew" homebrew
   installScript "OSX tweaks" osx
-  installScript "BitBar" bitbar
   installScript "Hammerspoon" hammerspoon
 fi
 
