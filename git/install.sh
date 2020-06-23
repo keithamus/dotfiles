@@ -1,34 +1,28 @@
 #!/usr/bin/env sh
-CURRENTGITEDITOR="$(git config --global core.editor)"
-printf "Editor? (default: $CURRENTGITEDITOR) "
-read -r GITEDITOR
-if [ "$GITEDITOR" = "" ]
+THISDIR=$(cd "$(dirname "$0")"; pwd)
+BREWFILE="$THISDIR/Brewfile"
+
+if [ "$(uname -s)" = "Darwin" ]
 then
-  GITEDITOR="$CURRENTGITEDITOR"
-fi
-CURRENTGITNAME="$(git config --global user.name)"
-printf "Name? (default: $CURRENTGITNAME) "
-read -r GITNAME
-if [ "$GITNAME" = "" ]
+  ../homebrew/install.sh
+  brew bundle install --file="$BREWFILE"
+elif [ "$(uname -s)" = "Linux" -a "$GDMSESSION" = "pop" ]
 then
-  GITNAME="$CURRENTGITNAME"
-fi
-CURRENTGITEMAIL="$(git config --global user.email)"
-printf "Email? (default: $CURRENTGITEMAIL) "
-read -r GITEMAIL
-if [ "$GITEMAIL" = "" ]
-then
- GITEMAIL="$CURRENTGITEMAIL"
+  sudo apt install -qq -y --no-install-recommends git tig
 fi
 
+GITEDITOR="$(git config --global core.editor)"
+GITNAME="$(git config --global user.name)"
+GITEMAIL="$(git config --global user.email)"
 THISDIR=$(cd "$(dirname "$0")"; pwd)
 GITCONFIG="$THISDIR/gitconfig"
 TIGCONFIG="$THISDIR/tigrc"
 
+
 mkdir -p ~/.config/git
-git config --global core.editor "$GITEDITOR"
-git config --global user.name "$GITNAME"
-git config --global user.email "$GITEMAIL"
+git config --global core.editor "${GITEDITOR:-nvim}"
+git config --global user.name "${GITNAME:-Keith Cirkel}"
+git config --global user.email "${GITEMAIL:-keithamus@users.noreply.github.com}"
 git config --global include.path "$GITCONFIG"
 
 USERTIGCONFIG="$HOME/.tigrc"

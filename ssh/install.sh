@@ -8,19 +8,27 @@ fi
 if [ -z "$STRAP_GITHUB_USER" ]; then
   STRAP_GITHUB_USER="$(git config github.user)"
 fi
-printf "GitHub username? (default: $STRAP_GITHUB_USER) "
-read -r USER
-if [ "$USER" = "" ]
-then
-  USER="$STRAP_GITHUB_USER"
-fi
+GHUSER="${STRAP_GITHUB_USER:-keithamus}"
 
-pub="$(ssh-keygen -y -f ~/.ssh/id_rsa)"
-if ! curl -sq "https://github.com/$USER.keys" | grep "$pub" > /dev/null; then
+pub="$(ssh-keygen -y -f ~/.ssh/id_rsa | cut -d ' ' -f 1,2)"
+pubfile="~/.ssh/id_rsa.pub"
+url="https://github.com/settings/ssh/new"
+if ! curl -sq "https://github.com/$GHUSER.keys" | grep "$pub" > /dev/null; then
   echo "Add your SSH key to GitHub.com!"
-  echo "The public key is in your clipboard"
-  pbcopy < ~/.ssh/id_rsa.pub
-  open https://github.com/settings/ssh/new
+  if [ "$(uname -s)" = "darwin" ]
+  then
+    pbcopy < "$pubfile"
+    echo "The public key is in your clipboard"
+    open "$url"
+  elif [ "$(uname -s)" = "Linux" -a "$GDMSESSION" = "pop" ]
+  then
+    xclip -selection clipboard < "$pubfile"
+    echo "The public key is in your clipboard"
+    gio open "$url"
+  else
+    cat "$pubfile"
+    echo "Copy the contents of this public key, and visit $url"
+  fi
 fi
 
 if ! grep "Host github.com" ~/.ssh/config > /dev/null; then 

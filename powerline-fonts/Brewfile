@@ -1,0 +1,11 @@
+tap "homebrew/cask-fonts"
+
+cask "font-anonymouspro-nerd-font-mono"
+cask "font-devicons"
+cask "font-firacode-nerd-font-mono"
+cask "font-hack-nerd-font"
+cask "font-inconsolata-nerd-font"
+cask "font-menlo-for-powerline"
+cask "font-meslo-nerd-font-mono"
+cask "font-sourcecodepro-nerd-font-mono"
+

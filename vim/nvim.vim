@@ -46,9 +46,6 @@ call plug#begin('~/.vim/plugged')
   " Adds capabilities for custom per-project start pages
   Plug 'keithamus/vimstart'
 
-  " Allows you to vim a textarea in the browser
-  Plug 'raghur/vim-ghost', {'do': ':GhostInstall'}
-
 """ Editing tools
 
   " Switch - between variants of different lines/vars
@@ -114,7 +111,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'Raimondi/delimitMate'
 
   " COC Completion Engine
-  Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 """ UI
 
@@ -422,7 +419,7 @@ xmap <C-k> "zdi[<C-R>z]()<Left>
 augroup colorSettings
   set t_Co=256
   set background=dark
-  colorscheme papercolor
+  colorscheme PaperColor
   augroup noBackground
     hi Normal guibg=NONE ctermbg=NONE
     hi NonText guibg=NONE ctermbg=NONE

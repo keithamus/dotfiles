@@ -1,5 +1,16 @@
 #!/usr/bin/env sh
 THISDIR=$(cd "$(dirname "$0")"; pwd)
+BREWFILE="$THISDIR/Brewfile"
+
+if [ "$(uname -s)" = "Darwin" ]
+then
+  ../homebrew/install.sh
+  brew bundle install --file="$BREWFILE"
+elif [ "$(uname -s)" = "Linux" -a "$GDMSESSION" = "pop" ]
+then
+  sudo apt install -qq -y --no-install-recommends fish
+fi
+
 mkdir -p ~/.config/fish/conf.d
 ln -sf "${THISDIR}/fishfile"  ~/.config/fish/fishfile
 ln -sf "${THISDIR}/conf.d/"* ~/.config/fish/conf.d/
