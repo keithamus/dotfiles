@@ -331,8 +331,9 @@ augroup cocSettings
   omap if <Plug>(coc-funcobj-i)
   omap af <Plug>(coc-funcobj-a)
   let g:coc_status_error_sign = 'E'
-  autocmd CursorHold * silent call CocActionAsync('doHover')
-  autocmd CursorHoldI * silent call CocActionAsync('doHover')
+  autocmd CursorHold * if ! coc#util#has_float() | call CocAction('doHover') | endif
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  autocmd CursorHoldI * if ! coc#util#has_float() | call CocAction('doHover') | endif
 augroup end
 
 augroup javascriptSyntaxSettings
