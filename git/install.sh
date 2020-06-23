@@ -4,7 +4,7 @@ BREWFILE="$THISDIR/Brewfile"
 
 if [ "$(uname -s)" = "Darwin" ]
 then
-  ../homebrew/install.sh
+  ./homebrew/install.sh
   brew bundle install --file="$BREWFILE"
 elif [ "$(uname -s)" = "Linux" -a "$GDMSESSION" = "pop" ]
 then
