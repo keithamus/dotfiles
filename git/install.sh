@@ -9,6 +9,9 @@ then
 elif [ "$(uname -s)" = "Linux" -a "$GDMSESSION" = "pop" ]
 then
   sudo apt install -qq -y --no-install-recommends git tig
+  wget https://github.com/dandavison/delta/releases/download/0.1.1/git-delta_0.1.1_amd64.deb
+  sudo dpkg --skip-same-version -i git-delta_0.1.1_amd64.deb
+  rm -f git-delta_0.1.1_amd64.deb
 fi
 
 GITEDITOR="$(git config --global core.editor)"
