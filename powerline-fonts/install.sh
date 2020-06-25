@@ -11,7 +11,7 @@ installFont() {
 }
 
 # Nerd Fonts Too!
-if [ "$(uname -s)" = "darwin" ]
+if [ "$(uname -s)" = "Darwin" ]
 then
   ./homebrew/install.sh
   brew bundle install --file="$BREWFILE"
