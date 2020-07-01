@@ -79,6 +79,7 @@ EOF
   installScript "Powerline Fonts" powerline-fonts
   installScript "Todo" todo
   installScript "VIM" vim
+  installScript "Tmux" tmux
 
 elif [ "$(uname -s)" = "Linux" -a "$GDMSESSION" = "pop" ]
 then
@@ -143,6 +144,7 @@ EOF
   installScript "Powerline Fonts" powerline-fonts
   installScript "Todo" todo
   installScript "VIM" vim
+  installScript "Tmux" tmux
 
 elif  [ "$(uname -s)" = "Linux" -a "$(id -u -n)" = "vsonline" ]
 then
@@ -202,6 +204,7 @@ EOF
   installScript "Fish" fish
   installScript "ASDF" asdf
   installScript "VIM" vim
+  installScript "Tmux" tmux
 
 else
   echo "Unknown OS: $(uname -a) $(id) $GDMSESSION"
