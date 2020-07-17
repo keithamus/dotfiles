@@ -120,11 +120,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'mengelbrecht/lightline-bufferline'
 
-  " IndentLine
-  " A vim plugin to display the indention levels with thin vertical lines
-  " see indentlineSettings for more
-  Plug 'Yggdroot/indentLine'
-
   " Icon theme
   Plug 'flazz/vim-colorschemes'
 
@@ -301,11 +296,6 @@ augroup lightlineSettings
   let g:lightline#bufferline#unicode_symbols = 1
 augroup END
 
-augroup indentlineSettings
-  let g:indentLine_char = '│'
-  let g:indentLine_color_term = 236
-augroup END
-
 augroup vimTestSettings
   nmap <silent> <leader>t :TestNearest<CR>
   nmap <silent> <leader>T :TestFile<CR>
@@ -426,7 +416,6 @@ augroup colorSettings
     hi LineNr guibg=NONE ctermbg=NONE
   augroup end
   if &background ==# "dark"
-    let g:indentLine_color_term = 240
     hi Normal guibg=#000000
     hi NonText ctermfg=240
     hi SpecialKey ctermfg=240
@@ -434,7 +423,6 @@ augroup colorSettings
     hi CursorLineNr ctermfg=250
   else
     let g:airline_theme = 'papercolor'
-    let g:indentLine_color_term = 254
     hi NonText ctermfg=250
     hi SpecialKey ctermfg=254
     hi Search cterm=NONE ctermfg=NONE ctermbg=254
