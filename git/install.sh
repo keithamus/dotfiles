@@ -17,7 +17,7 @@ then
 
   # Git-Codeowners
   curl -L https://github.com/softprops/git-codeowners/releases/download/v0.1.2/git-codeowners-Linux-x86_64.tar.gz | tar -xz
-  mv ./git-codeowners /usr/local/bin
+  sudo mv ./git-codeowners /usr/local/bin
 
 fi
 
