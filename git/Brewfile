@@ -2,4 +2,6 @@ brew "git"
 brew "git-lfs"
 brew "git-delta"
 brew "tig"
+tap "softprops/tools"
+brew "softprops/tools/git-codeowners"
 
