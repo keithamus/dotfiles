@@ -199,8 +199,6 @@ augroup fzfSettings
 augroup END
 
 augroup aleSettings
-  nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-  nmap <silent> <C-j> <Plug>(ale_next_wrap)
   let g:ale_set_loclist = 0
   let g:ale_set_quickfix = 1
   let g:ale_sign_column_always = 1
@@ -327,6 +325,8 @@ augroup cocSettings
   inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
   inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<tab>"
   nmap <Leader>o :CocList outline<cr>
+  nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
+  nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
   nmap <silent> gd <Plug>(coc-definition)
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
