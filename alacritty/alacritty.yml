@@ -39,3 +39,4 @@ key_bindings:
   - { key: PageDown, mods: Control, chars: "\x02\x6f" } #Ctrl+Shift+Tab -> Ctrl+B, o (Swap Panes)
   - { key: D, mods: Control|Shift, chars: "\x02\x22" } #Ctrl+Shift+D -> Ctrl+B, " (Horizontal Split)
   - { key: D, mods: Control|Shift|Alt, chars: "\x02\x25" } #Ctrl+Shift+D -> Ctrl+B, % (Vertical Split)
+  - { key: Return, mods: Control|Shift, chars: "\x02\x7a" } #Ctrl+Shift+Enter -> Ctrl+B, z (Zoom Split)
