@@ -1,0 +1,41 @@
+scrolling:
+  history: 100000
+
+font:
+  normal:
+    family: "Source Code Pro for Powerline"
+    style: Regular
+  bold:
+    style: Bold
+  italic:
+    style: Italic
+  bold_italic:
+    style: Bold Italic
+  size: 13.0
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true
+
+cursor:
+  style: Block
+  unfocused_hollow: true
+  thickness: 0.10
+
+mouse:
+  hide_when_typing: true
+
+mouse_bindings:
+  - { mouse: Middle, action: PasteSelection }
+
+key_bindings:
+  - { key: K, mods: Control, chars: "\x08K" }
+  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+
+  # Tmux Bindings. Use `showkey -a` to figure out escape codes
+  - { key: T, mods: Control, chars: "\x02\x63" } # Ctrl+T -> Ctrl+B, c (Create Window)
+  - { key: Tab, mods: Control, chars: "\x02\x6e" } #Ctrl+Tab -> Ctrl+B, n (Next Window)
+  - { key: Tab, mods: Control|Shift, chars: "\x02\x70" } #Ctrl+Shift+Tab -> Ctrl+B, p (Previous Window)
+  - { key: PageDown, mods: Control, chars: "\x02\x6f" } #Ctrl+Shift+Tab -> Ctrl+B, o (Swap Panes)
+  - { key: D, mods: Control|Shift, chars: "\x02\x22" } #Ctrl+Shift+D -> Ctrl+B, " (Horizontal Split)
+  - { key: D, mods: Control|Shift|Alt, chars: "\x02\x25" } #Ctrl+Shift+D -> Ctrl+B, % (Vertical Split)
