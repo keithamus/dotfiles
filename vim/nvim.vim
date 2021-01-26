@@ -341,6 +341,7 @@ set updatetime=300
 set noshowmode " disable vim's default mode line (e.g. `--INSERT--`)
 set showtabline=2 " Always show the tab line
 set laststatus=2
+set cole=0
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
 
@@ -375,6 +376,7 @@ if has('autocmd')
   augroup better-markdown
     autocmd BufNewFile,BufRead *.md set linebreak
     autocmd BufNewFile,BufRead *.md set wrap
+    autocmd BufNewFile,BufRead *.md set cole=0
   augroup END
 
   autocmd FileType json syntax match Comment +\/\/.\+$+
