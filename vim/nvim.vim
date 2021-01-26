@@ -21,11 +21,6 @@ call plug#begin('~/.vim/plugged')
 
 """ Project Tools
 
-  " ALE
-  " Asynchronous linting and make framework for Neovim/Vim
-  " see augroup aleSettings for more
-  Plug 'dense-analysis/ale'
-
   " Editorconfig
   " Reads .editorconfig files and cleans up files on save
   Plug 'editorconfig/editorconfig-vim'
@@ -198,29 +193,6 @@ augroup fzfSettings
   autocmd FileType fzf set laststatus=0 | autocmd BufLeave <buffer> set laststatus=2
 augroup END
 
-augroup aleSettings
-  let g:ale_set_loclist = 0
-  let g:ale_set_quickfix = 1
-  let g:ale_sign_column_always = 1
-  let g:ale_sign_error = ''
-  let g:ale_sign_warning = ''
-  let g:ale_fix_on_save = 1
-  let g:ale_completion_tsserver_autoimport = 1
-  let g:ale_fixers = {
-  \   'ruby': ['remove_trailing_lines', 'trim_whitespace', 'rubocop'],
-  \   'go': ['remove_trailing_lines', 'trim_whitespace', 'gomod', 'goimports', 'gofmt'],
-  \   'proto': ['remove_trailing_lines', 'trim_whitespace'],
-  \   'javascript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
-  \   'typescript': ['remove_trailing_lines', 'trim_whitespace', 'eslint'],
-  \}
-  let g:ale_linters = {
-  \   'ruby': ['rubocop'],
-  \   'go': ['gofmt', 'golint', 'govet', 'gobuild', 'gopls'],
-  \   'proto': ['protoc-gen-lint'],
-  \   'javascript': ['eslint', 'flow', 'tsserver'],
-  \   'typescript': ['eslint', 'tsserver'],
-  \}
-augroup END
 
 augroup switchSettings
   autocmd FileType javascript let b:switch_custom_definitions =
