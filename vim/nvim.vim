@@ -308,9 +308,10 @@ augroup cocSettings
   omap if <Plug>(coc-funcobj-i)
   omap af <Plug>(coc-funcobj-a)
   let g:coc_status_error_sign = 'E'
-  autocmd CursorHold * call CocActionAsync('doHover')
-  autocmd CursorHoldI * call CocActionAsync('doHover')
+  autocmd CursorHold * silent if CocHasProvider('hover') | call CocActionAsync('doHover') | end
+  autocmd CursorHoldI * silent if CocHasProvider('hover') | call CocActionAsync('doHover') | end
   autocmd CursorHold * silent call CocActionAsync('highlight')
+  autocmd CursorHoldI * silent call CocActionAsync('highlight')
 augroup end
 
 augroup javascriptSyntaxSettings
