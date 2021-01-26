@@ -192,7 +192,6 @@ augroup fzfSettings
   autocmd FileType fzf set laststatus=0 | autocmd BufLeave <buffer> set laststatus=2
 augroup END
 
-
 augroup switchSettings
   autocmd FileType javascript let b:switch_custom_definitions =
         \ [
@@ -309,9 +308,9 @@ augroup cocSettings
   omap if <Plug>(coc-funcobj-i)
   omap af <Plug>(coc-funcobj-a)
   let g:coc_status_error_sign = 'E'
-  autocmd CursorHold * if ! coc#util#has_float() | call CocAction('doHover') | endif
+  autocmd CursorHold * call CocActionAsync('doHover')
+  autocmd CursorHoldI * call CocActionAsync('doHover')
   autocmd CursorHold * silent call CocActionAsync('highlight')
-  autocmd CursorHoldI * if ! coc#util#has_float() | call CocAction('doHover') | endif
 augroup end
 
 augroup javascriptSyntaxSettings
