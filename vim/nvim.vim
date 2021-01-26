@@ -107,26 +107,25 @@ call plug#begin('~/.vim/plugged')
 
   " COC Completion Engine
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'neoclide/coc-yank', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-tslint-plugin', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-css', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-eslint', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-pairs', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-solargraph', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-stylelint', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-tslint-plugin', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-  Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-yank', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-tsserver', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-tslint-plugin', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-css', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-yaml', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-emmet', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-eslint', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-git', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-highlight', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-html', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-json', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-pairs', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-prettier', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-python', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-rls', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-solargraph', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-tslint-plugin', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neoclide/coc-tsserver', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'josa42/coc-go', {'do': 'npx yarn install --frozen-lockfile'}
 
 """ UI
 
