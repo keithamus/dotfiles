@@ -7,7 +7,6 @@ call plug#begin('~/.vim/plugged')
   " see augroup easymotionSettings for more
   Plug 'easymotion/vim-easymotion'
   Plug 'haya14busa/incsearch.vim'
-  Plug 'haya14busa/incsearch-fuzzy.vim'
   Plug 'haya14busa/incsearch-easymotion.vim'
 
   " FZF Fuzzy Search
@@ -15,9 +14,6 @@ call plug#begin('~/.vim/plugged')
   " see augroup fzfSettings for more
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
-
-  " Underling matching words in the buffer
-  Plug 'itchyny/vim-cursorword'
 
 """ Project Tools
 
@@ -32,20 +28,7 @@ call plug#begin('~/.vim/plugged')
   " Rhubarb adds GitHub support to fugitive
   Plug 'tpope/vim-rhubarb'
 
-  " Adds `:Test[File|Nearest|Suite|Last|Visit]` commands
-  Plug 'janko-m/vim-test'
-
-  " Adds `:Dash` command
-  Plug 'rizzatti/dash.vim'
-
-  " Adds capabilities for custom per-project start pages
-  Plug 'keithamus/vimstart'
-
 """ Editing tools
-
-  " Switch - between variants of different lines/vars
-  " see switchSettings for more
-  Plug 'AndrewRadev/switch.vim'
 
   " Add keymaps to S to surround selections in characters
   Plug 'tpope/vim-surround'
@@ -56,30 +39,16 @@ call plug#begin('~/.vim/plugged')
   " gcc to toggle comments
   Plug 'tpope/vim-commentary'
 
-  " gt<movement> for title casing
-  Plug 'christoomey/vim-titlecase'
-
   " bunch of cool keyboard combos
   Plug 'tpope/vim-unimpaired'
 
   " enable . repeating for a bunch of plugins
   Plug 'tpope/vim-repeat'
 
-  " ga<letter> ga*<letter> to align code
-  " see easyalignSettings for more
-  Plug 'junegunn/vim-easy-align'
-
   " cx{motion} store a value to exchange with the next cx
   Plug 'tommcdo/vim-exchange'
 
-  " rebind P/p to handle whitespace and indentation better
-  Plug 'AndrewRadev/whitespaste.vim'
-  Plug 'sickill/vim-pasta'
-
 """ TextObject Plugins!
-
-  " User definable TextObjects using regex or functions
-  Plug 'kana/vim-textobj-user'
 
   " ai/ii - select region at this indent and further
   " aI/iI - select region at this indent alone
@@ -88,22 +57,7 @@ call plug#begin('~/.vim/plugged')
   " aa/ia - select argument in function call
   Plug 'vim-scripts/argtextobj.vim'
 
-  " ad/id - select date, at/it - select time
-  Plug 'kana/vim-textobj-datetime'
-
-  " ah/ih - select git hunk
-  Plug 'gilligan/textobj-gitgutter'
-
-  " ax/ix - select (X|HT)ML attributes
-  Plug 'whatyouhide/vim-textobj-xmlattr'
-
-  " ac/ic - select CSS rules+selectors
-  Plug 'jasonlong/vim-textobj-css'
-
 """ Autocompletion
-
-  " autocomplete brackets/quotes!
-  Plug 'Raimondi/delimitMate'
 
   " COC Completion Engine
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -115,7 +69,6 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc-emmet', {'do': 'npx yarn install --frozen-lockfile'}
   Plug 'neoclide/coc-eslint', {'do': 'npx yarn install --frozen-lockfile'}
   Plug 'neoclide/coc-git', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-highlight', {'do': 'npx yarn install --frozen-lockfile'}
   Plug 'neoclide/coc-html', {'do': 'npx yarn install --frozen-lockfile'}
   Plug 'neoclide/coc-json', {'do': 'npx yarn install --frozen-lockfile'}
   Plug 'neoclide/coc-pairs', {'do': 'npx yarn install --frozen-lockfile'}
@@ -126,6 +79,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'neoclide/coc-tslint-plugin', {'do': 'npx yarn install --frozen-lockfile'}
   Plug 'neoclide/coc-tsserver', {'do': 'npx yarn install --frozen-lockfile'}
   Plug 'josa42/coc-go', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'josa42/coc-sh', {'do': 'npx yarn install --frozen-lockfile'}
 
 """ UI
 
@@ -144,7 +98,6 @@ call plug#begin('~/.vim/plugged')
   " HighlightedYank
   " Briefly highlight the yanked text
   Plug 'machakann/vim-highlightedyank'
-
 
 """ Syntaxes
 
@@ -168,16 +121,6 @@ augroup easymotionSettings
   map  <Leader>j <Plug>(easymotion-j)
   map  <Leader>k <Plug>(easymotion-k)
   map  <Leader>h <Plug>(easymotion-linebackward)
-  function! s:config_easyfuzzymotion(...) abort
-    return extend(copy({
-          \   'converters': [incsearch#config#fuzzyword#converter()],
-          \   'modules': [incsearch#config#easymotion#module({'overwin': 1})],
-          \   'keymap': {"\<CR>": '<Over>(easymotion)'},
-          \   'is_expr': 0,
-          \   'is_stay': 1
-          \ }), get(a:, 1, {}))
-  endfunction
-  noremap <silent><expr> <Leader>/ incsearch#go(<SID>config_easyfuzzymotion())
 augroup END
 
 augroup fzfSettings
@@ -190,38 +133,6 @@ augroup fzfSettings
   let g:fzf_nvim_statusline = 0
   autocmd! FileType fzf
   autocmd FileType fzf set laststatus=0 | autocmd BufLeave <buffer> set laststatus=2
-augroup END
-
-augroup switchSettings
-  autocmd FileType javascript let b:switch_custom_definitions =
-        \ [
-        \   {
-        \      '\<\([a-zA-z.()]\+\) === false': '!\1',
-        \      '!\<\([a-zA-z.()]\+\)':          '\1 === false',
-        \   },
-        \   {
-        \     'describe(\(.*\)': 'describe.skip(\1',
-        \     'describe\.skip(\(.*\)': 'describe.only(\1',
-        \     'describe\.only(\(.*\)': 'describe(\1',
-        \   },
-        \   {
-        \     '\(\s*\)it(\(.*\)': '\1it.skip(\2',
-        \     '\(\s*\)it\.skip(\(.*\)': '\1it.only(\2',
-        \     '\(\s*\)it\.only(\(.*\)': '\1it(\2',
-        \   },
-        \ ]
-augroup END
-
-augroup easyalignSettings
-  xmap ga <Plug>(EasyAlign)
-  nmap ga <Plug>(EasyAlign)
-augroup END
-
-augroup gitgutterSettings
-  let g:gitgutter_sign_added = ''
-  let g:gitgutter_sign_removed = ''
-  let g:gitgutter_sign_modified = ''
-  let g:gitgutter_sign_modified_removed = ''
 augroup END
 
 augroup fugitiveSettings
@@ -282,12 +193,6 @@ augroup lightlineSettings
   let g:lightline#bufferline#filename_modifier = ':~'
   let g:lightline#bufferline#clickable = 1
   let g:lightline#bufferline#unicode_symbols = 1
-augroup END
-
-augroup vimTestSettings
-  nmap <silent> <leader>t :TestNearest<CR>
-  nmap <silent> <leader>T :TestFile<CR>
-  let test#strategy = "neovim"
 augroup END
 
 augroup cocSettings
