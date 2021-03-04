@@ -211,7 +211,7 @@
   mnemonicprefix = 1
 
 [push]
-  default = upstream
+  default = current
 
 [rebase]
   stat = 1
