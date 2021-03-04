@@ -217,6 +217,8 @@ augroup cocSettings
   autocmd CursorHoldI * silent if CocHasProvider('hover') | call CocActionAsync('doHover') | end
   autocmd CursorHold * silent call CocActionAsync('highlight')
   autocmd CursorHoldI * silent call CocActionAsync('highlight')
+
+  autocmd FileType vim,javascript,typescript,json setl formatexpr=CocAction('formatSelected')
 augroup end
 
 augroup javascriptSyntaxSettings
@@ -241,13 +243,17 @@ let $NVIM_TUI_ENABLE_TRUE_COLOR = 1  " attempt to make things true-color
 set lazyredraw                       " attempt to speed up redrawing
 set ttyfast                          " attempt to speed up redrawing
 set nofoldenable                     " disable annoying folding
+set nobackup                         " disable backups
+set nowritebackup                    " disable backups
 set inccommand=nosplit               " enable inccommand
-set fillchars+=vert:│
+set fillchars+=vert:│                " use correct character for split window divider
 set updatetime=300
-set noshowmode " disable vim's default mode line (e.g. `--INSERT--`)
-set showtabline=2 " Always show the tab line
+set noshowmode                       " disable vim's default mode line (e.g. `--INSERT--`)
+set showtabline=2                    " Always show the tab line
 set laststatus=2
 set cole=0
+set shortmess+=c                     " Don't pass messages to |ins-completion-menu|
+set signcolumn=yes
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal = 0
 
