@@ -22,6 +22,11 @@ git config --global user.name "${GITNAME:-Keith Cirkel}"
 git config --global user.email "${GITEMAIL:-keithamus@users.noreply.github.com}"
 git config --global include.path "$GITCONFIG"
 
+GPG_ID=$(gpg --list-secret-keys --keyid-format LONG $GITEMAIL | head -1 | awk '{print $2}' | awk -F '/' '{print $2}')
+if [ "$GPG_ID" ]; then
+  git config --global user.signingkey $GPG_ID
+fi
+
 USERTIGCONFIG="$HOME/.tigrc"
 TIGRCFILES="$THISDIR/tigrc.d"
 if [ ! -f "$USERTIGCONFIG" ];
