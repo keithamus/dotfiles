@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+"$(dirname "$0")/../auto-install.sh" "$(basename $(dirname $0))"
+
 THISDIR=$(cd "$(dirname "$0")" || exit; pwd)
 VIM_DIR="$HOME/.vim"
 if [ ! -L ~/.vim ] && [ -d ~/.vim ]

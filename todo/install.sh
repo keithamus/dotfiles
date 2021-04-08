@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+"$(dirname "$0")/../auto-install.sh" "$(basename $(dirname $0))"
+
 THISDIR=$(cd "$(dirname "$0")"; pwd)
 TODOCONF_DIR="$HOME/.todo"
 ACTION_DIR="$TODOCONF_DIR/todo.actions.d"

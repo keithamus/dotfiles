@@ -1,22 +1,22 @@
 #!/usr/bin/env sh
+"$(dirname "$0")/../auto-install.sh" "$(basename $(dirname $0))"
+
 if [ ! -d "$HOME/.asdf" ]
 then
 	git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.7.8
 fi
 cd ~/.asdf
 
-if [ ! "$(which asdf)" ]
+if [ ! "$(which asdf 2>/dev/null)" ]
 then
 	echo '. $HOME/.asdf/asdf.sh' >> ~/.bashrc
-	if [ "$(which bash)" = "$SHELL" ]
+	if [ "$(which bash 2>/dev/null)" = "$SHELL" ]
 	then
 		. ~/.bashrc
 	fi
 fi
 
-asdf() {
-  ~/.asdf/bin/asdf $@
-}
+export PATH="$PATH:$HOME/.asdf/bin"
 
 asdf update
 asdf plugin update --all
@@ -39,10 +39,6 @@ asdf install nodejs latest
 asdf global nodejs $(asdf list nodejs | head -1 | tr -d '[:space:]')
 
 asdf plugin add python
-if [ "$(uname -s)" = "Linux" -a "$(which apt)" ]
-then
- sudo apt install -y --no-install-recommends make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm libncurses5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
-fi
 asdf install python latest
 asdf global python $(asdf list python | head -1 | tr -d '[:space:]')
 

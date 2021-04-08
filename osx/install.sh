@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+"$(dirname "$0")/../auto-install.sh" "$(basename $(dirname $0))"
+
 echo "Enabling menu tray icon defaults"
 defaults write com.apple.systemuiserver menuextras -array \
   "/system/library/coreservices/menu extras/bluetooth.menu" \
