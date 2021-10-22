@@ -5,6 +5,7 @@ THISDIR=$(cd "$(dirname "$0")"; pwd)
 mkdir -p ~/.config/fish/conf.d
 ln -sf "${THISDIR}/fishfile"  ~/.config/fish/fishfile
 ln -sf "${THISDIR}/conf.d/"* ~/.config/fish/conf.d/
+ln -sf "${THISDIR}/functions/"* ~/.config/fish/functions/
 
 if [ "$(grep -c fish /etc/shells)" = "0" ]
 then
