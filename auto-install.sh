@@ -9,6 +9,8 @@ if [ -f "$DIR/Brewfile" ] && [ "$OS" = "macos" ]; then
 elif [ -f "$DIR/Debfile" ] && [ "$(which apt 2>/dev/null)"]; then
   xargs -a "$THISDIR/Debfile" sudo apt install -qq -y --no-install-recommends
 elif [ -f "$DIR/Yayfile" ] && [ "$(which pacman 2>/dev/null)" ]; then
-  sudo pacman --noconfirm --needed -Syu yay
+  if !which yay 2&>/dev/null; then
+    sudo pacman --noconfirm --needed -S yay
+  fi
   yes | xargs -a "$DIR/Yayfile" yay --needed --answerclean No --answerdiff N -S --noprovides
 fi
