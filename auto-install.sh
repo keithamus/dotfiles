@@ -14,3 +14,16 @@ elif [ -f "$DIR/Yayfile" ] && [ "$(which pacman 2>/dev/null)" ]; then
   fi
   yes | xargs -a "$DIR/Yayfile" yay --needed --answerclean No --answerdiff N -S --noprovides
 fi
+
+echo "testing $DIR/config"
+if [ -d "$DIR/config" ]; then
+  echo "Found config"
+  for DOTDIR in "$DIR/config/"*; do
+    XDGDIR="$HOME/.config/$(basename $DOTDIR)"
+    if [ ! -L "$XDGDIR" ] && [ -d "$XDGDIR" ]; then
+      echo "moving old $XDGDIR"
+      mv -f "$XDGDIR" "$XDGDIR.old-$(date -Iseconds)"
+    fi
+    ln -sfn "$DOTDIR" "$XDGDIR" 
+  done
+fi
