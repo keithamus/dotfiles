@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-"$(dirname "$0")/../auto-install.sh" "$(basename $(dirname $0))"
+"$(dirname "$0")/../auto-install.sh" $0
 
 if [ "$(which apt 2>/dev/null)"]; then
   # Git-Delta

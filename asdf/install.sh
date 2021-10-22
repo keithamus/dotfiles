@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-"$(dirname "$0")/../auto-install.sh" "$(basename $(dirname $0))"
+"$(dirname "$0")/../auto-install.sh" $0
 
 if [ ! -d "$HOME/.asdf" ]
 then

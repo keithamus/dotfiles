@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 THISDIR=$(cd "$(dirname "$0")"; pwd)
 OS="$($THISDIR/os.sh)"
-DIR="$THISDIR/${1-}"
+DIR="$(cd $(dirname ${1-}); pwd)"
 
 if [ -f "$DIR/Brewfile" ] && [ "$OS" = "macos" ]; then
   "$THISDIR/homebrew/install.sh"
