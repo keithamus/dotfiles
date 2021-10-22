@@ -3,7 +3,7 @@ scrolling:
 
 font:
   normal:
-    family: "Source Code Pro for Powerline"
+    family: "SauceCodePro NF"
     style: Regular
   bold:
     style: Bold
@@ -11,7 +11,7 @@ font:
     style: Italic
   bold_italic:
     style: Bold Italic
-  size: 13.0
+  size: 12
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -28,9 +28,16 @@ mouse:
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
+import:
+  - ~/.cache/wal/colors-alacritty.yml
+
+window:
+  dynamic_title: true
+  dynamic_padding: true
+
 key_bindings:
-  - { key: K, mods: Control, chars: "\x08K" }
-  - { key: N, mods: Control|Shift, action: SpawnNewInstance }
+  - { key: K, mods: Super, chars: "\x08K" }
+  - { key: N, mods: Super|Shift, action: SpawnNewInstance }
 
   # Tmux Bindings. Use `showkey -a` to figure out escape codes
   - { key: T, mods: Control, chars: "\x02\x63" } # Ctrl+T -> Ctrl+B, c (Create Window)
