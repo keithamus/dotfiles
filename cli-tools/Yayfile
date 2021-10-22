@@ -35,3 +35,4 @@ extra/wget
 community/youtube-dl
 community/zopfli
 extra/brotli
+community/github-cli
