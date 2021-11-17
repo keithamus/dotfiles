@@ -7,7 +7,8 @@ if [ -f /etc/lsb-release ]; then
 elif [ "$(uname -s)" = "Darwin" ]; then
   OS="macos"
 fi 
-if [ "$(id -u -n)" = "codespace" ]; then
+case "$(uname -n)" in codespace*)
   OS="codespace"
-fi
+  ;;
+esac
 echo "$OS"
