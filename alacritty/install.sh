@@ -3,5 +3,5 @@
 
 THISDIR=$(cd "$(dirname "$0")"; pwd)
 
-mkdir -p ~/.config/alacritty
-ln -sf "${THISDIR}/alacritty.yml"  ~/.config/alacritty/alacritty.yml
+curl -s https://raw.githubusercontent.com/alacritty/alacritty/master/extra/alacritty.info > /tmp/alacritty.info
+sudo tic -xe alacritty,alacritty-direct /tmp/alacritty.info
