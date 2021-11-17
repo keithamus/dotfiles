@@ -21,14 +21,15 @@ if [ "$OS" != "codespace" ]; then
   installScript "Desktop Apps" desktop-apps
 fi
 
-installScript "Git" git
-installScript "CLI Tools" cli-tools
-
+installScript "1Password" op
 
 if [ "$OS" != "codespace" ]; then
   installScript "SSH" ssh
   installScript "GPG" gpg
 fi
+
+installScript "Git" git
+installScript "CLI Tools" cli-tools
 
 installScript "ASDF" asdf
 installScript "Fish" fish
