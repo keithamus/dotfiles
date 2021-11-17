@@ -1,0 +1,68 @@
+add_newline = false
+
+format = """
+$directory\
+$git_branch\
+$git_status\
+$jobs\
+$status\
+$character\
+"""
+
+right_format = """
+$git_metrics\
+$cmake\
+$deno\
+$golang\
+$helm\
+$lua\
+$nodejs\
+$python\
+$ruby\
+$rust\
+$terraform\
+"""
+
+[directory]
+style = "cyan"
+
+[git_branch]
+format = "[($symbol$branch)]($style)"
+
+[git_status]
+format = " [$all_status$ahead_behind]($style)"
+
+[jobs]
+format = "[$symbol$number]($style)"
+
+[cmake]
+format = " [$symbol($version)]($style)"
+version_format = "${raw}"
+[deno]
+format = " [$symbol($version)]($style)"
+version_format = "${raw}"
+[golang]
+format = " [$symbol($version)]($style)"
+version_format = "${raw}"
+[helm]
+format = " [$symbol($version)]($style)"
+version_format = "${raw}"
+[lua]
+format = " [$symbol($version)]($style)"
+version_format = "${raw}"
+[nodejs]
+format = " [$symbol($version)]($style)"
+version_format = "${raw}"
+detect_extensions = ["mjs", "cjs"]
+[python]
+format = " [$symbol($version)]($style)"
+version_format = "${raw}"
+[ruby]
+format = " [$symbol($version)]($style)"
+version_format = "${raw}"
+[rust]
+format = " [$symbol($version)]($style)"
+version_format = "${raw}"
+[terraform]
+format = " [$symbol($version)]($style)"
+version_format = "${raw}"
