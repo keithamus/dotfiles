@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/keith/Code/dotfiles/streamdeck/config'
+let g:netrw_dirhist_0='/home/keith/.local/share/nvim/swap'
+let g:netrw_dirhist_9='/home/keith'
+let g:netrw_dirhist_8='/home/keith/Code/dotfiles/alacritty'
+let g:netrw_dirhist_7='/home/keith/.config/rofi/networkmanager-dmenu'
+let g:netrw_dirhist_6='/home/keith/.config/rofi'
+let g:netrw_dirhist_5='/home/keith/.config/rofi/networkmanager-dmenu'
+let g:netrw_dirhist_4='/home/keith/Code/loupe/.git/logs/refs/notes'
+let g:netrw_dirhist_3='/home/keith/Code/loupe/.git/logs/refs'
+let g:netrw_dirhist_2='/home/keith/Code/loupe/.git/logs/refs/notes'

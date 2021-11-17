@@ -21,6 +21,10 @@ call plug#begin('~/.vim/plugged')
   " Reads .editorconfig files and cleans up files on save
   Plug 'editorconfig/editorconfig-vim'
 
+  " Obsession
+  " Keeps session state recorded for vim
+  Plug 'tpope/vim-obsession'
+
   " Fugitive
   " Adds a bunch of helpful git commands to Vim
   Plug 'tpope/vim-fugitive'
@@ -57,29 +61,10 @@ call plug#begin('~/.vim/plugged')
   " aa/ia - select argument in function call
   Plug 'vim-scripts/argtextobj.vim'
 
-""" Autocompletion
+""" LSP!
 
-  " COC Completion Engine
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'neoclide/coc-yank', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-tsserver', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-tslint-plugin', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-css', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-yaml', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-emmet', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-eslint', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-git', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-html', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-json', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-pairs', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-prettier', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-python', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-rls', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-solargraph', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-tslint-plugin', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'neoclide/coc-tsserver', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'josa42/coc-go', {'do': 'npx yarn install --frozen-lockfile'}
-  Plug 'josa42/coc-sh', {'do': 'npx yarn install --frozen-lockfile'}
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'nvim-lua/completion-nvim'
 
 """ UI
 
@@ -88,8 +73,8 @@ call plug#begin('~/.vim/plugged')
   Plug 'itchyny/lightline.vim'
   Plug 'mengelbrecht/lightline-bufferline'
 
-  " Icon theme
-  Plug 'flazz/vim-colorschemes'
+  " Color Schemes
+  Plug 'dylanaraps/wal.vim'
 
   " GitGutter
   " A Vim plugin which shows a git diff in the gutter (sign column) and stages/undoes hunks.
@@ -103,9 +88,20 @@ call plug#begin('~/.vim/plugged')
 
   " One syntax plugin to rule them all
   Plug 'sheerun/vim-polyglot'
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
+augroup obsessionSettings
+  autocmd VimEnter * nested
+    \ if argc() == 0 |
+    \   if filereadable('Session.vim') |
+    \     exe 'source Session.vim' |
+    \   else |
+    \     exe 'Obsession' |
+    \   end |
+    \ endif
+augroup END
 
 augroup easymotionSettings
   set nohlsearch
@@ -162,14 +158,11 @@ augroup lightlineSettings
   \ 'component_type': {
   \   'buffers': 'tabsel',
   \ },
-  \ 'component_function': {
-  \   'cocstatus': 'coc#status'
-  \ },
   \ 'component_raw': {
   \   'buffers': 1,
   \ },
   \ 'active': {
-  \   'right': [ [ 'lineinfo' ], [ 'cocstatus' ] ],
+  \   'right': [ [ 'lineinfo' ] ],
   \ },
   \ 'tabline': {
   \   'left': [ [ 'buffers' ] ],
@@ -194,32 +187,6 @@ augroup lightlineSettings
   let g:lightline#bufferline#clickable = 1
   let g:lightline#bufferline#unicode_symbols = 1
 augroup END
-
-augroup cocSettings
-  " Enter expands snippets
-  inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-  inoremap <silent><expr> <tab> pumvisible() ? coc#_select_confirm() : "\<tab>"
-  nmap <Leader>o :CocList outline<cr>
-  nmap <silent> <C-k> <Plug>(coc-diagnostic-prev)
-  nmap <silent> <C-j> <Plug>(coc-diagnostic-next)
-  nmap <silent> gd <Plug>(coc-definition)
-  nmap <silent> gy <Plug>(coc-type-definition)
-  nmap <silent> gi <Plug>(coc-implementation)
-  nmap <silent> gr <Plug>(coc-references)
-  nmap <leader>r <Plug>(coc-rename)
-  xmap <leader>r <Plug>(coc-rename)
-  xmap if <Plug>(coc-funcobj-i)
-  xmap af <Plug>(coc-funcobj-a)
-  omap if <Plug>(coc-funcobj-i)
-  omap af <Plug>(coc-funcobj-a)
-  let g:coc_status_error_sign = 'E'
-  autocmd CursorHold * silent if CocHasProvider('hover') | call CocActionAsync('doHover') | end
-  autocmd CursorHoldI * silent if CocHasProvider('hover') | call CocActionAsync('doHover') | end
-  autocmd CursorHold * silent call CocActionAsync('highlight')
-  autocmd CursorHoldI * silent call CocActionAsync('highlight')
-
-  autocmd FileType vim,javascript,typescript,json setl formatexpr=CocAction('formatSelected')
-augroup end
 
 augroup javascriptSyntaxSettings
   let g:javascript_plugin_jsdoc = 1
@@ -310,29 +277,19 @@ let g:markdown_syntax_conceal = 0
 " in [](). So `foo` becomes `[foo]()` with the cursor placed inbetween ()
 xmap <C-k> "zdi[<C-R>z]()<Left>
 
-augroup colorSettings
-  set t_Co=256
-  set background=dark
-  colorscheme PaperColor
-  augroup noBackground
-    hi Normal guibg=NONE ctermbg=NONE
-    hi NonText guibg=NONE ctermbg=NONE
-    hi LineNr guibg=NONE ctermbg=NONE
-  augroup end
-  if &background ==# "dark"
-    hi Normal guibg=#000000
-    hi NonText ctermfg=240
-    hi SpecialKey ctermfg=240
-    hi Search cterm=NONE ctermfg=NONE ctermbg=240
-    hi CursorLineNr ctermfg=250
-  else
-    let g:airline_theme = 'papercolor'
-    hi NonText ctermfg=250
-    hi SpecialKey ctermfg=254
-    hi Search cterm=NONE ctermfg=NONE ctermbg=254
-    hi CursorLineNr ctermfg=3
-  endif
-augroup END
+let g:lightline.colorscheme = "wal"
+colorscheme wal
+hi StatusLine ctermbg=7 ctermfg=2
+hi StatusLineNC ctermbg=0 ctermfg=8
+hi NonText ctermfg=250 
+hi SpecialKey ctermfg=254
+hi Search cterm=NONE ctermfg=NONE ctermbg=240
+hi CursorLineNr ctermfg=250
+hi Search cterm=NONE ctermfg=NONE ctermbg=254
+hi TSInclude ctermbg=NONE ctermfg=5
+hi TSNamespace ctermbg=NONE ctermfg=4
+hi TSRepeat ctermbg=NONE ctermfg=5
+hi TSOperator ctermbg=NONE ctermfg=4
 
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
 function! ExecuteMacroOverVisualRange()

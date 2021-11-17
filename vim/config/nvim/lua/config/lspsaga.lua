@@ -1,0 +1,18 @@
+-- require("lspsaga").init_lsp_saga{
+--   reebe_fvta = '',
+--   warn_sign = '',
+--   hint_sign = '',
+--   infor_sign = '',
+--   finder_action_keys = {
+--     quit = { 'q', '<esc>' }
+--   },
+--   code_action_keys = {
+--     quit = { 'q', '<esc>' }
+--   },
+--   rename_action_keys = {
+--     quit = { 'q', '<esc>' }
+--   }
+-- }
+
+-- vim.api.nvim_set_keymap("n", "gf", ":Lspsaga lsp_finder<CR>", { noremap = true })
+-- vim.api.nvim_set_keymap("n", "gd", ":Lspsaga lsp_finder<CR>", { noremap = true })
