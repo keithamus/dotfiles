@@ -1,0 +1,121 @@
+{
+  "layer": "top",
+    "height": 25,
+    "modules-left": ["custom/scratchpad-indicator", "sway/workspaces", "sway/mode"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["custom/media", "custom/screenrecord", "pulseaudio", "memory", "cpu", "tray", "custom/weather", "idle_inhibitor", "custom/eyedropper", "clock"],
+    "sway/workspaces": {
+      "all-outputs": true,
+      "format": "{value} {icon} ",
+      "persistent-workspaces": {
+        "1": [],
+        "2": [],
+        "3": []
+      },
+      "format-icons": {
+        "1": "",
+        "3": "浪",
+        "urgent": "",
+        "focused": "",
+        "default": ""
+      }
+    },
+    "custom/scratchpad-indicator": {
+      "interval": 3,
+      "return-type": "json",
+      "exec": "swaymsg -t get_tree | jq --unbuffered --compact-output '( select(.name == \"root\") | .nodes[] | select(.name == \"__i3\") | .nodes[] | select(.name == \"__i3_scratch\") | .focus) as $scratch_ids | [..  | (.nodes? + .floating_nodes?) // empty | .[] | select(.id |IN($scratch_ids[]))] as $scratch_nodes | { text: \"\\($scratch_nodes | length)\", tooltip: $scratch_nodes | map(\"\\(.app_id // .window_properties.class) (\\(.id)): \\(.name)\") | join(\"\\n\") }'",
+      "format": "{} 🗗",
+      "on-click": "exec swaymsg 'scratchpad show'",
+      "on-click-right": "exec swaymsg 'move scratchpad'"
+    },
+    "sway/window": {
+      "max-length": 50
+    },
+    "custom/media": {
+      "format": "{icon}{}",
+      "return-type": "json",
+      "format-icons": {
+        "Playing": "  ",
+        "Paused": "  "
+      },
+      "max-length":70,
+      "exec": "playerctl -a metadata --format '{\"text\": \"{{artist}} - {{markup_escape(title)}}\", \"tooltip\": \"{{artist}} : {{markup_escape(title)}} - {{playerName}}\", \"alt\": \"{{status}}\", \"class\": \"{{status}}\"}' -F",
+      "on-click": "playerctl play-pause",
+      "on-click-right": "playerctl next"
+    },
+    "custom/screenrecord": {
+      "format": "{icon}{}",
+      "interval": 1,
+      "exec": "~/.config/waybar/screen-record query",
+      "on-click": "~/.config/waybar/screen-record do",
+      "on-click-right": "~/.config/waybar/screen-record doscreen"
+    },
+    "idle_inhibitor": {
+      "format": "{icon}",
+      "format-icons": {
+        "activated": "",
+        "deactivated": "﯈"
+      }
+    },
+    "pulseaudio": {
+      "format": "{icon}  {volume}%",
+      "format-bluetooth": "{icon} {volume}%",
+      "format-muted": " 0%",
+      "format-icons": {
+        "headphone": "",
+        "hands-free": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["", ""]
+      },
+      "scroll-step": 1,
+      "on-click": "pavucontrol",
+      "on-click-right": "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+    },
+    "cpu": {
+      "interval": 2,
+      "format": " {usage}%",
+      "on-click": "alacritty -e btop",
+      "states": {
+        "critical": 95,
+        "warning": 70,
+        "good": 0,
+      }
+    },
+    "memory": {
+      "interval": 2,
+      "format": " {usage}%",
+      "on-click": "alacritty -e btop",
+      "format": " {percentage}%",
+      "states": {
+        "critical": 90,
+        "warning": 70,
+        "good": 0,
+      }
+    },
+    "tray": {
+      "icon-size": 18,
+      "show-passive-items": true,
+      "spacing": 10
+    },
+    "custom/weather": {
+      "exec": "curl 'https://wttr.in/?format=1'; curl 'https://wttr.in?format=4'",
+      "interval": 3600,
+      "on-click": "xdg-open https://wttr.in"
+    },
+    "custom/eyedropper": {
+      "format": "{} ",
+      "interval": 3600,
+      "exec": "echo ; echo 'Click on a pixel on your screen and show its color value'; echo btn",
+      "on-click": "farge",
+    },
+    "clock": {
+      "interval": 1,
+      "format": "  {:%a %d %T}",
+      "format-alt": "  {:%a %d %H:%M}",
+      "tooltip-format": "{:%F}",
+      "on-click": "alacritty -e khal interactive"
+    }
+}

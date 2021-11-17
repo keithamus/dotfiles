@@ -1,0 +1,166 @@
+@import "../../.cache/wal/colors-waybar.css";
+
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "Noto Sans", "SauceCodePro Nerd Font", sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    min-height: 32px;
+}
+
+window#waybar {
+    background-color: alpha(@background, 0.7);
+    border-bottom: 3px solid @color5;
+    color: @foreground;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+window#waybar.alacritty {
+    background-color: #3F3F3F;
+}
+
+window#waybar.chromium {
+    background-color: @background;
+    border: none;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    background-color: transparent;
+    color: @foreground;
+    /* Use box-shadow instead of border so the text isn't offset */
+    box-shadow: inset 0 -3px transparent;
+}
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 -3px @foreground;
+}
+
+#workspaces button.focused {
+    background-color: @color8;
+    box-shadow: inset 0 -3px @foreground;
+}
+
+#workspaces button.urgent {
+    background-color: @color1;
+}
+
+#mode {
+    background-color: @color8;
+    border-bottom: 3px solid @foreground;
+}
+
+#clock,
+#battery,
+#cpu,
+#memory,
+#disk,
+#temperature,
+#backlight,
+#network,
+#pulseaudio,
+#custom-media,
+#tray,
+#mode,
+#idle_inhibitor,
+#custom-media,
+#custom-screenrecord,
+#custom-weather,
+#mpd {
+    padding: 0 5px;
+    margin: 0 2px;
+    color: @foreground;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
+}
+
+#clock {
+  margin-right: 0;
+}
+
+@keyframes blink {
+    to {
+        background-color: @foreground;
+        color: @background;
+    }
+}
+
+label:focus {
+    background-color: @background;
+}
+
+#cpu.critical, #memory.critical {
+  color: @color1;
+  font-weight: bold;
+}
+#cpu.warning, #memory.critical {
+  color: @color3;
+  font-weight: bold;
+  background: none;
+}
+#cpu.good, #memory.good {
+  opacity: 0.8;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @color1;
+}
+
+#custom-weather {
+  font-size: 14px;
+}
+
+#custom-screenrecord {
+  font-size: 24px;
+}
+#custom-screenrecord.idle {
+  font-size: 20px;
+}
+
+#custom-screenrecord.starting {
+  color: white;
+}
+
+#custom-screenrecord.recording {
+  color: red;
+}
+
+#custom-eyedropper {
+  font-size: 20px;
+}
+
+#idle_inhibitor {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+#idle_inhibitor.activated {
+  font-weight: bold;
+  color: @color2;
+}

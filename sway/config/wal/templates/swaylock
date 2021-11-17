@@ -1,0 +1,7 @@
+daemonize
+show-failed-attempts
+screenshots
+effect-blur=20x20
+fade-in=1
+grace=5
+clock

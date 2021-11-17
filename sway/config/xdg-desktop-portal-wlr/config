@@ -1,0 +1,11 @@
+[screencast]
+chooser_type = none
+output_name = DP-2
+exec_before = dunstctl set-paused true
+exec_after = dunstctl set-paused false
+max_fps=30
+
+[region]
+chooser_cmd = "slurp -f %o -o"
+output_name = DP-2
+max_fps = 30

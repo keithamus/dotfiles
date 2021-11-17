@@ -1,0 +1,332 @@
+include "$HOME/.cache/wal/colors-sway"
+
+###############################################################################
+### Prefs                                                                   ###
+###############################################################################
+
+set {
+  $mod       Mod4
+  $border    3
+
+  $term      alacritty
+  $browser   firefox
+  $editor    nvim
+  $explorer  thunar
+  $menu      rofi
+
+  $screen              DP-2
+  $screen_off_timeout  600
+  $screen_lock_timeout 300
+  
+  $gnome-interface org.gnome.desktop.interface
+
+  $ws1  "1"
+  $ws2  "2"
+  $ws3  "3"
+  $ws4  "4"
+  $ws5  "5"
+  $ws6  "6"
+  $ws7  "7"
+  $ws8  "8"
+  $ws9  "9"
+  $ws10 "10"
+}
+
+output $screen {
+  background $wallpaper fill
+}
+
+input * {
+  xkb_layout "gb"
+  xkb_capslock disabled
+}
+
+# Gnome App Preferences
+exec_always {
+  gsettings set $gnome-interface cursor-size              24
+  gsettings get $gnome-interface cursor-blink             true
+  gsettings get $gnome-interface cursor-blink-time        1200
+  gsettings get $gnome-interface cursor-blink-timeout     10
+  gsettings set $gnome-interface text-scaling-factor      1.0
+  gsettings get $gnome-interface toolkit-accessibility    false
+  gsettings get $gnome-interface menus-have-tearoff       false
+  gsettings set $gnome-interface monospace-font-name      'SauceCodePro NF 10'
+  gsettings set $gnome-interface document-font-name       'Noto Sans 10'
+  gsettings set $gnome-interface font-name                'Noto Sans 10'
+  gsettings get $gnome-interface font-antialiasing        'grayscale'
+  gsettings get $gnome-interface font-hinting             'full'
+  gsettings get $gnome-interface font-rgba-order          'rgb'
+  gsettings set $gnome-interface gtk-theme                'Adwaita'
+  gsettings get $gnome-interface gtk-key-theme            'Default'
+  gsettings set $gnome-interface icon-theme               'Adwaita'
+  gsettings get $gnome-interface gtk-color-scheme         ''
+  gsettings get $gnome-interface toolbar-icons-size       'large'
+  gsettings get $gnome-interface toolbar-style            'text'
+  gsettings get $gnome-interface toolbar-detachable       false
+  gsettings get $gnome-interface menubar-detachable       false
+  gsettings get $gnome-interface enable-hot-corners       false
+  gsettings get $gnome-interface locate-pointer           false
+  gsettings get $gnome-interface gtk-enable-primary-paste true
+  gsettings get $gnome-interface enable-animations        true
+}
+  
+font pango:SauceCodePro NF 10
+
+# Colours:              border      backgr.      text         indicator    child_border
+client.focused          $color5     $background  $foreground  $background  $color5
+client.focused_inactive $background $background  $foreground  $background  $foreground
+client.unfocused        $background $background  $foreground  $background  $foreground
+client.urgent           $background $background  $foreground  $background  $foreground
+client.placeholder      $background $background  $foreground  $background  $foreground
+client.background       $background
+
+bar {
+  swaybar_command waybar
+}
+
+###############################################################################
+### Sidecar Applications                                                    ###
+###############################################################################
+
+# Clipman 
+exec_always {
+  wl-paste -t text --watch clipman store -P
+  wl-paste -p -t text --watch clipman store -P
+}
+
+#  Idle Locking
+exec_always {
+  swayidle -w \
+    timeout $screen_lock_timeout 'swaylock -f' \
+    timeout $screen_off_timeout 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"'
+}
+
+###############################################################################
+### System Compatibility                                                    ###
+###############################################################################
+
+# DBus Integrations
+exec_always {
+  systemctl --user import-environment \
+    DISPLAY \
+    GNOME_DESKTOP_SESSION_ID \
+    LIBVA_DRIVER_NAME \
+    LP_NUM_THREADS \
+    LS_COLORS \
+    MAKEFLAGS \
+    SSH_AUTH_SOCK \
+    SWAYSOCK \
+    WAYLAND_DISPLAY \
+    WLR_DRM_NO_MODIFIERS \
+    XDG_CURRENT_DESKTOP \
+    XDG_SESSION_TYPE
+  dbus-update-activation-environment 2>/dev/null \
+  && dbus-update-activation-environment --systemd DISPLAY \
+                                                  GNOME_DESKTOP_SESSION_ID \
+                                                  MOZ_DBUS_REMOTE \
+                                                  SWAYSOCK \
+                                                  WAYLAND_DISPLAY \
+                                                  XDG_CURRENT_DESKTOP \
+                                                  XDG_SESSION_TYPE
+}
+
+###############################################################################
+### Keyboard Shortcuts                                                      ###
+###############################################################################
+
+bindsym {
+
+  # 1password Integration
+  $mod+Ctrl+8 exec 1password --quick-access
+
+  # Menu
+  $mod+space exec $menu -show combi
+
+  # Clipman
+  $mod+y exec clipman pick -t $menu
+
+  # WAL
+  $mod+Shift+r exec wal -ql --saturate .5 -i ~/Pictures/Wallpapers -o ~/.config/wal/extensions.sh
+  $mod+Alt+r   exec wal -q --saturate .5 -i ~/Pictures/Wallpapers -o ~/.config/wal/extensions.sh
+
+  # MacOS Style Shortcuts
+  $mod+q kill
+  $mod+Alt+Escape  exec $term -e btop
+  $mod+Alt+3       exec grim - | wl-copy
+  $mod+Alt+4       exec grim -g "$(slurp)" - | wl-copy
+
+  # Volume Keys
+  XF86AudioRaiseVolume exec --no-startup-id ~/.config/sway/volume.sh up
+  XF86AudioLowerVolume exec --no-startup-id ~/.config/sway/volume.sh down
+  XF86AudioMute        exec --no-startup-id ~/.config/sway/volume.sh mute
+  XF86AudioMicMute     exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+
+  # Media Keys
+  XF86AudioPlay      exec --no-startup-id playerctl play-pause
+  XF86AudioPause     exec --no-startup-id playerctl pause
+  XF86AudioNext      exec --no-startup-id playerctl next
+  XF86AudioPrev      exec --no-startup-id playerctl previous
+
+  # Arrow Keys
+  $mod+Left        focus left
+  $mod+Down        focus down
+  $mod+Up          focus up
+  $mod+Right       focus right
+  $mod+Shift+Left  move left
+  $mod+Shift+Down  move down
+  $mod+Shift+Up    move up
+  $mod+Shift+Right move right
+
+  # Default keybindings (https://i3wm.org/docs/refcard.html)
+
+  # Basics
+  $mod+Return    exec $term
+  $mod+j         focus left
+  $mod+k         focus down
+  $mod+l         focus up
+  $mod+semicolon focus right
+  $mod+a         focus parent
+  #$mod+Space    toggle focus mode
+
+  # Moving Windows
+  $mod+Shift+j         move left
+  $mod+Shift+k         move down
+  $mod+Shift+l         move up
+  $mod+Shift+semicolon move right
+
+  # Modifying Windows
+  $mod+f fullscreen toggle
+  $mod+v split v
+  $mod+h split h
+  $mod+r mode "resize"
+
+  # Changing the container layout
+  $mod+e layout toggle split
+  $mod+s layout stacking
+  $mod+w layout tabbed
+
+  # Floating
+  $mod+Shift+space floating toggle
+
+  # Using Workspaces
+  $mod+1       workspace number $ws1
+  $mod+2       workspace number $ws2
+  $mod+3       workspace number $ws3
+  $mod+4       workspace number $ws4
+  $mod+5       workspace number $ws5
+  $mod+6       workspace number $ws6
+  $mod+7       workspace number $ws7
+  $mod+8       workspace number $ws8
+  $mod+9       workspace number $ws9
+  $mod+0       workspace number $ws10
+  $mod+Shift+1 move container to workspace number $ws1
+  $mod+Shift+2 move container to workspace number $ws2
+  $mod+Shift+3 move container to workspace number $ws3
+  $mod+Shift+4 move container to workspace number $ws4
+  $mod+Shift+5 move container to workspace number $ws5
+  $mod+Shift+6 move container to workspace number $ws6
+  $mod+Shift+7 move container to workspace number $ws7
+  $mod+Shift+8 move container to workspace number $ws8
+  $mod+Shift+9 move container to workspace number $ws9
+  $mod+Shift+0 move container to workspace number $ws10
+
+  # Opening applications
+  $mod+d exec $menu
+  $mod+shift+q kill
+
+  # Restart / Exec
+  $mod+Shift+c reload
+  #$mod+shift+r restart
+  $mod+Shift+e exec ~/.config/rofi/power.sh
+
+  # Scratchpad
+  $mod+Shift+minus move scratchpad
+  $mod+minus scratchpad show
+}
+
+mode "resize" {
+  bindsym {
+    j         resize shrink    width  10 px or 10 ppt
+    k         resize grow      height 10 px or 10 ppt
+    l         resize shrink    height 10 px or 10 ppt
+    semicolon resize grow      width  10 px or 10 ppt
+    Left      resize shrink    width  10 px or 10 ppt
+    Down      resize grow      height 10 px or 10 ppt
+    Up        resize shrink    height 10 px or 10 ppt
+    Right     resize grow      width  10 px or 10 ppt
+    Return    mode   "default"
+    Escape    mode   "default"
+    $mod+r    mode   "default"
+  }
+}
+
+###############################################################################
+### Window Rules                                                            ###
+###############################################################################
+
+smart_borders on
+smart_gaps on
+gaps {
+  inner 40
+}
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+tiling_drag enable
+
+default_border pixel $border
+
+for_window {
+  [floating] border pixel $border
+  [class=".*"] border pixel $border
+
+  # Highlight XWayland apps
+  [shell="xwayland"] title_format "%title [XWayland]"
+
+  # Prevent screen locking while fullscreen
+  [app_id="firefox"]                    inhibit_idle fullscreen
+  [class="firefox"]                     inhibit_idle fullscreen
+  [class="Nightly"]                     inhibit_idle fullscreen
+  [class=".*.exe"]                      inhibit_idle fullscreen
+  [class="steam_app.*"]                 inhibit_idle fullscreen
+  [instance="chromium"]                 inhibit_idle fullscreen
+  [app_id="mpv"]                        inhibit_idle visible
+  [app_id="vlc"]                        inhibit_idle visible
+  [title="Zoom Meeting.*"]              inhibit_idle open
+  [title="Firefox . Sharing Indicator"] inhibit_idle open
+
+  # Prevent locking while these apps are open
+  [instance="chromium"] inhibit_idle fullscreen
+
+  # Floating windows
+  [window_role="pop-up"]                          floating enable
+  [window_role="bubble"]                          floating enable
+  [window_role="dialog"]                          floating enable
+  [window_type="dialog"]                          floating enable
+  [title="(?:Open|Save) (?:File|Folder|As)"]      floating enable
+  [class="Steam"]                                 floating enable
+  [app_id="xfce-polkit"]                          floating enable
+  [app_id="zoom" title="^zoom$"]                  floating_enable
+  [app_id="zoom" title="^About$"]                 floating_enable
+  [app_id="galculator"]                           floating_enable
+  [app_id="firefox" title="^Picture-in-Picture$"] floating enable
+  [title="Firefox . Sharing Indicator"]           floating enable
+  [title="^Farge$"]                               floating enable
+  [app_id="showmethekey-gtk"]                     floating enable
+
+  # Client-side-decorations:
+  [class="Steam"]                                 border pixel 0; border csd 0
+  [app_id="swappy"]                               border pixel 0; border csd 0
+  [app_id="zoom" title="^zoom$"]                  border pixel 0; border csd 0
+  [title="(?:Open|Save) (?:File|Folder|As)"]      border pixel 0; border csd 0
+  [app_id="firefox" title="^Picture-in-Picture$"] border pixel 0; border csd 0
+  [title="^Farge$"]                               border pixel 0; border csd 0
+  [app_id="showmethekey-gtk"]                     border pixel 0; border csd 0
+  [title="Firefox . Sharing Indicator"]           border pixel 0; border csd 0
+  [title="Google Chrome$"]                        border pixel 0; border csd 0
+  [title="sharing your screen.$"]                 border pixel 0; border csd 0
+
+  # Auto Resize Windows
+  [title="(?:Open|Save) (?:File|Folder|As)"] resize set width 1030 height 710
+}

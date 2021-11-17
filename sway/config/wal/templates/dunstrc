@@ -1,0 +1,75 @@
+[global]
+    monitor = 0
+    follow = mouse
+    geometry = "400x400-15+50"
+    indicate_hidden = yes
+    shrink = no
+    transparency = 10
+    notification_height = 0
+    separator_height = 1
+    padding = 15
+    horizontal_padding = 15
+    frame_width = 2
+    frame_color = "{color5}"
+    separator_color = frame
+    sort = yes
+    idle_threshold = 120
+    timeout = 10
+    font = Iter 12
+    line_height = 0
+    markup = full
+    format = "<small>%a<small>\n\n</small></small><b>%s</b>\n%b"
+    vertical_alignment = top
+    alignment = left
+    show_age_threshold = 0
+    word_wrap = yes
+    ellipsize = end
+    ignore_newline = no
+    stack_duplicates = true
+    hide_duplicate_count = false
+    show_indicators = no
+    icon_position = left
+    min_icon_size = 32
+    max_icon_size = 80
+    icon_path = /usr/share/icons/breeze/status/24@3x/:/usr/share/icons/breeze/devices/24@3x/:/usr/share/icons/breeze/apps/24@3x/:/usr/share/icons/breeze/places/24@3x/
+    sticky_history = yes
+    history_length = 1000
+    dmenu = /usr/bin/wofi --show dmenu -p dunst:
+    browser = /usr/bin/firefox -new-tab
+    always_run_script = true
+    title = Dunst
+    class = Dunst
+    startup_notification = false
+    verbosity = mesg
+    corner_radius = 8
+    force_xinerama = false
+    mouse_left_click = do_action, close_current
+    mouse_middle_click = close_all
+    mouse_right_click = close_current
+
+[experimental]
+    per_monitor_dpi = false
+
+[shortcuts]
+    close = ctrl+space
+    close_all = ctrl+shift+space
+    history = ctrl+grave
+    context = ctrl+shift+period
+
+[urgency_low]
+    background = "{background}"
+    foreground = "{foreground}"
+    highlight = "{color1}"
+    timeout = 20
+
+[urgency_normal]
+    background = "{background}"
+    foreground = "{foreground}"
+    highlight = "{color1}"
+    timeout = 20
+
+[urgency_critical]
+    background = "{background}"
+    foreground = "{foreground}"
+    highlight = "{color1}"
+    timeout = 0

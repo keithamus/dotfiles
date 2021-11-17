@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+filename="$HOME/Videos/screen-record-$(date +%Y-%m-%d-%H-%M-%S).mp4"
+stop=0
+
+id () {
+  out=$(pgrep -fxo "bash $0 do" || pgrep -xfo "bash $0 doscreen" || echo)
+  if [ -z "$out" ]; then
+    return 1
+  fi
+  if [ "$out" == "$$" ]; then
+    return 1
+  fi
+  echo $out
+}
+
+stop_active () {
+  pkill -INT -P "$(id)" 2>/dev/null
+  return $?
+}
+
+stop_record () {
+  stop=1
+  pkill -INT -P "$$" wf-recorder 2>/dev/null
+  rm "/tmp/$$.state"
+}
+
+countdown () {
+  echo "count" > "/tmp/$$.state"
+  echo 3
+  sleep 1
+  if [ $stop -eq 1 ]; then
+    return
+  fi
+  echo 2
+  sleep 1
+  if [ $stop -eq 1 ]; then
+    return
+  fi
+  echo 1
+  sleep 1 
+  if [ $stop -eq 1 ]; then
+    return
+  fi
+}
+
+record () {
+  if [ $stop -eq 1 ]; then
+    return
+  fi
+  echo "recording" > "/tmp/$$.state"
+  echo "$@"
+  wf-recorder -f "$filename" "$*"
+  echo "idle" > "/tmp/$$.state"
+}
+
+notify () {
+  if [[ -f "$filename" ]]; then
+    act=$(dunstify -A 3,3 "$filename" -a "Screen Record")
+    echo "Act was $act" 
+    if [ "$act" == "3" ]; then
+      thunar "$filename" &
+    fi
+  fi
+}
+
+trap stop_record INT
+trap stop_record SIGINT
+
+case "$1" in
+  query)
+    sleep 0.1
+    if ! id>/dev/null; then
+      echo ""
+      echo "Click to record"
+      echo idle
+    else
+      state_file="/tmp/$(id).state"
+      state=$(cat "$state_file" || echo recording)
+      if [ "$state" == "count" ]; then
+        mtime=$(stat -c %Y "$state_file")
+        now=$(date +%s)
+        delta=$((2463+$((mtime-now))))
+        printf "\u${delta}\n"
+      elif [ "$state" == "idle" ]; then
+        echo ""
+      else
+        echo "壘"
+      fi
+      echo "Click to stop recording"
+      echo "$state"
+    fi
+    ;;
+  do)
+    if ! stop_active; then
+      sleep 0.1
+      echo "starting" > "/tmp/$$.state"
+      geometry="$(slurp -d)"
+      if [ -n "$geometry" ]; then
+        countdown
+        record -g "$geometry"
+        notify
+      fi
+    fi
+    ;;
+  doscreen)
+    if ! stop_active; then
+      countdown
+      record
+      notify
+    fi
+    ;;
+  *)
+    stop_active
+    ;;
+esac
