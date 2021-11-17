@@ -6,7 +6,7 @@ OS="$($THISDIR/../os.sh)"
 
 if [ ! -f "$HOME/.ssh/id_rsa" ]; then
   echo "Creating an ssh key"
-  ssh-keygen -q -b 4096 -N "" -f ~/.ssh/id_rsa
+  ssh-keygen -q -t ed25519 -N "" -C "$(hostname)" -f ~/.ssh/id_rsa
 fi
 
 
