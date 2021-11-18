@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-set -Eeuo pipefail
+set -Eeu
 OS=""
 if [ -f /etc/lsb-release ]; then
   . /etc/lsb-release
