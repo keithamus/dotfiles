@@ -7,7 +7,7 @@ if [ -f "$DIR/Brewfile" ] && [ "$OS" = "macos" ]; then
   "$THISDIR/homebrew/install.sh"
   brew bundle install --file="$DIR/Brewfile"
 elif [ -f "$DIR/Debfile" ] && [ "$(which apt 2>/dev/null)" ]; then
-  xargs -a "$THISDIR/Debfile" sudo apt install -qq -y --no-install-recommends
+  xargs -a "$DIR/Debfile" sudo apt install -qq -y --no-install-recommends
 elif [ -f "$DIR/Yayfile" ] && [ "$(which pacman 2>/dev/null)" ]; then
   if ! which yay >/dev/null 2>&1; then
     sudo pacman --noconfirm --needed -S yay
