@@ -259,10 +259,12 @@
 [rerere]
   enabled = 1
 
-[url "github.com:"]
-  insteadOf = git@github.com/
+[url "https://github.com/"]
   insteadOf = http://github.com/
   insteadOf = https://github.com/
+  
+[url "github.com:"]
+  insteadOf = git@github.com/
   insteadOf = github.com/
   insteadOf = git://github.com/
   insteadOf = git@github.com:
