@@ -21,9 +21,8 @@ if [ "$OS" != "codespace" ]; then
   installScript "Desktop Apps" desktop-apps
 fi
 
-installScript "1Password" op
-
 if [ "$OS" != "codespace" ]; then
+  installScript "1Password" op
   installScript "SSH" ssh
   installScript "GPG" gpg
 fi
