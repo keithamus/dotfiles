@@ -3,7 +3,7 @@ set -Eeu
 OS=""
 if [ -f /etc/lsb-release ]; then
   . /etc/lsb-release
-  OS="${DISTRIB_ID,Ubuntu}"
+  OS="${DISTRIB_ID:-Ubuntu}"
 elif [ "$(uname -s)" = "Darwin" ]; then
   OS="macos"
 fi 
