@@ -23,6 +23,18 @@ github.com ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAA
 github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
 EOF
 
+if [ "$OS" = "macos" ]; then
+  "$THISDIR/homebrew/install.sh"
+  brew upgrade && brew upgrade
+elif [ -f "$DIR/Debfile" ] && [ "$(which apt 2>/dev/null)" ]; then
+  sudo apt update && sudo apt upgrade -y
+elif [ -f "$DIR/Yayfile" ] && [ "$(which pacman 2>/dev/null)" ]; then
+  if ! which yay >/dev/null 2>&1; then
+    sudo pacman --noconfirm --needed -S yay
+  fi
+  yes | yay --answerclean No --answerdiff N --noprovides -Syu
+fi
+
 if [ "$OS" != "codespace" ]; then
   installScript "Desktop Apps" desktop-apps
 fi
