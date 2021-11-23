@@ -52,4 +52,4 @@ installScript "ASDF" asdf
 installScript "Fish" fish
 installScript "Powerline Fonts" powerline-fonts
 installScript "VIM" vim
-#installScript "Tmux" tmux
+installScript "Tmux" tmux
