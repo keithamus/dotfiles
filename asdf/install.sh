@@ -37,15 +37,7 @@ asdf global golang "$(asdf list golang | head -1 | tr -d '[:space:]')"
 asdf plugin add nodejs
 ~/.asdf/plugins/nodejs/bin/import-release-team-keyring
 asdf install nodejs latest
-asdf global nodejs $(asdf list nodejs | head -1 | tr -d '[:space:]')
-
-asdf plugin add python
-asdf install python latest
-asdf global python $(asdf list python | head -1 | tr -d '[:space:]')
-
-asdf plugin add ruby
-asdf install ruby latest
-asdf global ruby $(asdf list ruby | head -1 | tr -d '[:space:]')
+asdf global nodejs "$(asdf list nodejs | head -1 | tr -d '[:space:]')"
 
 asdf plugin add rust
 asdf install rust latest
