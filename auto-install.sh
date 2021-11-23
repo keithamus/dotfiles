@@ -4,14 +4,21 @@ OS="$("$THISDIR/os.sh")"
 DIR="$(cd "$(dirname "${1-}")" || exit 1; pwd)"
 
 if [ -f "$DIR/Brewfile" ] && [ "$OS" = "macos" ]; then
-  "$THISDIR/homebrew/install.sh"
+   if ! which brew >/dev/null 2>&1; then
+    echo "Installing homebrew..."
+    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+  echo "Installing brew packages..."
   brew bundle install --file="$DIR/Brewfile"
 elif [ -f "$DIR/Debfile" ] && [ "$(which apt 2>/dev/null)" ]; then
+  echo "Installing deb packages..."
   xargs -a "$DIR/Debfile" sudo apt install -qq -y --no-install-recommends
 elif [ -f "$DIR/Yayfile" ] && [ "$(which pacman 2>/dev/null)" ]; then
   if ! which yay >/dev/null 2>&1; then
+    echo "Installing Yay..."
     sudo pacman --noconfirm --needed -S yay
   fi
+  echo "Installing yay packages..."
   yes | xargs -a "$DIR/Yayfile" yay --needed --answerclean No --answerdiff N -S --noprovides
 fi
 
