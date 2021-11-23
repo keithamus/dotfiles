@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-"$(dirname "$0")/../auto-install.sh" $0
+"$(dirname "$0")/../auto-install.sh" "$0"
 
 cat <<EOF
 I'm refusing to import a GPG key automatically, due to the security concerns,

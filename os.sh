@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
-set -Eeu
 OS=""
 if [ -f /etc/lsb-release ]; then
+  # shellcheck disable=SC1091
   . /etc/lsb-release
   OS="${DISTRIB_ID:-Ubuntu}"
 elif [ "$(uname -s)" = "Darwin" ]; then

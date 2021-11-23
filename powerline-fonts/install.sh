@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
-"$(dirname "$0")/../auto-install.sh" $0
+"$(dirname "$0")/../auto-install.sh" "$0"
 
-THISDIR=$(cd "$(dirname "$0")"; pwd)
+THISDIR=$(cd "$(dirname "$0")" || exit 1; pwd)
 git clone git@github.com:powerline/fonts.git "$THISDIR/powerline"
 sh "$THISDIR/powerline/install.sh"
 

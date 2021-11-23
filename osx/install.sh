@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-"$(dirname "$0")/../auto-install.sh" $0
+"$(dirname "$0")/../auto-install.sh" "$0"
 
 echo "Enabling menu tray icon defaults"
 defaults write com.apple.systemuiserver menuextras -array \

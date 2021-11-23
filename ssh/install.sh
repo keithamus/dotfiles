@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
-"$(dirname "$0")/../auto-install.sh" $0
+"$(dirname "$0")/../auto-install.sh" "$0"
 
-THISDIR=$(cd "$(dirname "$0")"; pwd)
-OS="$($THISDIR/../os.sh)"
+THISDIR=$(cd "$(dirname "$0")" || exit 1; pwd)
+OS="$("$THISDIR/../os.sh")"
 
 if [ ! -f "$HOME/.ssh/id_rsa" ]; then
   echo "Creating an ssh key"

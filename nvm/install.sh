@@ -1,11 +1,12 @@
 #!/usr/bin/env sh
-"$(dirname "$0")/../auto-install.sh" $0
+"$(dirname "$0")/../auto-install.sh" "$0"
 
 if [ ! -f "$HOME/.nvm/nvm.sh" ]
 then
   curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.30.1/install.sh | bash
 fi
-source ~/.nvm/nvm.sh
+# shellcheck disable=SC1090
+. ~/.nvm/nvm.sh
 
 nvm --version
 

@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-"$(dirname "$0")/../auto-install.sh" $0
+"$(dirname "$0")/../auto-install.sh" "$0"
 
 
 echo "Install/update packer.nvim"
@@ -8,7 +8,7 @@ if [ ! -d "$PACKDIR" ]; then
   git clone --depth 1 https://github.com/wbthomason/packer.nvim\
    ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 fi
-cd $PACKDIR
+cd "$PACKDIR" || exit 1
 git pull
 echo 
 
