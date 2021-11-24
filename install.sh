@@ -35,6 +35,8 @@ elif [ -f "$DIR/Yayfile" ] && [ "$(which pacman 2>/dev/null)" ]; then
   yes | yay --answerclean No --answerdiff N --noprovides -Syu
 fi
 
+installScript "Alacritty" alacritty
+
 if [ "$OS" != "codespace" ]; then
   installScript "Desktop Apps" desktop-apps
 fi
