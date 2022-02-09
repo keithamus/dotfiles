@@ -14,7 +14,7 @@ installScript() {
   echo "###"
   echo "# Installing $1"
   echo "###"
-  sh "$SCRIPT_ROOT/$2/install.sh"
+  sh "$SCRIPT_ROOT/$2/${3:-install}.sh"
 }
 
 cat >> ~/.ssh/known_hosts <<EOF
@@ -35,13 +35,14 @@ elif [ -f "$DIR/Yayfile" ] && [ "$(which pacman 2>/dev/null)" ]; then
   yes | yay --answerclean No --answerdiff N --noprovides -Syu
 fi
 
-installScript "Alacritty" alacritty
-
 if [ "$OS" != "codespace" ]; then
-  installScript "Desktop Apps" desktop-apps
+  installScript "Alacritty" alacritty
+else
+  installScript "Alacritty" alacritty install-terminfo
 fi
 
 if [ "$OS" != "codespace" ]; then
+  installScript "Desktop Apps" desktop-apps
   installScript "1Password" op
   installScript "SSH" ssh
   installScript "GPG" gpg
