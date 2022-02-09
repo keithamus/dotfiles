@@ -12,12 +12,6 @@ installFont() {
   unzip -u "$1.zip" -d ~/.fonts
   rm "$1.zip"
 }
-installFont "AnonymousPro"
-installFont "FiraCode"
-installFont "Hack"
-installFont "Inter"
-installFont "Inconsolata"
-installFont "Meslo"
 installFont "SourceCodePro"
 
 if [ "$(which fc-cache 2>/dev/null)" ]; then
