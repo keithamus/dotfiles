@@ -5,7 +5,7 @@ return require('packer').startup(function()
   -- syntax highlighting
   use {
     'nvim-treesitter/nvim-treesitter',
-    branch = '0.5-compat',
+    run = ':TSUpdate',
     config = [[require('config.treesitter')]]
   }
 
@@ -96,10 +96,8 @@ return require('packer').startup(function()
   -- LSP based text objects
   use {
     'nvim-treesitter/nvim-treesitter-textobjects',
-    branch = '0.5-compat',
     requires = {
       'nvim-treesitter/nvim-treesitter',
-      branch = '0.5-compat'
     },
     config = [[require('config/treesitter-textobjects')]]
   }
@@ -114,5 +112,11 @@ return require('packer').startup(function()
   use {
     'projekt0n/github-nvim-theme',
     config = [[require('config.github-theme')]]
+  }
+
+  -- openscad
+  use {
+    'salkin-mada/openscad.nvim',
+    config = [[require('openscad')]]
   }
 end)

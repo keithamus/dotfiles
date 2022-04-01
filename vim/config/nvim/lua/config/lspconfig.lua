@@ -15,36 +15,29 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
 }
 
 local servers = {
+  arduino_language_server = {
+    cmd =  {
+      "arduino-language-server",
+      "-cli-config", ".arduino15/arduino-cli.yaml"
+    }
+  },
+  cssls = {},
   denols = {
-    filetypes = { "typescript", "typescriptreact" },
+    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
   },
-  tsserver = {
-    filetypes = { "javascript", "typescript", "typescriptreact" },
-  },
+  dockerls = {},
+  gopls = {},
+  golangci_lint_ls = {},
+  html = {},
+  jsonls = {},
+  rust_analyzer = {},
+  solargraph = {},
+  tsserver = {},
   sumneko_lua = {
     cmd = { "lua-language-server" },
   },
-  -- jsonls = require("modules.lsp.json").config,
-  html = {
-    cmd = { "vscode-html-language-server", "--stdio" }
-  },
-  cssls = {
-    cmd = { "vscode-css-language-server", "--stdio" }
-  },
-  gopls = {
-    settings = {
-      gopls = {
-        codelenses = {
-          references = true,
-          test = true,
-          tidy = true,
-          upgrade_dependency = true,
-          generate = true,
-        },
-        gofumpt = true,
-      },
-    },
-  },
+  vimls = {},
+  yamlls = {}
 }
 
 for name, opts in pairs(servers) do
