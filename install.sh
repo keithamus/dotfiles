@@ -3,7 +3,7 @@ SCRIPT_ROOT=$(cd "$(dirname "$0")" || exit 1; pwd)
 if [ -d "$SCRIPT_ROOT/setup" ]; then
   SCRIPT_ROOT="$(dirname "${SCRIPT_ROOT}")"
 fi
-OS=$(./os.sh)
+OS=$(${SCRIPT_ROOT}/os.sh)
 
 echo "########################################"
 echo "# Running keithamus dotfiles installer"
