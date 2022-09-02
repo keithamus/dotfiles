@@ -57,17 +57,17 @@ return require('packer').startup(function()
 
   -- top "tab" bar
   use {
-    'akinsho/nvim-bufferline.lua',
+    'akinsho/bufferline.nvim',
     requires = 'kyazdani42/nvim-web-devicons',
     config = [[require('config.bufferline')]]
   }
 
   -- git signs
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim',
-    config = [[require('config.gitsigns')]]
-  }
+  -- use {
+  --   'lewis6991/gitsigns.nvim',
+  --   requires = 'nvim-lua/plenary.nvim',
+  --   config = [[require('config.gitsigns')]]
+  -- }
 
   -- gcc to toggle comments
   use {
@@ -118,5 +118,18 @@ return require('packer').startup(function()
   use {
     'salkin-mada/openscad.nvim',
     config = [[require('openscad')]]
+  }
+
+  -- focus mode
+  use {
+    'junegunn/goyo.vim',
+    -- config = [[require('goyo')]]
+  }
+
+  -- markdown preview in browser
+  use {
+    'iamcco/markdown-preview.nvim',
+     run = 'cd app && npm install',
+     cmd = 'MarkdownPreview'
   }
 end)

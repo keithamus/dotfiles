@@ -1,5 +1,7 @@
 local lspconfig = require('lspconfig')
+local util = require('lspconfig.util')
 local configs = require('lspconfig/configs')
+root_pattern = util.root_pattern
 
 -- override handlers
 -- pcall(require, "modules.lsp.handlers")
@@ -24,6 +26,7 @@ local servers = {
   cssls = {},
   denols = {
     filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    root_dir = root_pattern("deno.json", "deno.jsonc", "mod.ts", "deps.ts"),
   },
   dockerls = {},
   gopls = {},
