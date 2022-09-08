@@ -41,6 +41,41 @@ return require('packer').startup(function()
     requires = {{'hrsh7th/nvim-cmp'}, {'neovim/nvim-lspconfig'}, {'onsails/lspkind-nvim'}},
     config = [[require('config.cmp')]]
   }
+  use {
+    'hrsh7th/cmp-nvim-lsp-signature-help',
+    requires = {{'hrsh7th/nvim-cmp'}}
+  }
+  use {
+    'ray-x/cmp-treesitter',
+    requires = {{'hrsh7th/nvim-cmp'}}
+  }
+  use {
+    'hrsh7th/cmp-cmdline',
+    requires = {{'hrsh7th/nvim-cmp'}}
+  }
+  use {
+    'hrsh7th/cmp-buffer',
+    requires = {{'hrsh7th/nvim-cmp'}}
+  }
+  use {
+    'hrsh7th/cmp-path',
+    requires = {{'hrsh7th/nvim-cmp'}}
+  }
+
+  use {
+    'zbirenbaum/copilot.lua',
+    requires = {{"github/copilot.vim"}},
+    event = {"VimEnter"},
+    config = function()
+      vim.defer_fn(function()
+        require("copilot").setup()
+      end, 100)
+    end
+  }
+  use {
+    'zbirenbaum/copilot-cmp',
+    requires = {{'zbirenbaum/copilot.lua'}}
+  }
 
   -- Snippets
   use {

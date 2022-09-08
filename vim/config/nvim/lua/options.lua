@@ -65,3 +65,6 @@ vim.o.shortmess = "aoOtTFc"
 
 vim.o.signcolumn = "yes"
 vim.cmd [[highlight! link SignColumn LineNr]]
+
+-- Completions
+vim.o.completeopt="menu,menuone,noselect"
