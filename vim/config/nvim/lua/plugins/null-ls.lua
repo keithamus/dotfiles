@@ -62,11 +62,6 @@ return {
               return vim.fn.executable("stylelint") > 0
             end,
           }),
-          builtins.diagnostics.tsc.with({
-            condition = function()
-              return vim.fn.executable("tsc") > 0
-            end,
-          }),
           builtins.diagnostics.yamllint.with({
             condition = function()
               return vim.fn.executable("yamllint") > 0
@@ -81,11 +76,6 @@ return {
           builtins.formatting.deno_fmt.with({
             condition = function()
               return vim.fn.executable("deno") > 0
-            end,
-          }),
-          builtins.formatting.eslint.with({
-            condition = function()
-              return vim.fn.executable("eslint") > 0
             end,
           }),
           builtins.formatting.gofmt.with({

@@ -21,6 +21,3 @@ fi
 cd "$PACKDIR" || exit 1
 git pull
 echo 
-
-echo "PackerSync"
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'

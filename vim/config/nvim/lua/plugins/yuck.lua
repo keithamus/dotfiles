@@ -1,0 +1,5 @@
+return {
+  {
+    "elkowar/yuck.vim"
+  }
+}

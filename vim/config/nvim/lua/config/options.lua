@@ -30,6 +30,7 @@ opt.foldenable = false
 opt.backup = true
 opt.writebackup = true
 opt.updatetime = 300
+opt.backupdir = "~/.cache/nvim/backups//,."
 
 -- Always show the tab line
 opt.showtabline = 2
