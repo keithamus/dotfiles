@@ -32,6 +32,13 @@ import:
   - ~/.cache/wal/colors-alacritty.yml
 
 window:
+  dimensions:
+    columns: 95
+    lines: 34
+  position:
+    x: 2890
+    y: 0
+
   dynamic_title: true
   dynamic_padding: true
 
