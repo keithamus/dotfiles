@@ -68,7 +68,7 @@
   ##################
 
   # Delete branches that have been merged into master already
-  delete-merged-branches = "!f() { git branch --merged origin/master | tail -n +2 | xargs git branch -d; }; f"
+  delete-merged-branches = "!f() { git branch --merged origin/main | tail -n +2 | xargs git branch -d; }; f"
 
   # Set up every remote branch as a local tracking copy
   track-all-branches = "!f() { for remote in `git branch -r `; do git branch --track $remote; done; }; f"
@@ -120,32 +120,6 @@
   rim = !git fetch-interactive-rebase
   rib = !git fetch-interactive-rebase
 
-  #########################
-  #### GitHub specific ####
-  #########################
-
-  # View the current commit in github
-  github-view-commit = "!f() { open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/commit/$(git rev-parse ${1-HEAD}); }; f"
-
-  # View the current branch in github
-  github-view-branch = "!f() { open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/tree/${1-HEAD}%(branch); }; f"
-
-  # View the github page for the current project
-  github-view-project = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)"
-
-  # Go to the github issues page for this current project
-  github-view-issues = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/issues"
-
-  # Go to the github pulls page for this current project
-  github-view-pulls = "!open https://$(git remote -v | grep -Eo 'github.com[:/][^.]+' | head -1 | tr : /)/pulls"
-
-  # ~~Shorthands
-  ghc = !git github-view-commit
-  ghb = !git github-view-branch
-  ghh = !git github-view-project
-  ghi = !git github-view-issues
-  ghp = !git github-view-pulls
-
   ####################
   #### Committing ####
   ####################
@@ -154,7 +128,7 @@
   get-coauthor = "!f() { author=$(git log --no-merges -1 --author \"${1}\" --format='%an <%ae>' 2>/dev/null); test -z \"$author\" && exit 1; echo \"Co-authored-by: $author\"; }; f"
 
   # Ammend a commit to add a trailer for `Co-authored-by`
-  coauthor = "!f() { $co = $(git get-coauthor \"${1}\"); echo; read -n1 -p $co y; [[ \"$y\" == 'y' ]] && git commit --amend -m\"$(git log --format=%B -n1)\" -m\"$co\"; }; f"
+  coauthor = "!f() { co=$(git get-coauthor \"${1}\"); echo; read -n1 -p $co y; [ \"$y\" == 'y' ] && git commit --amend -m\"$(git log --format=%B -n1)\" -m\"$co\"; }; f"
 
   # Commit ammend no edit
   commit-ammend-no-edit = "!git s; git show | cat; echo; read -n1 -p 'Amend this commit? ' y; echo; [[ \"$y\" == 'y' ]] && git commit --amend --no-edit"
@@ -201,6 +175,13 @@
 
   # ~~Shorthands
   ci = "!f() { hub ci-status $@; }; f"
+
+  ###############
+  #### GHCli ####
+  ###############
+
+  actions = "!f() { gh run list --branch $(git rev-parse --abbrev-ref HEAD); }; f"
+
 
 [commit]
   gpgsign = true
@@ -270,3 +251,13 @@
   insteadOf = git@github.com:
   insteadOf = github.com:
   insteadOf = git://github.com: 
+
+[url "gist.github.com:"]
+  insteadOf = git@gist.github.com/
+  insteadOf = http://gist.github.com/
+  insteadOf = https://gist.github.com/
+  insteadOf = gist.github.com/
+  insteadOf = git://gist.github.com/
+  insteadOf = git@gist.github.com:
+  insteadOf = gist.github.com:
+  insteadOf = git://gist.github.com: 
