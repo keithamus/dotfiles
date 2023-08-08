@@ -10,6 +10,9 @@ return {
       },
       status = { virtual_text = true },
       output = { open_on_run = true },
+    },
+    keys = {
+      { "<leader>tW", function() require("neotest").watch.toggle() end, desc = "Toggle Watch" },
     }
   }
 }
