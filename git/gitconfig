@@ -16,7 +16,7 @@
 
 [delta]
   side-by-side = true
-  syntax-theme = GitHub
+  syntax-theme = Monokai Extended
 
 [alias]
 
@@ -138,6 +138,8 @@
 
   # Start a commit with a conventional commit prefix
   conventional-commit = "!f() { p=(chore feat fix docs style refactor perf test build ci); git conventional-commit-table; read -n1 n; echo git commit -m\"${p[n]}: \" -e $@; }; f"
+
+  last-commit-message = "log -1 --format='%B'"
 
   # ~~Shorthands
   c = commit

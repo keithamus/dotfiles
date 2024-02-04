@@ -1,9 +1,10 @@
 # Git Abbreviations
-abbr g 'git'
+abbr g git
 abbr gs 'git st'
 abbr ga 'git add -p'
 abbr gpf 'git push --force-with-lease'
 abbr gpu 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD); and hub compare;'
+abbr gpk 'git push --set-upstream keithamus (git rev-parse --abbrev-ref HEAD); and hub compare;'
 abbr gpr 'hub pull-request -o'
 abbr gcm 'git commit --message'
 abbr gcw 'git commit --message \'WIP!\''
