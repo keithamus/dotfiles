@@ -3,7 +3,7 @@ scrolling:
 
 font:
   normal:
-    family: "SauceCodePro NF"
+    family: "Monaspace Neon Light"
     style: Regular
   bold:
     style: Bold
@@ -23,7 +23,7 @@ cursor:
   thickness: 0.10
 
 mouse:
-  hide_when_typing: true
+  hide_when_typing: false
 
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
