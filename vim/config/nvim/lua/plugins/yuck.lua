@@ -1,5 +1,6 @@
 return {
   {
-    "elkowar/yuck.vim"
+    "elkowar/yuck.vim",
+    ft = "yuck"
   }
 }

@@ -4,16 +4,7 @@ return {
   {
     "projekt0n/github-nvim-theme",
     lazy = false,
-    tag = "v0.0.7",
     priority = 1000,
-    opts = {
-      dark_float = true,
-      overrides = function()
-        return {
-          BufferLineBackground = {},
-        }
-      end,
-    },
     config = function(_, opts)
       local function getWALMode()
         local home = os.getenv("HOME")
@@ -32,7 +23,7 @@ return {
       end
 
       vim.opt.background = getWALMode()
-      opts.theme_style = vim.o.background
+      -- opts.theme_style = vim.o.background
       require("github-theme").setup(opts)
 
       vim.cmd([[highlight link NonText LineNr]])
@@ -44,7 +35,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "github_light",
+      colorscheme = "github_dark_dimmed",
     },
   },
 }

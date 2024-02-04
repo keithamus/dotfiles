@@ -5,6 +5,11 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Don't autoformat
+vim.g.autoformat = false
+vim.b.autoformat = false
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
 local opt = vim.opt
 
 -- show hidden characters
@@ -30,7 +35,7 @@ opt.foldenable = false
 opt.backup = true
 opt.writebackup = true
 opt.updatetime = 300
-opt.backupdir = "~/.cache/nvim/backups//,."
+opt.backupdir = os.getenv("HOME") .. "/.local/state/nvim/backups"
 
 -- Always show the tab line
 opt.showtabline = 2
