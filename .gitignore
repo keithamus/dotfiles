@@ -18,3 +18,4 @@ bitbar/plugins
 powerline-fonts/powerline
 *.zip
 *.lock.json
+lazy-lock.json
