@@ -4,6 +4,7 @@ golang = 'latest'
 nodejs = 'latest'
 ruby = 'latest'
 protoc = 'latest'
+rust = "latest"
 
 [settings]
 experimental = true
