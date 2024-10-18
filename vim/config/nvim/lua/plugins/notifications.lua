@@ -1,6 +1,6 @@
 return {
   {
     "nvim-notify",
-    enabled = false
+    enabled = true
   }
 }
