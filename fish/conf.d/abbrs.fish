@@ -29,3 +29,6 @@ abbr npit 'npm it'
 
 # journal
 abbr jim 'nvim ~/Journal/(date +%Y)/(date +%Y-%m-%d).md +\'!mkdir -p %:h\' +w +i'
+
+# mise
+abbr mr 'mise run --'
