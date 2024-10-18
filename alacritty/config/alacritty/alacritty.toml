@@ -54,6 +54,11 @@ key = "w"
 mods = "Super"
 
 [[keyboard.bindings]]
+chars = "\u0002c"
+key = "T"
+mods = "Control"
+
+[[keyboard.bindings]]
 chars = "\u0002n"
 key = "Tab"
 mods = "Control"
