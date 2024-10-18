@@ -15,6 +15,7 @@
   defaultBranch = main
 
 [delta]
+  light = false
   side-by-side = true
   syntax-theme = Monokai Extended
 
@@ -199,6 +200,7 @@
   noprefix = 1
   algorithm = patience
   mnemonicprefix = 1
+  colorMoved = default
 
 [push]
   default = current
@@ -218,6 +220,7 @@
 
 [merge]
   ff = only
+  conflictstyle = diff3
 
 [branch "master"]
   mergeoptions = --no-ff
