@@ -32,86 +32,82 @@ action = "SpawnNewInstance"
 key = "N"
 mods = "Super|Shift"
 
-# Tmux
+## Tmux
+
+# Super+T / Control+T -> Create Window (Ctrl+b c)
 [[keyboard.bindings]]
 chars = "\u0002c"
 key = "T"
 mods = "Super"
+[[keyboard.bindings]]
+chars = "\u0002c"
+key = "T"
+mods = "Control"
 
+# Super+Shift+} / Control+Tab -> Next Window (Ctrl+b n)
 [[keyboard.bindings]]
 chars = "\u0002n"
 key = "}"
 mods = "Super|Shift"
+[[keyboard.bindings]]
+chars = "\u0002n"
+key = "Tab"
+mods = "Control"
 
+# Super+Shift+{ / Control+Shift+Tab -> Previous Window (Ctrl+b p)
 [[keyboard.bindings]]
 chars = "\u0002p"
 key = "{"
 mods = "Super|Shift"
+[[keyboard.bindings]]
+chars = "\u0002p"
+key = "Tab"
+mods = "Control|Shift"
 
+# Super+w -> Close window (Ctrl+b w)
 [[keyboard.bindings]]
 chars = "\u0002W"
 key = "w"
 mods = "Super"
 
-[[keyboard.bindings]]
-chars = "\u0002c"
-key = "T"
-mods = "Control"
-
-[[keyboard.bindings]]
-chars = "\u0002n"
-key = "Tab"
-mods = "Control"
-
-[[keyboard.bindings]]
-chars = "\u0002p"
-key = "Tab"
-mods = "Control|Shift"
-
+# Super+PageDown -> Next Pane (Ctrl+b o)
 [[keyboard.bindings]]
 chars = "\u0002o"
 key = "PageDown"
-mods = "Control"
+mods = "Super"
 
+# Control+Shift+D / Super+Shift+D -> Split Pane Horizontally (Ctrl+b ")
 [[keyboard.bindings]]
 chars = "\u0002\""
 key = "D"
 mods = "Control|Shift"
+[[keyboard.bindings]]
+chars = "\u0002\""
+key = "D"
+mods = "Super|Shift"
 
+# Control+Shift+Alt+D -> Split Pane Vertically (Ctrl+b %)
 [[keyboard.bindings]]
 chars = "\u0002%"
 key = "D"
 mods = "Control|Shift|Alt"
+[[keyboard.bindings]]
+chars = "\u0002%"
+key = "D"
+mods = "Super|Shift|Alt"
 
+# Control+Shift+Enter / Super+Shift+Enter -> Zoom Pane (Ctrl+b z)
 [[keyboard.bindings]]
 chars = "\u0002z"
 key = "Return"
 mods = "Control|Shift"
-
-# - { key: D, mods: Command, chars: "\x06\x76" }
-# - { key: D, mods: Command|Shift, chars: "\x06\x73" }
-# - { key: W, mods: Command, chars: "\x06\x78" }
-# - { key: H, mods: Command, chars: "\x06\x68" }
-# - { key: J, mods: Command, chars: "\x06\x6a" }
-# - { key: K, mods: Command, chars: "\x06\x6b" }
-# - { key: L, mods: Command, chars: "\x06\x6c" }
-# - { key: T, mods: Command, chars: "\x06\x63" }
-# - { key: Key1, mods: Command, chars: "\x06\x31" }
-# - { key: Key2, mods: Command, chars: "\x06\x32" }
-# - { key: Key3, mods: Command, chars: "\x06\x33" }
-# - { key: Key4, mods: Command, chars: "\x06\x34" }
-# - { key: Key5, mods: Command, chars: "\x06\x35" }
-# - { key: Key6, mods: Command, chars: "\x06\x36" }
-# - { key: Key7, mods: Command, chars: "\x06\x37" }
-# - { key: Key8, mods: Command, chars: "\x06\x38" }
-# - { key: Key9, mods: Command, chars: "\x06\x39" }
-# - { key: Left, mods: Command, chars: "\x06\x48" }
-# - { key: Down, mods: Command, chars: "\x06\x4a" }
-# - { key: Up, mods: Command, chars: "\x06\x4b" }
-# - { key: Right, mods: Command, chars: "\x06\x4c" }
+[[keyboard.bindings]]
+chars = "\u0002z"
+key = "Return"
+mods = "Super|Shift"
 
 [mouse]
-hide_when_typing = false
+hide_when_typing = true
 
 [[mouse.bindings]]
 action = "PasteSelection"
