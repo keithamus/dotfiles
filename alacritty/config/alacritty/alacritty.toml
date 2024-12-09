@@ -1,3 +1,4 @@
+[general]
 import = ["/Users/keith/.cache/wal/colors-alacritty.yml"]
 
 [cursor]
