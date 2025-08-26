@@ -10,8 +10,9 @@ abbr gcm 'git commit --message'
 abbr gcw 'git commit --message \'WIP!\''
 abbr gc 'git commit'
 abbr gcan 'git commit --amend --no-edit'
-abbr gfcm 'git fetch --all --prune; and git branch --merged origin/master | tail -n +2 | xargs git branch -d; and git checkout origin/master'
-abbr griom 'git fetch; and git rebase -i origin/master'
+abbr gf 'git fetch --all --prune'
+abbr gfcm 'git fetch --all --prune; and git checkout origin/main'
+abbr gfrm 'git fetch --all --prune; and git rebase -i origin/main'
 abbr gcl 'git clone git@github.com:'
 abbr gba 'git checkout -b (git log --format=%s | head -1 | tr -cs \[:alnum:\] "-" | tr \[:upper:\] \[:lower:\] | sed \'s/-$//\' | sed \'s/^-//\')'
 
@@ -31,4 +32,5 @@ abbr npit 'npm it'
 abbr jim 'nvim ~/Journal/(date +%Y)/(date +%Y-%m-%d).md +\'!mkdir -p %:h\' +w +i'
 
 # mise
-abbr mr 'mise run --'
+abbr m 'mise'
+abbr mr 'mise r'
