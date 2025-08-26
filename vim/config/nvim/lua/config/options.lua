@@ -57,3 +57,9 @@ opt.updatetime = 500
 
 -- disable relative lines
 opt.relativenumber = false
+
+vim.cmd([[
+  augroup SnacksIndentColor
+    hi SnacksIndent guifg=#303133
+  augroup END
+]])

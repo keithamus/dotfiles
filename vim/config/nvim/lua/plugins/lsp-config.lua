@@ -5,9 +5,9 @@ return {
     opts = {
       setup = {
         rust_analyzer = function()
-          return true 
+          return true
         end,
-      }
-    }
-  }
+      },
+    },
+  },
 }
