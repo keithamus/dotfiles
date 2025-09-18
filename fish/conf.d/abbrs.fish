@@ -15,6 +15,7 @@ abbr gfcm 'git fetch --all --prune; and git checkout origin/main'
 abbr gfrm 'git fetch --all --prune; and git rebase -i origin/main'
 abbr gcl 'git clone git@github.com:'
 abbr gba 'git checkout -b (git log --format=%s | head -1 | tr -cs \[:alnum:\] "-" | tr \[:upper:\] \[:lower:\] | sed \'s/-$//\' | sed \'s/^-//\')'
+abbr ghprq 'gh pr create --fill && gh pr merge --auto --delete-branch --squash'
 
 # nvim Abbreviations!
 abbr nf 'nvim (fzf)'

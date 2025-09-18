@@ -10,6 +10,7 @@
 
 [interactive]
   diffFilter = delta --color-only
+  singleKey = true
 
 [init]
   defaultBranch = main
