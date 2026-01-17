@@ -22,6 +22,16 @@ return {
       "tsx",
       "typescript",
       "yaml",
+      "wgsl",
     },
-  }
+    parsers = {
+      wgsl = {
+        install_info = {
+          url = "https://github.com/szebniok/tree-sitter-wgsl",
+          files = { "src/parser.c" },
+        },
+        filetype = "wgsl",
+      },
+    },
+  },
 }
