@@ -5,6 +5,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Don't animate
+vim.g.snacks_animate = false
+
 -- Don't autoformat
 vim.g.autoformat = false
 vim.b.autoformat = false
