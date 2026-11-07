@@ -1,1 +1,1 @@
-set PATH $PATH './.bin' './bin' 
+set PATH $PATH "$HOME/.local/bin/"
